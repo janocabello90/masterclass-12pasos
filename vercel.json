@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/masterclass-activa-landing.html" },
+    { "source": "/gracias", "destination": "/gracias.html" }
+  ]
+}

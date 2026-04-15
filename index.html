@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Masterclass · Cómo se gestiona una clínica de fisioterapia | Álex Vallés & Jano Cabello</title>
+<meta name="description" content="Los 12 pasos exactos que aplicamos en Clínica Podium para que facture +500.000€ con el dueño fuera del día a día. Masterclass gratuita + grupo privado con 14 ejercicios reales enviados a tu móvil antes del 30 de abril." />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --navy:#1B3A5C;
+    --oro:#D4A843;
+    --oro-dark:#B8902E;
+    --beige:#FBF3DC;
+    --cream:#FDF9EC;
+    --text:#1A1A1A;
+    --muted:#6B6B6B;
+  }
+  *{font-family: Arial, Helvetica, sans-serif;}
+  html{scroll-behavior:smooth;}
+  body{color:var(--text); background:#ffffff;}
+  .font-serif{font-family: Georgia, 'Times New Roman', serif;}
+  .bg-navy{background:var(--navy);}
+  .bg-beige{background:var(--beige);}
+  .bg-cream{background:var(--cream);}
+  .text-navy{color:var(--navy);}
+  .text-oro{color:var(--oro);}
+  .text-oro-dark{color:var(--oro-dark);}
+  .bg-oro{background:var(--oro);}
+  .border-oro{border-color:var(--oro);}
+  .border-navy{border-color:var(--navy);}
+
+  /* CTA principal */
+  .btn-primary{
+    background:var(--oro);
+    color:var(--navy);
+    font-weight:900;
+    letter-spacing:.3px;
+    box-shadow: 0 6px 0 var(--oro-dark);
+    transition: all .15s ease;
+  }
+  .btn-primary:hover{ transform: translateY(2px); box-shadow: 0 4px 0 var(--oro-dark);}
+  .btn-primary:active{ transform: translateY(6px); box-shadow: 0 0 0 var(--oro-dark);}
+
+  /* Texturas / detalle */
+  .grain{
+    background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .fade-up{opacity:0; transform:translateY(18px); transition: all .7s ease;}
+  .fade-up.on{opacity:1; transform:translateY(0);}
+
+  .divider-wave{
+    height:40px;
+    background: linear-gradient(to bottom, var(--navy) 50%, transparent 50%);
+    mask: radial-gradient(circle 20px at 20px -4px, transparent 99%, #000 100%) 0 0/40px 40px;
+  }
+
+  /* Tag */
+  .tag{
+    display:inline-block;
+    background:rgba(212,168,67,.18);
+    color:var(--oro);
+    font-weight:800;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:4px;
+  }
+
+  /* Checkbox bullet */
+  .bullet::before{
+    content:"✓";
+    color:var(--oro);
+    font-weight:900;
+    margin-right:10px;
+  }
+
+  /* WhatsApp burbuja */
+  .wa-burbuja{
+    position:relative;
+    background:#DCF8C6;
+    color:#1a1a1a;
+    border-radius:12px 12px 12px 2px;
+    padding:14px 16px;
+    max-width:420px;
+    box-shadow:0 1px 1px rgba(0,0,0,.08);
+  }
+
+  /* Card bombazo */
+  .bombazo{
+    background:#fff;
+    border:1px solid #e8e0c4;
+    border-radius:14px;
+    padding:16px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .bombazo:hover{ transform: translateY(-2px); box-shadow: 0 10px 30px rgba(27,58,92,.08);}
+  .bombazo-num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px; height:36px;
+    border-radius:10px;
+    background:var(--navy);
+    color:var(--oro);
+    font-weight:900;
+    font-size:14px;
+  }
+
+  /* Contador plazas */
+  .pulse-dot{
+    display:inline-block;
+    width:8px; height:8px;
+    border-radius:50%;
+    background:#1ecb5c;
+    box-shadow: 0 0 0 0 rgba(30,203,92,.6);
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(30,203,92,.6);}
+    70%{ box-shadow:0 0 0 12px rgba(30,203,92,0);}
+    100%{ box-shadow:0 0 0 0 rgba(30,203,92,0);}
+  }
+
+  /* Modal Thank You */
+  #thankyou{
+    position:fixed;
+    inset:0;
+    background:rgba(27,58,92,.96);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:20px;
+    overflow-y:auto;
+  }
+  #thankyou.active{ display:flex;}
+  .ty-card{
+    background:#fff;
+    border-radius:20px;
+    max-width:560px;
+    width:100%;
+    padding:32px;
+    text-align:center;
+  }
+
+  /* Fuerza de titulares */
+  .hero-title{
+    font-weight:900;
+    letter-spacing:-1px;
+    line-height:1.02;
+  }
+  @media(min-width:768px){
+    .hero-title{ letter-spacing:-2px;}
+  }
+</style>
+</head>
+<body class="bg-white">
+
+<!-- ============== BARRA SUPERIOR ============== -->
+<div class="bg-navy text-white text-center py-4 px-4 grain">
+  <div class="tracking-widest uppercase text-oro font-black text-lg md:text-2xl">MASTERCLASS GRATUITA</div>
+  <div class="text-xs md:text-sm text-gray-200 mt-1">Jueves <strong>30 de abril</strong> · 19:00h · online en directo</div>
+</div>
+
+<!-- ============== HERO ============== -->
+<section class="bg-navy text-white relative overflow-hidden">
+  <div class="grain absolute inset-0 opacity-30"></div>
+  <div class="max-w-5xl mx-auto px-5 md:px-8 pt-14 md:pt-20 pb-16 md:pb-24 relative">
+
+    <h1 class="hero-title text-4xl md:text-6xl lg:text-7xl mb-6">
+      Cómo se gestiona una clínica<br/>
+      de fisioterapia que factura<br/>
+      <span class="text-oro">más de 500.000€</span><br/>
+      con el dueño fuera del día a día
+    </h1>
+
+    <p class="text-lg md:text-2xl text-gray-200 mb-8 max-w-3xl leading-relaxed">
+      Los <strong>12 pasos exactos</strong> que aplicamos en Clínica Podium
+      (<span class="text-oro font-semibold">600.000-700.000€ al año</span>).
+      Una masterclass en directo · 90 minutos.
+    </p>
+
+    <!-- Bloque de bonus de anclaje -->
+    <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-5 md:p-6 mb-8 max-w-3xl">
+      <div class="text-oro font-bold uppercase text-xs tracking-widest mb-3">CONSIGUE ACCESO A:</div>
+      <ul class="space-y-2 text-gray-100">
+        <li class="flex gap-3"><span class="text-oro font-black">→</span><span>Acceso al grupo privado de WhatsApp donde publicamos <strong>14 bombazos diarios</strong> (1 ejercicio real del programa ACTIVA cada día, resuelto con caso concreto, de hoy al 30 de abril)</span></li>
+        <li class="flex gap-3"><span class="text-oro font-black">→</span><span>Respuestas en directo de Álex y Jano tras cada bombazo</span></li>
+        <li class="flex gap-3"><span class="text-oro font-black">→</span><span>PDF exclusivo: <em>«Las 7 señales de que tu clínica te tiene secuestrado»</em></span></li>
+        <li class="flex gap-3"><span class="text-oro font-black">→</span><span><strong>DESCUENTO SORPRESA</strong> en el PROGRAMA ACTIVA que anunciaremos en directo</span></li>
+      </ul>
+    </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+      <a href="#formulario" class="btn-primary inline-block text-center px-8 py-5 rounded-xl text-lg md:text-xl">
+        Reservar mi plaza gratis
+      </a>
+      <div class="text-sm text-gray-300 flex items-center gap-2">
+        <span class="pulse-dot"></span>
+        <span>Plazas limitadas · inscripción en 30 segundos</span>
+      </div>
+    </div>
+
+    <div class="mt-8 text-gray-400 text-sm italic">
+      Impartida por <strong class="text-white not-italic">Álex Vallés</strong> (fundador de Clínica Podium, autor de «La Fórmula del Éxito en Fisioterapia») y <strong class="text-white not-italic">Jano Cabello</strong> (socio, CMO y codirector del máster «De Fisio a Empresario»).
+    </div>
+  </div>
+</section>
+
+<!-- ============== FRANJA DE DATOS ============== -->
+<section class="bg-cream py-12 md:py-16">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
+      <div>
+        <div class="text-3xl md:text-5xl font-black text-navy">600-700K€</div>
+        <div class="text-sm text-gray-600 mt-2 uppercase tracking-wider">Facturación Podium · sin tratar Álex</div>
+      </div>
+      <div>
+        <div class="text-3xl md:text-5xl font-black text-navy">121</div>
+        <div class="text-sm text-gray-600 mt-2 uppercase tracking-wider">Aplicantes al programa en la última beca</div>
+      </div>
+      <div>
+        <div class="text-3xl md:text-5xl font-black text-navy">14</div>
+        <div class="text-sm text-gray-600 mt-2 uppercase tracking-wider">Bombazos diarios en el grupo privado</div>
+      </div>
+      <div>
+        <div class="text-3xl md:text-5xl font-black text-navy">90min</div>
+        <div class="text-sm text-gray-600 mt-2 uppercase tracking-wider">Masterclass · 30 de abril · en directo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ¿PARA QUIÉN ES? ============== -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-4xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">Para quién</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-10 leading-tight">
+      Si estás así, esto es para ti.<br/>
+      <span class="text-oro-dark">Si no, cierra la pestaña.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8 md:gap-10">
+      <div>
+        <h3 class="font-black text-navy text-xl mb-4 flex items-center gap-2">
+          <span class="text-green-600 text-2xl">✓</span> Esto es para ti si…
+        </h3>
+        <ul class="space-y-3 text-gray-800 leading-relaxed">
+          <li class="bullet">Eres fisioterapeuta propietario/a de clínica y facturas entre 0 y 200.000€ al año</li>
+          <li class="bullet">Tu agenda está llena pero los márgenes no aparecen</li>
+          <li class="bullet">Dependes TÚ de todo: si no apareces un día, la clínica se tambalea</li>
+          <li class="bullet">Has intentado contratar y te ha salido mal</li>
+          <li class="bullet">Trabajas 10-12h al día y no estás con tu familia lo que querrías</li>
+          <li class="bullet">Has hecho otras formaciones de negocio y te han dejado a medias</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-black text-xl mb-4 flex items-center gap-2" style="color:#B02E2E">
+          <span class="text-2xl">✗</span> NO es para ti si…
+        </h3>
+        <ul class="space-y-3 text-gray-800 leading-relaxed">
+          <li>· Buscas trucos de marketing para llenar más la agenda (el problema no es ese)</li>
+          <li>· Quieres motivación vacía de gurús de Instagram</li>
+          <li>· No estás dispuesto/a a mirar los números reales de tu clínica</li>
+          <li>· Prefieres seguir echando 12h al día antes que rediseñar el negocio</li>
+          <li>· Aún no has abierto clínica y buscas inspiración general</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== LA PROMESA DETALLADA (ECUACIÓN DE VALOR) ============== -->
+<section class="bg-beige py-16 md:py-24 relative">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">Gratis · Sí, en serio</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-4 leading-tight">
+      LO QUE VAS A LLEVARTE<br/>
+      <span class="text-oro-dark">GRATIS</span>
+    </h2>
+    <p class="text-xl md:text-2xl text-navy font-black mb-10 leading-tight max-w-3xl">
+      Vamos a darte gratis lo que otros venden por 2.000€ sin saber lo que dicen.
+    </p>
+
+    <p class="text-lg md:text-xl text-gray-800 leading-relaxed mb-10 max-w-3xl">
+      El 30 de abril a las 19:00 te enseñamos <strong>los 12 pasos exactos</strong>
+      que una clínica de fisioterapia tiene que dar para pasar de <em>«el dueño no
+      puede coger vacaciones»</em> a <em>«la clínica factura sin que el dueño esté
+      dentro del día a día»</em>. El plano completo, con los ejercicios que te llevas
+      desde hoy a tu móvil.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white rounded-2xl p-6 md:p-7 border-2 border-navy">
+        <div class="text-oro-dark font-black uppercase text-xs tracking-widest mb-3">Vas a recibir</div>
+        <p class="text-gray-900 leading-relaxed">
+          El <strong>mapa de los 12 pasos</strong> que hacen que una clínica funcione sin el dueño
+          y facture por encima de 500.000€. No es lo que hacen los consultores — es lo que hizo Álex
+          en su propia clínica.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 md:p-7 border-2 border-navy">
+        <div class="text-oro-dark font-black uppercase text-xs tracking-widest mb-3">Experiencia de más de 200 clínicas</div>
+        <p class="text-gray-900 leading-relaxed">
+          Álex lo ha hecho en <strong>Clínica Podium (600-700K€ al año)</strong> y lo ha replicado
+          en más de 200 clínicas que han pasado por FisioReferentes. No es suerte. Es método probado.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 md:p-7 border-2 border-navy">
+        <div class="text-oro-dark font-black uppercase text-xs tracking-widest mb-3">Cada día un regalo aplicable a tu clínica</div>
+        <p class="text-gray-900 leading-relaxed">
+          Desde hoy a las 20:30 recibes <strong>un ejercicio nuevo del programa ACTIVA</strong>
+          en el grupo privado de WhatsApp. 14 bombazos. Uno al día. Para aplicar esa misma noche en tu clínica.
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 md:p-7 border-2 border-navy">
+        <div class="text-oro-dark font-black uppercase text-xs tracking-widest mb-3">Es rápido y efectivo</div>
+        <p class="text-gray-900 leading-relaxed">
+          Gratis. Apuntarte lleva <strong>30 segundos</strong>. No pedimos tarjeta. Los bombazos son
+          audios de 2-3 min mientras cenas. La masterclass son 90 min del jueves 30.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center">
+      <a href="#formulario" class="btn-primary inline-block px-8 py-5 rounded-xl text-lg md:text-xl">
+        Quiero mi plaza y el grupo de WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== LOS 14 BOMBAZOS (CALENDARIO) ============== -->
+<section class="bg-navy text-white py-16 md:py-24 relative overflow-hidden">
+  <div class="grain absolute inset-0 opacity-30"></div>
+  <div class="max-w-6xl mx-auto px-5 md:px-8 relative">
+
+    <div class="tag mb-5">14 bombazos · 1 por día · EN DIRECTO</div>
+    <h2 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+      Cada día enseñamos EN DIRECTO<br/>
+      <span class="text-oro">una herramienta que va a cambiar tu clínica por completo.</span>
+    </h2>
+    <p class="text-gray-300 text-lg mb-10 max-w-3xl leading-relaxed">
+      Esto no es un grupo para leer. Es un grupo para <strong>implementar</strong>. Cada día a las 20:30,
+      Álex o Jano enseñan en directo un ejercicio real del Programa ACTIVA con un caso concreto.
+      Tú preguntas, ellos responden. Aplicas esa misma noche. 14 días. 14 herramientas. 14 cambios reales
+      en tu clínica antes incluso de la masterclass.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bombazo">
+        <div class="text-xs text-oro-dark font-bold uppercase tracking-wider mb-2">Un ejemplo</div>
+        <div class="text-navy font-bold text-lg mb-2">Los 5 números reales</div>
+        <div class="text-sm text-gray-700">Los 5 indicadores que todo dueño debe saber de memoria. Con plantilla editable para rellenar esa misma noche.</div>
+      </div>
+      <div class="bombazo">
+        <div class="text-xs text-oro-dark font-bold uppercase tracking-wider mb-2">Otro ejemplo</div>
+        <div class="text-navy font-bold text-lg mb-2">La promesa perfecta</div>
+        <div class="text-sm text-gray-700">Las 7 piezas de una promesa que vende sola. Álex reescribe en directo la promesa de 3 asistentes.</div>
+      </div>
+      <div class="bombazo">
+        <div class="text-xs text-oro-dark font-bold uppercase tracking-wider mb-2">Otro más</div>
+        <div class="text-navy font-bold text-lg mb-2">Contratar sin miedo</div>
+        <div class="text-sm text-gray-700">El sistema que Álex montó después de perder un equipo entero. Plantilla de entrevista incluida.</div>
+      </div>
+    </div>
+
+    <p class="text-gray-400 text-center text-sm mt-8 italic">
+      ...y así 14 días. Nada de relleno. Todo aplicable esa misma noche.
+    </p>
+
+    <!-- Burbuja WhatsApp de ejemplo -->
+    <div class="mt-10 flex justify-center">
+      <div class="wa-burbuja">
+        <div class="text-xs text-green-900 font-bold mb-2">▶ Audio de Álex · 2:47</div>
+        <div class="flex items-center gap-2">
+          <div class="w-32 h-2 bg-green-700/30 rounded-full overflow-hidden"><div class="w-1/3 h-full bg-green-700"></div></div>
+          <span class="text-xs text-green-900">0:58</span>
+        </div>
+        <div class="text-xs text-green-800 mt-2 italic">📎 PDF · Plantilla_Numeros_Reales.pdf</div>
+      </div>
+    </div>
+    <div class="text-center text-gray-400 text-sm mt-4">Así es como llega cada bombazo al grupo</div>
+  </div>
+</section>
+
+<!-- ============== QUÉ VAS A VER EN LA MASTERCLASS ============== -->
+<section class="bg-cream py-16 md:py-24">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">La masterclass · 30 abril 19:00h</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-10 leading-tight">
+      Los 12 pasos encajados<br/>
+      <span class="text-oro-dark">en un solo mapa.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-white border-2 border-navy rounded-2xl p-6">
+        <h3 class="text-navy font-black text-xl mb-3">Cómo saber si tu clínica te tiene secuestrado</h3>
+        <ul class="text-gray-800 space-y-1 text-sm">
+          <li>· Auditoría de los 4 secuestros</li>
+          <li>· Visión personal del éxito</li>
+          <li>· Los 5 números que todo dueño debe tener en la cabeza</li>
+        </ul>
+      </div>
+      <div class="bg-white border-2 border-navy rounded-2xl p-6">
+        <h3 class="text-navy font-black text-xl mb-3">Cómo elegir al paciente que sí paga</h3>
+        <ul class="text-gray-800 space-y-1 text-sm">
+          <li>· Avatar rentable (dejar de tratar a todo el mundo)</li>
+          <li>· Punto A → Punto Z y los 4 niveles de objeciones</li>
+          <li>· Los 5 momentos del paciente</li>
+        </ul>
+      </div>
+      <div class="bg-white border-2 border-navy rounded-2xl p-6">
+        <h3 class="text-navy font-black text-xl mb-3">Cómo cobrar 3x sin sentir culpa</h3>
+        <ul class="text-gray-800 space-y-1 text-sm">
+          <li>· La promesa perfecta (7 piezas)</li>
+          <li>· Ecuación de valor y las 5 palancas</li>
+          <li>· Diseñar un servicio de alto valor</li>
+        </ul>
+      </div>
+      <div class="bg-white border-2 border-navy rounded-2xl p-6">
+        <h3 class="text-navy font-black text-xl mb-3">Cómo contratar sin miedo y cómo se delega</h3>
+        <ul class="text-gray-800 space-y-1 text-sm">
+          <li>· Contratar sin miedo (tras la oveja negra)</li>
+          <li>· Delegación clínica real</li>
+          <li>· Los 4 sistemas mínimos viables</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 bg-navy text-white rounded-2xl p-6 md:p-8">
+      <div class="text-oro font-black uppercase text-xs tracking-widest mb-3">Bonus en directo</div>
+      <p class="text-lg leading-relaxed mb-2">
+        <strong>Ejercicio A (min 35):</strong> Álex reescribe en vivo <em>la promesa</em> de 3 asistentes que escriban en el chat.
+      </p>
+      <p class="text-lg leading-relaxed">
+        <strong>Ejercicio B (min 60):</strong> Diagnóstico del secuestro dominante en 3 casos reales del chat + siguiente paso recomendado.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CREENCIA CONTRARIA ============== -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center">
+    <div class="tag mb-5">Lo que no te han dicho</div>
+    <p class="text-2xl md:text-4xl text-navy leading-tight font-black mb-8">
+      «No tienes un problema de captación.<br/>
+      <span class="text-oro-dark">Tienes un problema de diseño.»</span>
+    </p>
+    <p class="text-lg text-gray-700 leading-relaxed">
+      Lo dicen los datos de las 121 aplicaciones al programa: solo el 35% nombra captación como dolor.
+      El <strong>63% lo que no tiene es organización</strong>. El 53% no sabe ejecutar. El 45% no tiene dirección.
+      Por eso esta masterclass no trata de «cómo traer más pacientes» — trata de cómo rediseñar el
+      negocio para que funcione sin ti. Y sí, también para que facture más.
+    </p>
+  </div>
+</section>
+
+<!-- ============== QUIENES SOMOS ============== -->
+<section class="bg-beige py-16 md:py-24">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">Quiénes te hablan</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-10 leading-tight">
+      Un fisio que lo hizo<br/>
+      + el estratega que lo sistematiza.
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl p-6 md:p-8 border-2 border-navy">
+        <div class="text-oro-dark font-black text-xs uppercase tracking-widest mb-2">Álex Vallés</div>
+        <h3 class="text-navy font-black text-2xl mb-3">Fisioterapeuta y empresario</h3>
+        <p class="text-gray-800 leading-relaxed mb-3">
+          Fundador de FisioZaragoza y Clínica Podium. 600.000-700.000€ anuales auditables sin estar él
+          tratando. Autor de «La Fórmula del Éxito en Fisioterapia». No es coach. No es consultor. Es un
+          fisio que ha pasado por cada secuestro que describe.
+        </p>
+        <p class="text-gray-600 italic text-sm">
+          «Ya basta de sobrevivir, es hora de disfrutar de nuestra profesión y nuestra vida.»
+        </p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 md:p-8 border-2 border-navy">
+        <div class="text-oro-dark font-black text-xs uppercase tracking-widest mb-2">Jano Cabello</div>
+        <h3 class="text-navy font-black text-2xl mb-3">Socio y director estratégico</h3>
+        <p class="text-gray-800 leading-relaxed mb-3">
+          CMO de FisioReferentes. Codirector del máster «De Fisio a Empresario». 13 años traduciendo
+          negocios buenos en sistemas replicables. Es quien vuelve el «yo» de Álex en un «nosotros» que
+          cualquier fisio puede aplicar.
+        </p>
+        <p class="text-gray-600 italic text-sm">
+          «Las herramientas sin método son ruido. El método sin herramientas es filosofía.»
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TESTIMONIOS (CITAS REALES DE 121 APLICANTES) ============== -->
+<section class="bg-white py-16 md:py-24">
+  <div class="max-w-5xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">Voces reales</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-10 leading-tight">
+      Esto nos habéis dicho<br/>
+      <span class="text-oro-dark">al aplicar a la beca.</span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="bg-beige rounded-2xl p-6 border-l-4 border-oro">
+        <p class="text-gray-900 leading-relaxed">«No tengo tiempo. No tengo energía. La casa, conciliar, los mayores, la empresa. No llego.»</p>
+      </div>
+      <div class="bg-beige rounded-2xl p-6 border-l-4 border-oro">
+        <p class="text-gray-900 leading-relaxed">«La dependencia que tengo tan tóxica con la clínica, todo lo que pasa pasa por mí o lo soluciono yo. 24/7.»</p>
+      </div>
+      <div class="bg-beige rounded-2xl p-6 border-l-4 border-oro">
+        <p class="text-gray-900 leading-relaxed">«He cogido miedo absoluto a contratar. Tuve un equipazo y por una oveja negra lo perdí todo.»</p>
+      </div>
+      <div class="bg-beige rounded-2xl p-6 border-l-4 border-oro">
+        <p class="text-gray-900 leading-relaxed">«Hice un curso de un gurú de Instagram y no me sirvió de nada. Creo que vosotros sois diferentes, que hay amor por la profesión.»</p>
+      </div>
+      <div class="bg-beige rounded-2xl p-6 border-l-4 border-oro">
+        <p class="text-gray-900 leading-relaxed">«Después de 17 años con la clínica, ya es hora de convertirla en un negocio rentable.»</p>
+      </div>
+      <div class="bg-beige rounded-2xl p-6 border-l-4 border-oro">
+        <p class="text-gray-900 leading-relaxed">«Necesito que mis dos clínicas funcionen para poder pasar más tiempo con mi bebé.»</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STACK DE VALOR (CIERRE HORMOZI) ============== -->
+<section class="bg-navy text-white py-16 md:py-24 relative overflow-hidden">
+  <div class="grain absolute inset-0 opacity-30"></div>
+  <div class="max-w-4xl mx-auto px-5 md:px-8 relative">
+    <div class="tag mb-5">Todo lo que te llevas · Gratis</div>
+    <h2 class="text-3xl md:text-5xl font-black mb-10 leading-tight">
+      Haz la cuenta tú mismo.<br/>
+      <span class="text-oro">Esto no se regala.</span>
+    </h2>
+
+    <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 md:p-8 space-y-5">
+      <div class="flex justify-between items-start border-b border-white/10 pb-4">
+        <div class="pr-4">
+          <div class="font-bold text-lg">Masterclass en directo · 30 de abril · 90 minutos</div>
+          <div class="text-gray-400 text-sm">Los 12 pasos encajados + 2 ejercicios resueltos en vivo</div>
+        </div>
+        <div class="text-oro font-black whitespace-nowrap">Valor 297€</div>
+      </div>
+      <div class="flex justify-between items-start border-b border-white/10 pb-4">
+        <div class="pr-4">
+          <div class="font-bold text-lg">Grupo privado de WhatsApp · 14 bombazos diarios</div>
+          <div class="text-gray-400 text-sm">Audios + PDFs + respuestas en directo de Álex y Jano</div>
+        </div>
+        <div class="text-oro font-black whitespace-nowrap">Valor 697€</div>
+      </div>
+      <div class="flex justify-between items-start border-b border-white/10 pb-4">
+        <div class="pr-4">
+          <div class="font-bold text-lg">PDF · «Las 7 señales de que tu clínica te tiene secuestrado»</div>
+          <div class="text-gray-400 text-sm">Autodiagnóstico rápido que se envía al llegar al grupo</div>
+        </div>
+        <div class="text-oro font-black whitespace-nowrap">Valor 47€</div>
+      </div>
+      <div class="flex justify-between items-start border-b border-white/10 pb-4">
+        <div class="pr-4">
+          <div class="font-bold text-lg">Réplica del directo disponible 72h</div>
+          <div class="text-gray-400 text-sm">Solo para inscritos, no se publica en abierto</div>
+        </div>
+        <div class="text-oro font-black whitespace-nowrap">Valor 97€</div>
+      </div>
+      <div class="flex justify-between items-start border-b border-white/10 pb-4">
+        <div class="pr-4">
+          <div class="font-bold text-lg">Descuento exclusivo en Programa ACTIVA</div>
+          <div class="text-gray-400 text-sm">Solo para asistentes en directo · se anuncia en la masterclass · válido 72h</div>
+        </div>
+        <div class="text-oro font-black whitespace-nowrap">SORPRESA</div>
+      </div>
+
+      <div class="flex justify-between items-center pt-2">
+        <div class="text-lg md:text-xl font-black">VALOR TOTAL</div>
+        <div class="text-xl md:text-2xl font-black text-oro">MÁS DE 2.000€ DE VALOR DIRECTO</div>
+      </div>
+      <div class="flex justify-between items-center bg-oro/20 border border-oro rounded-xl p-4 md:p-5">
+        <div class="text-xl md:text-2xl font-black text-oro">TU INVERSIÓN HOY</div>
+        <div class="text-3xl md:text-5xl font-black text-oro">0€</div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center">
+      <a href="#formulario" class="btn-primary inline-block px-8 py-5 rounded-xl text-lg md:text-xl">
+        Apuntarme ahora (es gratis)
+      </a>
+      <div class="text-sm text-gray-300 mt-4 flex items-center justify-center gap-2">
+        <span class="pulse-dot"></span>
+        <span>Plazas limitadas · tarda 30 segundos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FORMULARIO ============== -->
+<section id="formulario" class="bg-cream py-16 md:py-24">
+  <div class="max-w-xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">Reserva tu plaza</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-4 leading-tight">
+      Estás a 30 segundos<br/>
+      de entrar al grupo.
+    </h2>
+    <p class="text-gray-700 mb-8 leading-relaxed">
+      Rellena los 4 campos. Al enviar te llega el email con el <strong>link del grupo de WhatsApp</strong>
+      y la invitación de calendario para el 30 de abril.
+    </p>
+
+    <form id="formReg" class="bg-white rounded-2xl p-6 md:p-8 border-2 border-navy space-y-5" novalidate>
+      <div>
+        <label class="block text-navy font-bold mb-1 text-sm">Nombre completo</label>
+        <input required name="nombre" type="text" placeholder="Tu nombre y apellidos"
+               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-navy focus:outline-none"/>
+      </div>
+      <div>
+        <label class="block text-navy font-bold mb-1 text-sm">Email</label>
+        <input required name="email" type="email" placeholder="tu@email.com"
+               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-navy focus:outline-none"/>
+      </div>
+      <div>
+        <label class="block text-navy font-bold mb-1 text-sm">Teléfono (para el grupo de WhatsApp)</label>
+        <input required name="telefono" type="tel" placeholder="+34 600 000 000"
+               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-navy focus:outline-none"/>
+      </div>
+      <div>
+        <label class="block text-navy font-bold mb-1 text-sm">Facturación aproximada de tu clínica</label>
+        <select required name="facturacion"
+                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-navy focus:outline-none bg-white">
+          <option value="">Selecciona una opción</option>
+          <option>Aún no tengo clínica</option>
+          <option>Menos de 50.000€</option>
+          <option>50.000 - 100.000€</option>
+          <option>100.000 - 200.000€</option>
+          <option>Más de 200.000€</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary w-full py-5 rounded-xl text-lg md:text-xl">
+        Reservar plaza y entrar al grupo
+      </button>
+
+      <p class="text-xs text-gray-500 text-center mt-3">
+        Al enviar aceptas la política de privacidad. Puedes darte de baja cuando quieras.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- ============== FAQ ============== -->
+<section class="bg-white py-16 md:py-24">
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
+    <div class="tag mb-5">Dudas frecuentes</div>
+    <h2 class="text-3xl md:text-5xl font-black text-navy mb-10 leading-tight">Lo que nos preguntáis.</h2>
+
+    <div class="space-y-4">
+      <details class="bg-beige rounded-xl p-5 cursor-pointer group">
+        <summary class="font-black text-navy list-none flex justify-between items-center">
+          ¿Es realmente gratis? <span class="text-oro text-2xl group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-gray-800 leading-relaxed">Sí. No pedimos tarjeta ni en la masterclass ni en el grupo de WhatsApp. El único momento en el que hablamos de dinero es si al final de la masterclass decides entrar al Programa ACTIVA — y ahí tendrás un <strong>descuento sorpresa</strong> reservado para asistentes en directo.</p>
+      </details>
+      <details class="bg-beige rounded-xl p-5 cursor-pointer group">
+        <summary class="font-black text-navy list-none flex justify-between items-center">
+          ¿Y si no puedo asistir en directo? <span class="text-oro text-2xl group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-gray-800 leading-relaxed">Habrá réplica durante 72h para inscritos. Pero el descuento sorpresa en ACTIVA solo está disponible para quienes estén en directo el 30 de abril. Los bombazos del grupo no se pierden — quedan ahí.</p>
+      </details>
+      <details class="bg-beige rounded-xl p-5 cursor-pointer group">
+        <summary class="font-black text-navy list-none flex justify-between items-center">
+          ¿Qué pasa si mi clínica aún no factura 500K? <span class="text-oro text-2xl group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-gray-800 leading-relaxed">Exactamente por eso es para ti. El método se construye paso a paso desde la clínica pequeña-mediana (0-200K) hasta el nivel que ha alcanzado Podium. Los 12 pasos son los mismos — cambia la velocidad a la que los implementas.</p>
+      </details>
+      <details class="bg-beige rounded-xl p-5 cursor-pointer group">
+        <summary class="font-black text-navy list-none flex justify-between items-center">
+          ¿Vais a venderme algo todo el rato? <span class="text-oro text-2xl group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-gray-800 leading-relaxed">En los 14 bombazos del grupo hay contenido puro, no ventas. En la masterclass hablamos del Programa ACTIVA los últimos 15 minutos — antes enseñamos el método entero. No va a haber timers falsos ni trucos.</p>
+      </details>
+      <details class="bg-beige rounded-xl p-5 cursor-pointer group">
+        <summary class="font-black text-navy list-none flex justify-between items-center">
+          Ya he hecho otras formaciones y no me sirvieron. ¿Por qué esta sí? <span class="text-oro text-2xl group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-gray-800 leading-relaxed">Porque lo imparte un fisio que lo ha hecho, no un consultor de marketing. Porque vas a ver el método en acción 14 veces en 14 días antes de decidir si te metes. Porque el programa ACTIVA separa SABER, DECIDIR y ACTIVAR — y eso no lo hace nadie más en el sector.</p>
+      </details>
+      <details class="bg-beige rounded-xl p-5 cursor-pointer group">
+        <summary class="font-black text-navy list-none flex justify-between items-center">
+          ¿Puedo invitar a un colega? <span class="text-oro text-2xl group-open:rotate-45 transition">+</span>
+        </summary>
+        <p class="mt-4 text-gray-800 leading-relaxed">Sí — y te lo agradecemos. Cada persona debe inscribirse por separado en la landing para entrar al grupo privado. Si referís un colega que se inscribe, hay un pequeño regalo que os enviaremos.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CTA FINAL ============== -->
+<section class="bg-navy text-white py-16 md:py-24 relative overflow-hidden">
+  <div class="grain absolute inset-0 opacity-30"></div>
+  <div class="max-w-3xl mx-auto px-5 md:px-8 text-center relative">
+    <div class="tag mb-5">Jueves 30 de abril · 19:00</div>
+    <h2 class="text-3xl md:text-6xl font-black mb-6 leading-tight">
+      Tu clínica ya no puede<br/>
+      <span class="text-oro">seguir dependiendo de ti.</span>
+    </h2>
+    <p class="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed">
+      Apúntate hoy. El primer bombazo del grupo llega esta noche a las 20:30.
+      No estás firmando nada — estás entrando a ver cómo se hace.
+    </p>
+    <a href="#formulario" class="btn-primary inline-block px-10 py-6 rounded-xl text-xl md:text-2xl">
+      Quiero mi plaza · Es gratis
+    </a>
+    <div class="mt-6 text-sm text-gray-400 flex items-center justify-center gap-2">
+      <span class="pulse-dot"></span>
+      <span>Plazas limitadas · tarda 30 segundos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="bg-white py-10 border-t border-gray-200">
+  <div class="max-w-5xl mx-auto px-5 md:px-8 text-center text-sm text-gray-600">
+    <div class="font-black text-navy mb-2">FisioReferentes · Programa ACTIVA</div>
+    <div class="mb-3">Una iniciativa de Álex Vallés y Jano Cabello</div>
+    <div class="space-x-4">
+      <a href="#" class="hover:text-navy">Política de privacidad</a>
+      <span>·</span>
+      <a href="#" class="hover:text-navy">Aviso legal</a>
+      <span>·</span>
+      <a href="mailto:hola@fisioreferentes.com" class="hover:text-navy">hola@fisioreferentes.com</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============== THANK YOU MODAL ============== -->
+<div id="thankyou">
+  <div class="ty-card">
+    <div class="text-5xl mb-3">✅</div>
+    <h3 class="text-2xl md:text-3xl font-black text-navy mb-3">Estás dentro de la masterclass</h3>
+    <p class="text-gray-700 mb-6 leading-relaxed">
+      Te hemos mandado un email con la invitación de calendario para el jueves 30 de abril a las 19:00.
+    </p>
+
+    <div class="bg-beige rounded-xl p-5 mb-6 text-left border-l-4 border-oro">
+      <div class="font-black text-navy mb-2 uppercase text-xs tracking-widest">Paso 2 · El importante</div>
+      <p class="text-gray-900 leading-relaxed mb-4">
+        Ahora entra al <strong>grupo privado de WhatsApp</strong>. Ahí es donde pasa todo de hoy al 30.
+        Un bombazo al día. Ejercicios reales del programa ACTIVA. Respuestas en directo de Álex y Jano.
+      </p>
+      <a href="https://chat.whatsapp.com/EL_LINK_DEL_GRUPO" target="_blank"
+         class="block w-full text-center bg-green-600 hover:bg-green-700 text-white font-black py-4 px-6 rounded-lg transition">
+        👉 Unirme al grupo de WhatsApp
+      </a>
+      <div class="text-xs text-gray-500 mt-3 text-center">El link caduca en 72h</div>
+    </div>
+
+    <div class="text-sm text-gray-600 italic leading-relaxed">
+      «Los que entran al grupo ya no llegan a la masterclass a aprender.<br/>
+      Llegan a comprobar que lo que han visto encaja.»<br/>
+      <span class="text-navy font-bold not-italic mt-2 block">— Álex y Jano</span>
+    </div>
+
+    <button onclick="document.getElementById('thankyou').classList.remove('active')"
+            class="mt-6 text-gray-400 hover:text-navy text-sm underline">
+      Cerrar esta ventana
+    </button>
+  </div>
+</div>
+
+<script>
+  // Animación fade-up al scroll
+  const els = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  els.forEach(el=>io.observe(el));
+
+  // Form handling → POST a /api/subscribe → redirect a /gracias
+  document.getElementById('formReg').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('button[type="submit"]');
+
+    if(!f.nombre.value || !f.email.value || !f.telefono.value || !f.facturacion.value){
+      alert('Completa los 4 campos para reservar tu plaza.');
+      return;
+    }
+
+    // Estado cargando
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Reservando tu plaza...';
+
+    try {
+      const payload = {
+        nombre: f.nombre.value.trim(),
+        email: f.email.value.trim(),
+        telefono: f.telefono.value.trim(),
+        facturacion: f.facturacion.value
+      };
+
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(()=>({error:'Error desconocido'}));
+        throw new Error(err.error || 'No se pudo procesar');
+      }
+
+      // Redirect a la thank you page
+      window.location.href = '/gracias.html';
+    } catch (err) {
+      console.error(err);
+      btn.disabled = false;
+      btn.textContent = originalText;
+      alert('No hemos podido reservar tu plaza. Revisa los datos o escríbenos a hola@fisioreferentes.com');
+    }
+  });
+</script>
+
+</body>
+</html>
