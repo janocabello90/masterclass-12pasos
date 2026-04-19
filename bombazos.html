@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5"/>
+<title>Bombazos ACTIVA · Zona privada</title>
+<meta name="robots" content="noindex, nofollow"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{navy:'#1B3A5C','navy-deep':'#0F1B2D','navy-mid':'#152D4A',oro:'#D4A843','oro-dark':'#B08A2E',beige:'#FBF3DC',cream:'#FAF6EA'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,sans-serif;background:#0F1B2D;color:#E5E5E5;overflow-x:hidden}
+
+  /* ===== PASSWORD GATE ===== */
+  #gate{position:fixed;inset:0;z-index:9999;background:#0F1B2D;display:flex;align-items:center;justify-content:center;transition:opacity .6s,transform .6s}
+  #gate.hide{opacity:0;transform:scale(1.05);pointer-events:none}
+  .gate-card{text-align:center;max-width:400px;padding:40px}
+  .gate-input{background:transparent;border:2px solid #D4A84360;border-radius:12px;padding:16px 20px;color:white;font-size:18px;text-align:center;letter-spacing:.3em;width:100%;transition:border-color .3s;outline:none}
+  .gate-input:focus{border-color:#D4A843}
+  .gate-input::placeholder{color:#ffffff30;letter-spacing:.1em}
+  .gate-btn{margin-top:16px;background:linear-gradient(135deg,#D4A843,#B08A2E);color:#0F1B2D;font-weight:900;padding:14px 40px;border:none;border-radius:12px;font-size:16px;cursor:pointer;transition:transform .2s,box-shadow .2s;width:100%}
+  .gate-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -10px rgba(212,168,67,.5)}
+  .gate-error{color:#ff6b6b;font-size:13px;margin-top:12px;opacity:0;transition:opacity .3s}
+  .gate-error.show{opacity:1}
+  .gate-logo{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#D4A843;font-weight:700;margin-bottom:32px}
+  .gate-title{font-size:28px;font-weight:900;color:white;margin-bottom:8px}
+  .gate-sub{color:#ffffff60;font-size:14px;margin-bottom:32px}
+
+  /* ===== PARTICLES ===== */
+  .particle{position:fixed;width:2px;height:2px;background:#D4A84330;border-radius:50%;pointer-events:none;animation:float linear infinite}
+  @keyframes float{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) rotate(720deg);opacity:0}}
+
+  /* ===== MAIN ===== */
+  #app{display:none;opacity:0;transition:opacity .8s}
+  #app.show{display:block;opacity:1}
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-track{background:#ffffff08;border-radius:99px;height:6px;overflow:hidden}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#D4A843,#B08A2E);border-radius:99px;transition:width 1s ease}
+
+  /* ===== TIMELINE ===== */
+  .timeline{position:relative;padding-left:40px}
+  .timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#D4A84380 0%,#D4A84310 100%)}
+  .tl-dot{position:absolute;left:8px;top:24px;width:16px;height:16px;border-radius:50%;border:2px solid #D4A843;background:#0F1B2D;z-index:2;transition:all .3s}
+  .tl-dot.active{background:#D4A843;box-shadow:0 0 20px #D4A84360}
+  .tl-dot.locked{border-color:#ffffff20;background:#0F1B2D}
+
+  /* ===== BOMBAZO CARD ===== */
+  .bombazo-card{background:#152D4A;border:1px solid #ffffff10;border-radius:16px;padding:24px 28px;margin-bottom:24px;position:relative;transition:all .4s;overflow:hidden}
+  .bombazo-card:hover{border-color:#D4A84340;transform:translateX(4px)}
+  .bombazo-card.locked{opacity:.4;filter:blur(1px);pointer-events:none}
+  .bombazo-card.locked:hover{transform:none}
+  .bombazo-card.today{border-color:#D4A843;box-shadow:0 0 40px -10px #D4A84330}
+  .bombazo-num{font-size:48px;font-weight:900;color:#D4A84315;position:absolute;right:20px;top:10px;line-height:1}
+  .tag-mod{display:inline-block;background:#D4A84320;color:#D4A843;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:3px 10px;border-radius:99px;font-weight:700}
+  .tag-quien{display:inline-block;background:#ffffff10;color:#ffffffaa;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:99px;font-weight:600;margin-left:6px}
+
+  /* ===== MEDIA SLOT ===== */
+  .media-slot{background:#0F1B2D;border:2px dashed #ffffff15;border-radius:12px;padding:20px;margin-top:16px;text-align:center;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:border-color .3s}
+  .media-slot:hover{border-color:#D4A84340}
+  .media-slot iframe,.media-slot video,.media-slot audio{border-radius:8px;width:100%;max-width:100%}
+  .media-slot a{display:inline-flex;align-items:center;gap:8px;background:#D4A84320;color:#D4A843;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:background .2s}
+  .media-slot a:hover{background:#D4A84340}
+
+  /* ===== EXERCISE BOX ===== */
+  .exercise-box{background:#D4A84310;border-left:3px solid #D4A843;border-radius:0 8px 8px 0;padding:16px 20px;margin-top:12px}
+  .exercise-box h4{color:#D4A843;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+
+  /* ===== LOCK OVERLAY ===== */
+  .lock-overlay{position:absolute;inset:0;background:#0F1B2D80;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;border-radius:16px;z-index:5}
+  .lock-icon{font-size:24px;color:#ffffff30}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:640px){
+    .bombazo-card{padding:18px 20px}
+    .bombazo-num{font-size:36px;right:12px;top:8px}
+    .timeline{padding-left:32px}
+    .timeline::before{left:11px}
+    .tl-dot{left:4px;top:20px;width:14px;height:14px}
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ===== FLOATING PARTICLES ===== -->
+<div id="particles"></div>
+
+<!-- ===== PASSWORD GATE ===== -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo">FisioReferentes · Programa ACTIVA</div>
+    <h1 class="gate-title">Zona privada</h1>
+    <p class="gate-sub">Introduce la contraseña que te hemos dado en el grupo.</p>
+    <form id="gateForm" onsubmit="return checkPass()">
+      <input id="passInput" class="gate-input" type="password" placeholder="· · · · · · · ·" autocomplete="off" autofocus/>
+      <button type="submit" class="gate-btn">Entrar</button>
+      <div id="gateError" class="gate-error">Contraseña incorrecta. Revisa el grupo de WhatsApp.</div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-navy-deep/80 backdrop-blur-xl border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
+      <div>
+        <div class="text-oro text-[10px] font-bold tracking-[.2em] uppercase">Programa ACTIVA</div>
+        <div class="text-white font-black text-lg">14 Bombazos</div>
+      </div>
+      <div class="text-right">
+        <div class="text-[10px] text-white/40 font-bold tracking-wider uppercase mb-1">Progreso</div>
+        <div class="w-32 progress-track"><div id="progressBar" class="progress-fill" style="width:0%"></div></div>
+        <div id="progressText" class="text-[11px] text-oro font-bold mt-1">0 de 14</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="py-12 md:py-16 text-center px-5">
+    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
+      Salvemos la fisioterapia.<br/>
+      <span class="text-oro">Una píldora al día.</span>
+    </h1>
+    <p class="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
+      14 herramientas reales del Programa ACTIVA. Cada día se desbloquea una nueva.
+      Más de 2.000€ de método — gratis para ti.
+    </p>
+  </section>
+
+  <!-- TIMELINE OF BOMBAZOS -->
+  <section class="max-w-4xl mx-auto px-5 pb-20">
+    <div id="timeline" class="timeline"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 py-8 text-center text-white/30 text-sm px-5">
+    <p>FisioReferentes · Programa ACTIVA · Abril 2026</p>
+    <p class="mt-1">Contenido privado. No compartas esta página fuera del grupo.</p>
+  </footer>
+
+</div>
+
+<script>
+// ===== CONFIG =====
+const PASSWORD = 'ACTIVA2026';
+const SESSION_KEY = 'activa_bombazos_auth';
+
+// Bombazo data — EDITAR AQUÍ para añadir contenido
+const BOMBAZOS = [
+  {
+    num: 1, date: '2026-04-17', quien: 'Álex',
+    paso: 'Paso 1 · Diagnóstico y control',
+    titulo: 'Diagnóstico express de tu clínica',
+    descripcion: '5 preguntas que marcan la diferencia entre tener una clínica que crece y tener un autoempleo disfrazado. Coge papel y boli — esto es para ti, a solas, con la máxima honestidad que seas capaz.',
+    ejercicio: '<strong>Contéstate estas 5 antes de las 20:30. Sin prisa, 10 minutos tranquilos:</strong><br><br>1. ¿Cuál es el ciclo de vida de tu cliente?<br>2. ¿Cuál es tu CAC (coste de adquirir un paciente nuevo)?<br>3. ¿Tienes un sistema de crecimiento predecible, o estás creciendo por inercia?<br>4. ¿Por qué un paciente tendría que elegirte a ti frente a tu competencia?<br>5. ¿Por qué tu equipo querría seguir trabajando contigo dentro de 2 o 3 años?<br><br>Si alguna se te atasca, mejor. Esa es la que más nos va a servir.',
+    media: '<a href="https://us06web.zoom.us/clips/share/JqzULQSfTN2F7H-QEoz1ug" target="_blank" rel="noopener" style="display:block;text-decoration:none;"><img src="https://file.zoom.us/public/file/KJTeQXneTxOTHBpl_nAsmA/MS4zLj49bSC0iZryoggqz369SOKq_sZDe1zr02s4AOQbBupC/NpIMPQF-SHK9T4ZtELAcgg.gif" style="width:100%;border-radius:10px;cursor:pointer;" alt="Clip de Álex — Bombazo 01"/><span style="display:block;text-align:center;margin-top:8px;color:#D4A843;font-weight:700;font-size:14px;">▶ Ver clip de Álex</span></a>',
+    pdf: '',
+    pdfNombre: 'Plantilla KPIs de partida'
+  },
+  {
+    num: 2, date: '2026-04-18', quien: 'Álex',
+    paso: 'Paso 0 · Criterio estratégico',
+    titulo: '¿Eres fisio o empresario?',
+    descripcion: 'Esto no es un test de conocimiento ni una evaluación de tu clínica. Es un ejercicio de autoconocimiento — para que veas con claridad quién eres como dueño de negocio, desde dónde tomas decisiones y qué te está frenando realmente. Algunas preguntas van a incomodar. Eso es exactamente lo que tienen que hacer.',
+    ejercicio: '<strong>Cómo funciona:</strong><br><br>→ Es un formulario 100% privado. Funciona en tu navegador — nosotros no tenemos acceso a ninguna de tus respuestas. Lo que escribas se queda contigo.<br>→ Responde con libertad total. Sin filtros, sin quedar bien. Cuanto más honesto seas, más valor te llevas.<br>→ Al terminar te aparece tu perfil y tu diagnóstico. <strong>Haz una captura de pantalla</strong> para guardártelo.<br><br>Dedicadle 15-20 minutos tranquilos. No lo hagas entre sesión y sesión.',
+    media: '<div style="position:relative;width:100%;border-radius:10px;overflow:hidden;border:1px solid #ffffff15;"><iframe src="https://claude.ai/public/artifacts/67c6f0e1-62cb-477f-8506-2f605d30359f" style="width:100%;height:700px;border:none;border-radius:10px;background:#fff;" allow="clipboard-write"></iframe></div><p style="margin-top:8px;color:#ffffff30;font-size:11px;text-align:center;">100% privado · tus respuestas no salen de tu navegador · 15-20 min</p>',
+    pdf: '',
+    pdfNombre: ''
+  },
+  {
+    num: 3, date: '2026-04-19', quien: 'Álex',
+    paso: 'Paso 3 · Lo que hace crecer un buen negocio',
+    titulo: 'Los motores de crecimiento de FisioReferentes',
+    descripcion: 'Si ayer os enseñaba la importancia de vuestro rol como dueño de negocio, hoy os comparto una de las clases más reveladoras de nuestro Máster. Los motores de crecimiento de FisioReferentes. Nadie ahí fuera os va a contar esto, y menos gratis. Entender el bombazo de hoy cambia por completo la manera en la que piensas en tu clínica, así que no te lo pierdas.',
+    ejercicio: 'Después de ver el vídeo, pregúntate: ¿cuál de los motores de crecimiento está apagado en tu clínica? ¿Cuál llevas años empujando sin resultado?',
+    media: '<a href="https://us06web.zoom.us/clips/share/w0JiOsreR_aAx4YfFwQwCg" target="_blank" rel="noopener" style="display:block;text-decoration:none;"><img src="https://file.zoom.us/public/file/yydrdpuqTsaIZjmj_luWPw/MS4zLu4Gxh7eT5MH6jvhR9nKhmWXKZvSzn510spRCXlpBViH/pfL08yPtRI651KmvaQrKOA.gif" style="width:100%;border-radius:10px;cursor:pointer;" alt="Bombazo 03 — Los motores de crecimiento"/><span style="display:block;text-align:center;margin-top:8px;color:#D4A843;font-weight:700;font-size:14px;">▶ Ver Bombazo Nº3</span></a>',
+    pdf: '',
+    pdfNombre: 'Plantilla de visión con KPIs'
+  },
+  {
+    num: 4, date: '2026-04-21', quien: 'Álex',
+    paso: 'Paso 2 · Un negocio que vaya contigo',
+    titulo: 'El Pacto de Ulises',
+    descripcion: 'Tu perfil de liderazgo como dueño de clínica. Atarte al mástil ANTES de escuchar los cantos de sirena.',
+    ejercicio: 'Escribe tu Pacto de Ulises: las 3 decisiones irreversibles que te comprometes a mantener pase lo que pase.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Plantilla Pacto de Ulises'
+  },
+  {
+    num: 5, date: '2026-04-22', quien: 'Jano',
+    paso: 'Paso 4 · Define tu nicho',
+    titulo: '¿A quién NO deberías estar tratando?',
+    descripcion: 'La Matriz de filtrado de pacientes: quién sí, quién no, y por qué. Calcula el coste real del paciente no ideal.',
+    ejercicio: 'Identifica tus 3 perfiles de paciente más rentables. ¿Cuál atiendes por inercia?',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Matriz de filtrado de pacientes'
+  },
+  {
+    num: 6, date: '2026-04-23', quien: 'Jano',
+    paso: 'Paso 5 · Conoce a tu cliente ideal',
+    titulo: 'La ecuación del valor de tu servicio',
+    descripcion: 'Qué problema REAL resuelves (pista: no es "el dolor"). La Ecuación del Valor aplicada a tu servicio principal.',
+    ejercicio: 'Aplica la ecuación y escribe tu propuesta de valor en una frase que tu paciente entiende.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Plantilla Ecuación del Valor'
+  },
+  {
+    num: 7, date: '2026-04-24', quien: 'Álex',
+    paso: 'Paso 6 · Servicio de alto valor',
+    titulo: 'El viaje de tu paciente',
+    descripcion: 'Cómo diseñar el recorrido completo del paciente: de la primera llamada al alta. Caso Podium: cómo cambiamos el onboarding.',
+    ejercicio: 'Dibuja tu Viaje del Cliente actual. ¿Dónde hay huecos? ¿Dónde pierdes gente?',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Plantilla Viaje del Cliente'
+  },
+  {
+    num: 8, date: '2026-04-25', quien: 'Álex',
+    paso: 'Paso 7 · Sistema de fidelización',
+    titulo: '¿Dónde se te escapan los pacientes?',
+    descripcion: 'BOMBAZO INTERACTIVO. La Plantilla Detectora de Pérdidas del programa. Álex analiza en directo los casos de 3 asistentes.',
+    ejercicio: 'Identifica los 3 puntos de tu servicio donde más pacientes dejan de venir. Compártelo en el grupo para que Álex lo analice.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Plantilla Detectora de Pérdidas'
+  },
+  {
+    num: 9, date: '2026-04-26', quien: 'Jano',
+    paso: 'Paso 8 · Oferta y precios',
+    titulo: 'Pon precios que merezcan la pena',
+    descripcion: 'Escalera de precios: sesión suelta → bono → programa. Calculadora de impacto: qué pasa si subes 5€/sesión.',
+    ejercicio: 'Diseña tu escalera de 3 niveles de precio. Calcula el impacto real en tu margen mensual.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Calculadora de precios'
+  },
+  {
+    num: 10, date: '2026-04-27', quien: 'Álex',
+    paso: 'Paso 9 · Ventas con evidencia',
+    titulo: 'Cómo vender sin vender',
+    descripcion: 'El Script de presentación de servicios del programa. Cómo dejamos de "explicar tratamientos" y empezamos a "mostrar caminos".',
+    ejercicio: 'Reescribe cómo presentas tu servicio en la primera visita usando el script.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Script de presentación'
+  },
+  {
+    num: 11, date: '2026-04-28', quien: 'Jano',
+    paso: 'Paso 10 · Comunicar para atraer',
+    titulo: 'Tu plan de comunicación en 4 semanas',
+    descripcion: 'Plan de contenido mínimo viable: qué publicar, dónde y con qué frecuencia. Sin agobios.',
+    ejercicio: 'Diseña tus 4 primeras semanas de contenido con la plantilla del programa.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Plan de contenido 4 semanas'
+  },
+  {
+    num: 12, date: '2026-04-29', quien: 'Álex',
+    paso: 'Paso 12 · Equipo y orden',
+    titulo: 'Qué puedes soltar mañana',
+    descripcion: 'El Mapa de tareas delegables. Lista todo lo que haces en una semana y marca qué podría hacer otro.',
+    ejercicio: 'Haz tu mapa. Las 11 tareas que Álex dejó de hacer en Podium y cómo las delegó paso a paso.',
+    media: '',
+    pdf: '',
+    pdfNombre: 'Mapa de tareas delegables'
+  },
+  {
+    num: 13, date: '2026-04-29', quien: 'Jano',
+    paso: 'Paso 11 · Marca personal',
+    titulo: 'De ser visible a ser referente',
+    descripcion: 'Mensaje humano sobre posicionamiento. La diferencia entre tener seguidores y ser la referencia de tu zona.',
+    ejercicio: 'Sin ejercicio. Reflexión para llegar mañana con todo claro.',
+    media: '',
+    pdf: '',
+    pdfNombre: ''
+  },
+  {
+    num: 14, date: '2026-04-30', quien: 'Jano',
+    paso: 'Paso 13 · Visión global',
+    titulo: 'Hoy encajan las 14 piezas',
+    descripcion: 'Último audio antes del directo. Vista de pájaro: los 14 pasos del programa encajados. Cierre emocional.',
+    ejercicio: 'Repasa los 13 bombazos anteriores. Esta noche a las 19:00h se conecta todo en la masterclass.',
+    media: '',
+    pdf: '',
+    pdfNombre: ''
+  }
+];
+
+// ===== PASSWORD LOGIC =====
+function checkPass(){
+  const v = document.getElementById('passInput').value.trim().toUpperCase();
+  if(v === PASSWORD){
+    sessionStorage.setItem(SESSION_KEY,'1');
+    document.getElementById('gate').classList.add('hide');
+    setTimeout(()=>{document.getElementById('gate').style.display='none'},700);
+    const app = document.getElementById('app');
+    app.style.display='block';
+    setTimeout(()=>app.classList.add('show'),50);
+    renderTimeline();
+    return false;
+  }
+  document.getElementById('gateError').classList.add('show');
+  document.getElementById('passInput').value='';
+  document.getElementById('passInput').focus();
+  return false;
+}
+
+// Auto-login if already authenticated
+if(sessionStorage.getItem(SESSION_KEY)==='1'){
+  document.getElementById('gate').style.display='none';
+  const app=document.getElementById('app');
+  app.style.display='block';
+  app.classList.add('show');
+  window.addEventListener('DOMContentLoaded',renderTimeline);
+}
+
+// ===== PARTICLES =====
+(function(){
+  const c=document.getElementById('particles');
+  for(let i=0;i<30;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDuration=(8+Math.random()*12)+'s';
+    p.style.animationDelay=Math.random()*10+'s';
+    p.style.width=p.style.height=(1+Math.random()*2)+'px';
+    c.appendChild(p);
+  }
+})();
+
+// ===== RENDER TIMELINE =====
+function renderTimeline(){
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = '';
+  const today = new Date().toISOString().slice(0,10);
+  let unlocked = 0;
+
+  BOMBAZOS.forEach((b,i) => {
+    const isUnlocked = b.date <= today;
+    const isToday = b.date === today;
+    if(isUnlocked) unlocked++;
+
+    const card = document.createElement('div');
+    card.className = 'bombazo-card relative' + (isToday?' today':'') + (!isUnlocked?' locked':'');
+    card.innerHTML = `
+      <div class="bombazo-num">${String(b.num).padStart(2,'0')}</div>
+      ${!isUnlocked?'<div class="lock-overlay"><div class="lock-icon">🔒 Se desbloquea el '+formatDate(b.date)+'</div></div>':''}
+
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="tag-mod">${b.paso}</span>
+        <span class="tag-quien">${b.quien}</span>
+        <span class="text-white/30 text-xs ml-auto">${formatDate(b.date)}</span>
+      </div>
+
+      <h3 class="text-white font-black text-xl md:text-2xl mb-2 pr-12">${b.titulo}</h3>
+      <p class="text-white/60 leading-relaxed text-sm mb-0">${b.descripcion}</p>
+
+      ${b.ejercicio?`
+      <div class="exercise-box">
+        <h4>Ejercicio</h4>
+        <p class="text-white/70 text-sm leading-relaxed">${b.ejercicio}</p>
+      </div>`:''}
+
+      ${isUnlocked && (b.media || b.pdf) ? `
+      <div class="media-slot mt-4">
+        ${b.media ? b.media : '<p class="text-white/20 text-xs italic">Vídeo/audio pendiente de subir</p>'}
+        ${b.pdf ? `<a href="${b.pdf}" target="_blank" rel="noopener">📎 ${b.pdfNombre || 'Descargar plantilla'}</a>` : (b.pdfNombre ? `<p class="text-white/20 text-xs italic">📎 ${b.pdfNombre} — pendiente</p>` : '')}
+      </div>` : ''}
+
+      ${isUnlocked && !b.media && !b.pdf && b.pdfNombre ? `
+      <div class="media-slot mt-4">
+        <p class="text-white/20 text-xs italic">Contenido pendiente de subir</p>
+      </div>` : ''}
+    `;
+
+    // Timeline dot
+    const wrapper = document.createElement('div');
+    wrapper.className = 'relative';
+    wrapper.style.paddingBottom = '0';
+
+    const dot = document.createElement('div');
+    dot.className = 'tl-dot' + (isUnlocked ? ' active' : ' locked');
+
+    wrapper.appendChild(dot);
+    wrapper.appendChild(card);
+    tl.appendChild(wrapper);
+  });
+
+  // Progress
+  const pct = Math.round((unlocked/BOMBAZOS.length)*100);
+  document.getElementById('progressBar').style.width = pct+'%';
+  document.getElementById('progressText').textContent = unlocked+' de '+BOMBAZOS.length;
+}
+
+function formatDate(d){
+  const months=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const days=['dom','lun','mar','mié','jue','vie','sáb'];
+  const dt=new Date(d+'T12:00:00');
+  return days[dt.getDay()]+' '+dt.getDate()+' '+months[dt.getMonth()];
+}
+</script>
+
+</body>
+</html>
