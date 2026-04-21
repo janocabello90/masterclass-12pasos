@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Quién eres como dueño? — Bombazo 02</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap');
+
+:root{
+  --paper: #faf8f3;
+  --paper2: #f2ede3;
+  --ink: #1e1c18;
+  --ink2: #3a3830;
+  --ink3: #7a7668;
+  --rule: #ddd8cc;
+  --rule2: #e8e3d8;
+  --gold: #9a7a2a;
+  --gold2: #c8a84a;
+  --gold-light: #f5edd8;
+  --green: #2a6a3a;
+  --green-light: #e8f2ec;
+  --red: #8a2a2a;
+  --red-light: #f5e8e8;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:0 0 80px;
+  position:relative;
+}
+
+/* Textura de papel sutil */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+.wrap{max-width:660px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ── CABECERA ── */
+.cabecera{
+  padding:52px 0 36px;
+  border-bottom:2px solid var(--ink);
+}
+.cab-eyebrow{
+  font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.cab-eyebrow::before{content:'';width:20px;height:1px;background:var(--ink3)}
+.cab-h1{
+  font-family:'Lora',serif;
+  font-size:clamp(28px,5vw,44px);
+  font-weight:400;line-height:1.1;
+  letter-spacing:-.03em;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.cab-h1 em{font-style:italic;color:var(--gold)}
+.cab-sub{
+  font-size:14px;color:var(--ink3);line-height:1.8;
+  max-width:500px;font-weight:300;
+}
+.cab-nota{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-top:16px;
+  font-size:11px;color:var(--ink3);
+  background:var(--gold-light);border:1px solid #e0d0a0;
+  border-radius:4px;padding:5px 12px;
+}
+
+/* ── INTRO ── */
+.intro{
+  margin:28px 0;
+  padding:20px 22px;
+  background:var(--paper2);
+  border-left:3px solid var(--gold2);
+  border-radius:0 6px 6px 0;
+}
+.intro p{font-size:13px;color:var(--ink2);line-height:1.85;margin-bottom:8px}
+.intro p:last-child{margin-bottom:0}
+.intro strong{font-weight:600;color:var(--ink)}
+.intro em{font-style:italic;color:var(--gold)}
+
+/* ── BLOQUE DE PREGUNTA ── */
+.bloque{
+  margin-bottom:28px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--rule2);
+}
+.bloque:last-of-type{border-bottom:none}
+
+.bloque-num{
+  font-family:'Lora',serif;
+  font-size:11px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.bloque-num::after{content:'';flex:1;height:1px;background:var(--rule)}
+.bloque-pregunta{
+  font-family:'Lora',serif;
+  font-size:18px;font-weight:400;color:var(--ink);
+  line-height:1.4;margin-bottom:6px;letter-spacing:-.01em;
+}
+.bloque-pregunta em{font-style:italic;color:var(--gold)}
+.bloque-hint{
+  font-size:12px;color:var(--ink3);line-height:1.65;
+  margin-bottom:16px;font-weight:300;font-style:italic;
+}
+
+/* TEXTAREA estilo cuaderno */
+.campo-texto{position:relative}
+textarea{
+  width:100%;
+  font-family:'Lora',serif;
+  font-size:14px;color:var(--ink);
+  background:transparent;
+  border:none;
+  border-bottom:1.5px solid var(--rule);
+  padding:8px 0 10px;
+  resize:none;min-height:72px;
+  outline:none;line-height:1.85;
+  transition:border-color .2s;
+  display:block;
+}
+textarea:focus{border-color:var(--gold2)}
+textarea::placeholder{
+  color:var(--rule);
+  font-style:italic;font-size:13px;
+}
+
+/* OPCIONES de elección */
+.opciones{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.opcion{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 14px;
+  background:#fff;
+  border:1.5px solid var(--rule2);
+  border-radius:7px;
+  cursor:pointer;
+  transition:all .18s;
+  user-select:none;
+}
+.opcion:hover{border-color:var(--gold2);background:var(--gold-light)}
+.opcion.sel{
+  border-color:var(--gold2);
+  background:var(--gold-light);
+}
+.opcion-radio{
+  width:18px;height:18px;border-radius:50%;
+  border:2px solid var(--rule);
+  flex-shrink:0;margin-top:1px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;
+}
+.opcion.sel .opcion-radio{
+  border-color:var(--gold2);background:var(--gold2);
+}
+.opcion.sel .opcion-radio::after{
+  content:'';width:6px;height:6px;border-radius:50%;background:#fff;
+}
+.opcion-texto{
+  font-size:13px;color:var(--ink2);line-height:1.6;
+  font-weight:400;
+}
+.opcion.sel .opcion-texto{color:var(--ink);font-weight:500}
+
+/* ESCALA emocional */
+.escala-emocional{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:6px;margin-top:4px;
+}
+.esc-opt{
+  padding:10px 6px 8px;
+  border:1.5px solid var(--rule2);
+  border-radius:7px;
+  text-align:center;cursor:pointer;
+  transition:all .18s;user-select:none;
+  background:#fff;
+}
+.esc-opt:hover{border-color:var(--gold2);background:var(--gold-light)}
+.esc-opt.sel{border-color:var(--gold2);background:var(--gold-light)}
+.esc-emoji{font-size:20px;display:block;margin-bottom:4px}
+.esc-label{font-size:10px;color:var(--ink3);line-height:1.3;font-weight:400}
+.esc-opt.sel .esc-label{color:var(--gold);font-weight:600}
+
+/* SEPARADOR SECCIÓN */
+.sec-sep{
+  display:flex;align-items:center;gap:12px;
+  margin:36px 0 24px;
+}
+.sec-sep-txt{
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink3);
+  white-space:nowrap;
+}
+.sec-sep::before,.sec-sep::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* BTN */
+.btn-wrap{text-align:center;margin-top:36px}
+.btn-generar{
+  font-family:'Lora',serif;
+  font-size:16px;font-weight:500;
+  font-style:italic;
+  background:var(--ink);color:var(--paper);
+  border:none;padding:15px 44px;
+  border-radius:5px;cursor:pointer;
+  letter-spacing:.02em;
+  transition:all .2s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.btn-generar:hover{background:var(--ink2);transform:translateY(-1px)}
+.btn-generar span{font-size:18px;transition:transform .2s}
+.btn-generar:hover span{transform:translateX(4px)}
+
+/* ── RESULTADO ── */
+.resultado{
+  display:none;margin-top:52px;
+  animation:ap .6s ease;
+}
+.resultado.show{display:block}
+@keyframes ap{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Membrete del informe */
+.informe-cab{
+  border-top:2px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+  padding:18px 0 16px;
+  margin-bottom:0;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:16px;
+}
+.inf-izq{}
+.inf-etiqueta{
+  font-size:9px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:6px;
+}
+.inf-titulo{
+  font-family:'Lora',serif;
+  font-size:clamp(18px,3.5vw,26px);
+  font-weight:400;color:var(--ink);
+  line-height:1.2;letter-spacing:-.02em;
+}
+.inf-titulo em{font-style:italic;color:var(--gold)}
+.inf-der{text-align:right}
+.inf-fecha{font-size:10px;color:var(--ink3);line-height:1.7}
+
+/* PERFIL IDENTIDAD */
+.perfil-id{
+  background:var(--ink);color:var(--paper);
+  border-radius:10px;padding:26px 28px;
+  margin:18px 0 14px;
+  position:relative;overflow:hidden;
+}
+.perfil-id::before{
+  content:'';position:absolute;
+  top:-40px;right:-40px;
+  width:160px;height:160px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(200,168,74,.1),transparent 70%);
+}
+.pid-etiqueta{
+  font-size:9px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold2);margin-bottom:10px;
+}
+.pid-perfil{
+  font-family:'Lora',serif;
+  font-size:clamp(18px,3vw,24px);
+  font-weight:400;color:#f0ece0;
+  line-height:1.2;margin-bottom:6px;
+  letter-spacing:-.01em;
+}
+.pid-perfil em{font-style:italic;color:var(--gold2)}
+.pid-sub{font-size:13px;color:#9a9488;line-height:1.65;font-weight:300}
+
+/* BLOQUES ANÁLISIS */
+.analisis-bloques{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+
+.an-bloque{
+  background:#fff;
+  border:1px solid var(--rule2);
+  border-radius:8px;
+  overflow:hidden;
+}
+.an-bloque-head{
+  background:var(--paper2);
+  padding:10px 16px;
+  border-bottom:1px solid var(--rule2);
+  display:flex;align-items:center;gap:8px;
+}
+.an-bloque-ico{font-size:14px}
+.an-bloque-label{
+  font-size:10px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink3);
+}
+.an-bloque-body{padding:14px 16px}
+.an-bloque-body p{
+  font-size:13px;color:var(--ink2);line-height:1.85;
+  margin-bottom:8px;
+}
+.an-bloque-body p:last-child{margin-bottom:0}
+.an-bloque-body strong{font-weight:600;color:var(--ink)}
+.an-bloque-body em{font-style:italic;color:var(--gold)}
+
+/* ESPEJO — refleja sus propias respuestas */
+.espejo{
+  background:var(--gold-light);
+  border:1px solid #e0d0a0;
+  border-radius:8px;padding:18px 20px;
+  margin:14px 0;
+}
+.espejo-titulo{
+  font-size:10px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:12px;
+}
+.espejo-fila{
+  display:flex;gap:10px;
+  padding:7px 0;
+  border-bottom:1px solid #e0d0a088;
+  font-size:13px;
+}
+.espejo-fila:last-child{border-bottom:none}
+.ef-q{
+  font-family:'Lora',serif;
+  font-size:12px;color:var(--gold);
+  flex-shrink:0;width:20px;font-style:italic;
+  margin-top:1px;
+}
+.ef-a{
+  color:var(--ink2);line-height:1.6;flex:1;
+  font-style:italic;font-size:12px;
+}
+.ef-a.vacio{color:var(--rule);font-style:normal}
+
+/* FORTALEZAS Y FRENOS */
+.fila-doble{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+@media(max-width:500px){.fila-doble{grid-template-columns:1fr}}
+.mini-bloque{border-radius:7px;padding:14px 16px}
+.mb-verde{background:var(--green-light);border:1px solid #b0d8b8}
+.mb-rojo{background:var(--red-light);border:1px solid #d8b0b0}
+.mb-etiqueta{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.mb-verde .mb-etiqueta{color:var(--green)}
+.mb-rojo .mb-etiqueta{color:var(--red)}
+.mb-items{display:flex;flex-direction:column;gap:5px}
+.mb-item{font-size:12px;line-height:1.5;display:flex;gap:6px;align-items:flex-start}
+.mb-item-dot{flex-shrink:0;margin-top:4px;width:5px;height:5px;border-radius:50%}
+.mb-verde .mb-item-dot{background:var(--green)}
+.mb-rojo .mb-item-dot{background:var(--red)}
+
+/* PRÓXIMOS PASOS */
+.pasos{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.paso{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 14px;
+  background:#fff;border:1px solid var(--rule2);
+  border-radius:7px;
+}
+.paso-n{
+  font-family:'Lora',serif;
+  font-size:18px;color:var(--gold2);
+  flex-shrink:0;line-height:1;margin-top:1px;
+}
+.paso-contenido{}
+.paso-titulo{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.paso-desc{font-size:12px;color:var(--ink3);line-height:1.55}
+
+/* CIERRE */
+.cierre-final{
+  border-top:1px solid var(--rule);
+  border-bottom:2px solid var(--ink);
+  margin-top:28px;
+  padding:24px 0 22px;
+  text-align:center;
+}
+.cf-titulo{
+  font-family:'Lora',serif;
+  font-size:clamp(16px,3vw,22px);
+  font-weight:400;color:var(--ink);
+  line-height:1.3;margin-bottom:10px;letter-spacing:-.01em;
+}
+.cf-titulo em{font-style:italic;color:var(--gold)}
+.cf-texto{
+  font-size:13px;color:var(--ink3);
+  line-height:1.8;max-width:480px;margin:0 auto;font-weight:300;
+}
+.cf-texto strong{color:var(--ink);font-weight:500}
+
+@media(max-width:480px){
+  .informe-cab{flex-direction:column;align-items:flex-start;gap:8px}
+  .inf-der{text-align:left}
+  .escala-emocional{grid-template-columns:repeat(5,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- CABECERA -->
+<div class="cabecera">
+  <div class="cab-eyebrow">Bombazo 02 · 19 de abril · Alex Vallés</div>
+  <h1 class="cab-h1">¿Quién eres<br>como <em>dueño</em>?</h1>
+  <p class="cab-sub">Antes de mejorar cualquier área de tu negocio, necesitas saber desde qué lugar lo estás dirigiendo. Este ejercicio no mide lo que tienes resuelto — mide quién eres como dueño de clínica.</p>
+  <div class="cab-nota">✍️ Responde con lo que ES, no con lo que te gustaría que fuera</div>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <p>Hay una frase que me dijo un fisio hace tiempo y que no he podido olvidar:</p>
+  <p><em>"Yo soy fisio, no empresario."</em> Lo dijo con orgullo. Y yo entendí en ese momento que era exactamente la razón por la que llevaba 4 años ganando lo mismo.</p>
+  <p>El problema no es ser fisioterapeuta. <strong>El problema es no haber decidido conscientemente quién quieres ser además de fisioterapeuta.</strong> Eso es lo que vamos a trabajar hoy.</p>
+</div>
+
+<!-- ════════════ BLOQUE 1: IDENTIDAD ════════════ -->
+<div class="sec-sep"><div class="sec-sep-txt">Parte 1 · Tu identidad como dueño</div></div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 01</div>
+  <div class="bloque-pregunta">Cuando alguien te pregunta a qué te dedicas, ¿cómo te presentas <em>a ti mismo</em>?</div>
+  <div class="bloque-hint">No lo que dices en LinkedIn. Lo que dices en una cena de amigos cuando te preguntan.</div>
+  <textarea id="q1" rows="2" placeholder="Escribe exactamente lo que dices..."></textarea>
+</div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 02</div>
+  <div class="bloque-pregunta">¿Qué parte de tu semana dedicás a <em>trabajar en tu negocio</em> — no en él?</div>
+  <div class="bloque-hint">Trabajar "en" el negocio es tratar pacientes. Trabajar "en" él es diseñar cómo mejora, crece y funciona sin ti.</div>
+  <div class="opciones" id="op2">
+    <div class="opcion" onclick="selOp('op2',this,'nada')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Casi nada. Cuando termino la agenda, ya no tengo energía para más.</div>
+    </div>
+    <div class="opcion" onclick="selOp('op2',this,'poco')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Algo, cuando puedo. Pero es irregular y lo primero que sacrifico cuando hay presión.</div>
+    </div>
+    <div class="opcion" onclick="selOp('op2',this,'regular')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Tengo tiempo reservado para gestión, aunque no siempre lo protejo bien.</div>
+    </div>
+    <div class="opcion" onclick="selOp('op2',this,'si')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Tengo bloques fijos en mi semana para trabajar en el negocio — y los respeto.</div>
+    </div>
+  </div>
+</div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 03</div>
+  <div class="bloque-pregunta">Cuando tomas una decisión importante en la clínica, ¿desde qué lugar lo haces <em>habitualmente</em>?</div>
+  <div class="bloque-hint">Sé honesto. La mayoría de las decisiones se toman desde un lugar diferente del que nos gustaría admitir.</div>
+  <div class="opciones" id="op3">
+    <div class="opcion" onclick="selOp('op3',this,'miedo')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Desde el miedo — a perder pacientes, a no llegar, a que algo salga mal.</div>
+    </div>
+    <div class="opcion" onclick="selOp('op3',this,'reaccion')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Desde la reacción — respondo a lo que va pasando más que anticipar y diseñar.</div>
+    </div>
+    <div class="opcion" onclick="selOp('op3',this,'intuicion')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Desde la intuición — me fío de lo que me dice la experiencia, aunque no siempre tengo datos.</div>
+    </div>
+    <div class="opcion" onclick="selOp('op3',this,'criterio')">
+      <div class="opcion-radio"></div>
+      <div class="opcion-texto">Desde el criterio — tengo una visión clara y contrasto las decisiones contra ella.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ BLOQUE 2: FORTALEZAS Y FRENOS ════════════ -->
+<div class="sec-sep"><div class="sec-sep-txt">Parte 2 · Lo que te mueve y lo que te frena</div></div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 04</div>
+  <div class="bloque-pregunta">¿Cuál es tu mayor fortaleza real como dueño de negocio — <em>no como clínico</em>?</div>
+  <div class="bloque-hint">No es la técnica ni el conocimiento clínico. ¿Qué cualidad tuya como dueño ha sido la más determinante hasta ahora?</div>
+  <textarea id="q4" rows="2" placeholder="Como dueño, mi mayor fortaleza es..."></textarea>
+</div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 05</div>
+  <div class="bloque-pregunta">¿Qué creencia sobre ti mismo o tu negocio sabes que te está frenando — aunque no te guste admitirlo?</div>
+  <div class="bloque-hint">Las creencias limitantes más destructivas son las que suenan razonables. "Los pacientes no pagarían más." "Sin mí la calidad baja." "No es buen momento."</div>
+  <textarea id="q5" rows="2" placeholder="La creencia que sé que me frena es..."></textarea>
+</div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 06</div>
+  <div class="bloque-pregunta">¿Qué emoción predomina cuando piensas en el futuro de tu clínica?</div>
+  <div class="bloque-hint">Sin filtros. ¿Qué sientes realmente cuando imaginas tu negocio dentro de 2 años?</div>
+  <div class="escala-emocional" id="em6">
+    <div class="esc-opt" onclick="selEsc('em6',this,'angustia')">
+      <span class="esc-emoji">😰</span>
+      <span class="esc-label">Angustia o agobio</span>
+    </div>
+    <div class="esc-opt" onclick="selEsc('em6',this,'incertidumbre')">
+      <span class="esc-emoji">😶</span>
+      <span class="esc-label">Incertidumbre</span>
+    </div>
+    <div class="esc-opt" onclick="selEsc('em6',this,'esperanza')">
+      <span class="esc-emoji">🌱</span>
+      <span class="esc-label">Esperanza pero sin plan</span>
+    </div>
+    <div class="esc-opt" onclick="selEsc('em6',this,'confianza')">
+      <span class="esc-emoji">💪</span>
+      <span class="esc-label">Confianza con dirección</span>
+    </div>
+    <div class="esc-opt" onclick="selEsc('em6',this,'claridad')">
+      <span class="esc-emoji">🧭</span>
+      <span class="esc-label">Claridad y plan concreto</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ BLOQUE 3: VISIÓN ════════════ -->
+<div class="sec-sep"><div class="sec-sep-txt">Parte 3 · Tu visión como líder</div></div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 07</div>
+  <div class="bloque-pregunta">Si dentro de 3 años tu clínica funciona exactamente como tú quieres, ¿cómo es <em>tu vida</em> — no solo el negocio?</div>
+  <div class="bloque-hint">No lo que debería ser. Lo que tú quieres realmente. Horas trabajadas, ingresos, presencia en clínica, tiempo libre, familia.</div>
+  <textarea id="q7" rows="3" placeholder="Dentro de 3 años, mi vida sería..."></textarea>
+</div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 08</div>
+  <div class="bloque-pregunta">¿Qué tipo de líder quieres ser para tu equipo — o para el equipo que quieres construir?</div>
+  <div class="bloque-hint">Piensa en el mejor jefe que hayas tenido o en el líder que hubieras querido tener. ¿Qué tiene que tienes tú también — y qué te falta?</div>
+  <textarea id="q8" rows="2" placeholder="El tipo de líder que quiero ser es..."></textarea>
+</div>
+
+<div class="bloque">
+  <div class="bloque-num">Pregunta 09</div>
+  <div class="bloque-pregunta">¿Qué decisión llevas posponiendo como dueño que sabes que cambiaría el rumbo de tu clínica?</div>
+  <div class="bloque-hint">No como clínico — como dueño. Precio, modelo, equipo, delegación, foco. La primera que te venga es la correcta.</div>
+  <textarea id="q9" rows="2" placeholder="La decisión que sigo posponiendo es..."></textarea>
+</div>
+
+<!-- BTN -->
+<div class="btn-wrap">
+  <button class="btn-generar" onclick="generar()">
+    Generar mi perfil como dueño
+    <span>→</span>
+  </button>
+</div>
+
+<!-- ════════════ RESULTADO ════════════ -->
+<div class="resultado" id="resultado">
+
+  <div class="informe-cab">
+    <div class="inf-izq">
+      <div class="inf-etiqueta">Fisioreferentes · Autoconocimiento del dueño</div>
+      <div class="inf-titulo">Tu perfil como <em>líder y dueño</em></div>
+    </div>
+    <div class="inf-der">
+      <div class="inf-fecha" id="inf-fecha"></div>
+    </div>
+  </div>
+
+  <!-- PERFIL DE IDENTIDAD -->
+  <div class="perfil-id">
+    <div class="pid-etiqueta">Tu perfil de identidad empresarial</div>
+    <div class="pid-perfil" id="pid-perfil">—</div>
+    <div class="pid-sub" id="pid-sub">—</div>
+  </div>
+
+  <!-- ESPEJO: sus propias palabras -->
+  <div class="espejo">
+    <div class="espejo-titulo">Lo que has dicho — en tus propias palabras</div>
+    <div id="espejo-contenido"></div>
+  </div>
+
+  <!-- ANÁLISIS -->
+  <div class="analisis-bloques" id="analisis-bloques"></div>
+
+  <!-- FORTALEZAS Y FRENOS -->
+  <div class="fila-doble" id="fila-doble"></div>
+
+  <!-- PRÓXIMOS PASOS -->
+  <div class="an-bloque">
+    <div class="an-bloque-head">
+      <div class="an-bloque-ico">🧭</div>
+      <div class="an-bloque-label">Tus próximos pasos como dueño</div>
+    </div>
+    <div class="an-bloque-body">
+      <div class="pasos" id="pasos-contenido"></div>
+    </div>
+  </div>
+
+  <!-- CIERRE -->
+  <div class="cierre-final">
+    <div class="cf-titulo" id="cf-titulo">—</div>
+    <div class="cf-texto" id="cf-texto">—</div>
+  </div>
+
+</div><!-- /resultado -->
+
+</div><!-- /wrap -->
+
+<script>
+var R = {
+  q1:'', q4:'', q5:'', q7:'', q8:'', q9:'',
+  op2: null, op3: null, em6: null
+};
+
+function selOp(grpId, el, val){
+  document.getElementById(grpId).querySelectorAll('.opcion')
+    .forEach(function(o){ o.classList.remove('sel') });
+  el.classList.add('sel');
+  R[grpId==='op2'?'op2':'op3'] = val;
+}
+
+function selEsc(grpId, el, val){
+  document.getElementById(grpId).querySelectorAll('.esc-opt')
+    .forEach(function(o){ o.classList.remove('sel') });
+  el.classList.add('sel');
+  R.em6 = val;
+}
+
+function v(id){ return (document.getElementById(id).value||'').trim() }
+function trunc(s,n){ return s.length>n ? s.substring(0,n)+'…' : s }
+
+function generar(){
+  R.q1 = v('q1'); R.q4 = v('q4'); R.q5 = v('q5');
+  R.q7 = v('q7'); R.q8 = v('q8'); R.q9 = v('q9');
+
+  // FECHA
+  var hoy = new Date();
+  document.getElementById('inf-fecha').innerHTML =
+    'Generado el '+hoy.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})+
+    '<br><span style="color:var(--rule)">Bombazo 02 · ACTIVA</span>';
+
+  // ── PERFIL DE IDENTIDAD ──
+  var perfil, subPerfil;
+  var desdeCriterio = R.op3==='criterio';
+  var desdeReaccion = R.op3==='miedo'||R.op3==='reaccion';
+  var tieneVision   = R.em6==='confianza'||R.em6==='claridad';
+  var angustia      = R.em6==='angustia'||R.em6==='incertidumbre';
+  var tiempoGestion = R.op2==='si'||R.op2==='regular';
+
+  if(desdeCriterio && tieneVision && tiempoGestion){
+    perfil = 'El empresario que <em>ya lo ha decidido</em>';
+    subPerfil = 'Tienes identidad de dueño, aunque todavía quede camino por recorrer. La decisión más difícil — quién quieres ser — ya está tomada. Lo que falta es el sistema que lo haga sostenible.';
+  } else if(desdeCriterio && !tiempoGestion){
+    perfil = 'El dueño con <em>criterio pero sin tiempo</em>';
+    subPerfil = 'Piensas como empresario pero actúas como empleado de tu propia clínica. El criterio está ahí — falta proteger el espacio para aplicarlo.';
+  } else if(desdeReaccion && angustia){
+    perfil = 'El técnico <em>atrapado en su propio trabajo</em>';
+    subPerfil = 'Eres excelente como fisioterapeuta. Como dueño, todavía estás reaccionando más que diseñando. Eso no es un defecto — es el punto de partida más frecuente.';
+  } else if(R.em6==='esperanza'){
+    perfil = 'El dueño en <em>transición</em>';
+    subPerfil = 'Sientes que hay otra forma de funcionar — y tienes razón. Lo que te falta no es más información sino el sistema que convierta esa esperanza en un plan concreto.';
+  } else {
+    perfil = 'El clínico que <em>empieza a verse como empresario</em>';
+    subPerfil = 'Estás en el momento más importante: el de darte cuenta. Muy pocos llegan aquí con esta honestidad. Lo que viene después depende de lo que decidas hacer con ello.';
+  }
+
+  document.getElementById('pid-perfil').innerHTML = perfil;
+  document.getElementById('pid-sub').textContent  = subPerfil;
+
+  // ── ESPEJO ──
+  var espejoData = [
+    { q:'Te presentas como…', a: R.q1 },
+    { q:'Tu mayor fortaleza como dueño…', a: R.q4 },
+    { q:'La creencia que te frena…', a: R.q5 },
+    { q:'Tu visión de vida en 3 años…', a: R.q7 },
+    { q:'La decisión pospuesta…', a: R.q9 }
+  ];
+  document.getElementById('espejo-contenido').innerHTML = espejoData.map(function(e){
+    var txt = e.a ? trunc(e.a,120) : null;
+    return '<div class="espejo-fila"><div class="ef-q">—</div>'
+      +'<div class="ef-a'+(txt?'':' vacio')+'"><strong style="font-style:normal;color:var(--gold)">'
+      +e.q+'</strong> '+(txt||'Sin completar')+'</div></div>';
+  }).join('');
+
+  // ── ANÁLISIS ──
+  var bloques = [];
+
+  // Cómo decide
+  var decText = {
+    miedo: 'Tomar decisiones desde el miedo produce cautela excesiva — precios bajos, modelos conservadores, postergación indefinida. El miedo como motor de decisión no desaparece con información: desaparece con criterio. Y el criterio se construye teniendo claro a dónde vas y por qué.',
+    reaccion: 'Reaccionar en lugar de diseñar es la señal más clara de que el negocio te está dirigiendo a ti — y no al revés. No es falta de capacidad: es falta de sistema. Cuando no hay un plan claro, cualquier urgencia del día manda.',
+    intuicion: 'La intuición es un activo real — sobre todo en un clínico con experiencia. El siguiente paso es validarla con datos. La intuición sin datos produce decisiones inconsistentes; con datos, produce ventaja competitiva.',
+    criterio: 'Decidir desde el criterio — contrastando con una visión clara — es la base del liderazgo empresarial real. El reto ahora es mantenerlo cuando aparece la presión del día a día y asegurarte de que ese criterio tiene datos reales detrás, no solo intuición.'
+  };
+  if(R.op3) bloques.push({ico:'🎯', label:'Cómo tomas decisiones', texto: decText[R.op3]});
+
+  // Emoción ante el futuro
+  var emText = {
+    angustia: 'La angustia ante el futuro del negocio no es debilidad — es información. Generalmente señala una brecha entre lo que quieres y lo que tienes, sin un camino claro entre los dos puntos. Cuando esa brecha tiene un mapa, la angustia se convierte en urgencia productiva.',
+    incertidumbre: 'La incertidumbre es el estado natural cuando tienes ambición pero no un plan concreto. No indica que estés haciendo algo mal — indica que el siguiente paso es convertir la dirección en objetivos con fecha.',
+    esperanza: 'La esperanza sin plan es el estado más peligroso del dueño de clínica: tienes la energía para cambiar pero no el sistema que lo haga posible. Esa energía tiene fecha de caducidad si no se canaliza pronto.',
+    confianza: 'Tener confianza y dirección es una posición sólida. El riesgo de tu perfil es la complacencia — creer que porque la dirección está clara, el sistema ya está construido. La confianza bien fundada requiere revisión periódica de los datos.',
+    claridad: 'Tener claridad y un plan concreto es el estado que todos los dueños de clínica deberían tener — y muy pocos tienen de verdad. El reto ahora es mantener esa claridad cuando el día a día presione, y asegurarte de que el plan se actualiza con los resultados reales.'
+  };
+  if(R.em6) bloques.push({ico:'🌡️', label:'Cómo ves el futuro de tu clínica', texto: emText[R.em6]});
+
+  // Presentación profesional
+  var presentacion = R.q1.toLowerCase();
+  var esFisio = presentacion.indexOf('fisio')!==-1||presentacion.indexOf('terapeuta')!==-1;
+  var esDueno = presentacion.indexOf('dueño')!==-1||presentacion.indexOf('propietario')!==-1||presentacion.indexOf('empresario')!==-1||presentacion.indexOf('clínica')!==-1||presentacion.indexOf('negocio')!==-1;
+  if(R.q1){
+    var pTexto = esDueno
+      ? 'Te presentas incorporando el rol de dueño. Eso importa más de lo que parece — la identidad que proyectas hacia afuera termina reforzando la que construyes hacia adentro.'
+      : esFisio
+      ? 'Te presentas exclusivamente como fisioterapeuta. Es lógico — es tu vocación y tu formación. Pero hay una consecuencia: cuando solo te identificas como técnico, el cerebro toma decisiones de técnico, no de dueño. Cambiar esa presentación, aunque parezca superficial, es el primer paso del cambio de identidad.'
+      : 'La forma en que te presentas revela cómo te ves a ti mismo. Fíjate en si en esa descripción aparece el rol de dueño o director — o si te defines únicamente por lo que haces técnicamente.';
+    bloques.push({ico:'🪞', label:'Cómo te ves a ti mismo', texto: pTexto});
+  }
+
+  // Decisión pospuesta
+  if(R.q9){
+    bloques.push({
+      ico:'⏳', label:'La decisión que llevas posponiendo',
+      texto: 'Has identificado una decisión que sabes que cambiaría el rumbo de tu clínica — y llevas tiempo sin tomarla. Eso no es procrastinación: es la señal de que esa decisión necesita un marco, un sistema o un acompañamiento que todavía no tienes. Las decisiones difíciles no se toman solas: se toman cuando hay suficiente claridad y suficiente estructura para sostener sus consecuencias.'
+    });
+  }
+
+  document.getElementById('analisis-bloques').innerHTML = bloques.map(function(b){
+    return '<div class="an-bloque">'
+      +'<div class="an-bloque-head"><div class="an-bloque-ico">'+b.ico+'</div><div class="an-bloque-label">'+b.label+'</div></div>'
+      +'<div class="an-bloque-body"><p>'+b.texto+'</p></div>'
+      +'</div>';
+  }).join('');
+
+  // ── FORTALEZAS Y FRENOS ──
+  var fort = R.q4 ? ['<li class="mb-item"><div class="mb-item-dot"></div><span>'+trunc(R.q4,120)+'</span></li>'] : ['<li class="mb-item"><div class="mb-item-dot"></div><span>Sin completar — escríbela: es el activo más importante que tienes.</span></li>'];
+  var fren = R.q5 ? ['<li class="mb-item"><div class="mb-item-dot"></div><span>'+trunc(R.q5,120)+'</span></li>'] : ['<li class="mb-item"><div class="mb-item-dot"></div><span>Sin completar — identificarla es el primer paso para que deje de mandarte.</span></li>'];
+
+  document.getElementById('fila-doble').innerHTML =
+    '<div class="mini-bloque mb-verde"><div class="mb-etiqueta">Tu fortaleza como dueño</div><ul class="mb-items">'+fort.join('')+'</ul></div>'
+    +'<div class="mini-bloque mb-rojo"><div class="mb-etiqueta">Tu freno más honesto</div><ul class="mb-items">'+fren.join('')+'</ul></div>';
+
+  // ── PRÓXIMOS PASOS ──
+  var pasos = [];
+
+  if(!tiempoGestion){
+    pasos.push({
+      n:'1', titulo:'Protege tiempo para el negocio esta semana',
+      desc:'Pon en tu agenda, como si fuera una cita con un paciente, 2 horas para trabajar en el negocio — no en clínica. Sin ese tiempo, todo lo demás es teoría.'
+    });
+  }
+
+  if(R.q9){
+    pasos.push({
+      n: pasos.length>0?'2':'1',
+      titulo:'Toma la decisión que llevas posponiendo',
+      desc:'No hace falta tenerlo todo claro. Hace falta decidir cuál es el primer paso en esa dirección y ponerle una fecha.'
+    });
+  }
+
+  if(R.q5){
+    pasos.push({
+      n: String(pasos.length+1),
+      titulo:'Nombra tu creencia limitante — a alguien de confianza',
+      desc:'Las creencias que nos frenan pierden fuerza cuando las nombramos en voz alta. Hoy, cuéntasela a alguien. Eso solo ya cambia algo.'
+    });
+  }
+
+  pasos.push({
+    n: String(pasos.length+1),
+    titulo:'Esta noche: construye tu Pacto de Ulises',
+    desc:'El siguiente paso de ACTIVA convierte lo que acabas de descubrir en un compromiso escrito contigo mismo. No una declaración de intenciones — un pacto real con tu yo futuro.'
+  });
+
+  document.getElementById('pasos-contenido').innerHTML = pasos.map(function(p){
+    return '<div class="paso"><div class="paso-n">'+p.n+'.</div><div class="paso-contenido"><div class="paso-titulo">'+p.titulo+'</div><div class="paso-desc">'+p.desc+'</div></div></div>';
+  }).join('');
+
+  // ── CIERRE ──
+  var cierreTextos = {
+    'El empresario que <em>ya lo ha decidido</em>': {
+      titulo: 'La identidad ya está. <em>El sistema es lo siguiente.</em>',
+      texto: 'Has hecho el trabajo más difícil: decidir quién quieres ser. Ahora el reto es construir el sistema que lo haga sostenible mes a mes. Ninguna de las áreas del negocio que quedan por resolver es un problema de talento — son decisiones y estructuras. Eso se construye. En ACTIVA, lo construimos en el orden correcto, con tus números reales como punto de partida.'
+    },
+    default: {
+      titulo: 'Saber quién eres <em>es el punto de partida real.</em>',
+      texto: 'Lo que acabas de hacer — responder con honestidad — ya es más de lo que hacen la mayoría de los dueños de clínica. El autoconocimiento no es un ejercicio motivacional. Es la base desde la que se toman mejores decisiones, se construyen mejores equipos y se diseñan mejores negocios. <strong>Ninguna de las áreas que necesitas mejorar es un problema de talento</strong> — son decisiones y sistemas que se aprenden en el orden correcto.'
+    }
+  };
+
+  var cierreKey = (desdeCriterio && tieneVision && tiempoGestion) ? 'El empresario que <em>ya lo ha decidido</em>' : 'default';
+  var cierre = cierreTextos[cierreKey] || cierreTextos['default'];
+  document.getElementById('cf-titulo').innerHTML = cierre.titulo;
+  document.getElementById('cf-texto').innerHTML  = cierre.texto;
+
+  // MOSTRAR
+  document.getElementById('resultado').classList.add('show');
+  setTimeout(function(){
+    document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'start'});
+  }, 150);
+}
+</script>
+</body>
+</html>
