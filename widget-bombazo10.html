@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El viaje del paciente — La Fórmula del Éxito en Fisioterapia</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+:root{
+  --paper:#faf8f3;
+  --ink:#1e1c18;
+  --ink2:#3a3830;
+  --ink3:#7a7668;
+  --rule:#ddd8cc;
+  --gold:#9a7a2a;
+  --gold2:#c8a84a;
+  --gold-light:#f5edd8;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Lora',Georgia,serif;
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  padding:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+.book{max-width:640px;margin:0 auto;padding:40px 32px 80px;position:relative;z-index:1;}
+
+/* Header del libro */
+.book-header{
+  text-align:center;
+  padding:40px 0 32px;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:36px;
+}
+.book-eyebrow{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+.book-title{
+  font-size:clamp(26px,5vw,38px);
+  font-weight:400;line-height:1.15;
+  color:var(--ink);letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+.book-title em{font-style:italic;color:var(--gold)}
+.book-author{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:13px;color:var(--ink3);font-weight:400;
+  letter-spacing:.05em;
+}
+.book-personal{
+  margin-top:20px;
+  padding:16px 20px;
+  background:var(--gold-light);
+  border-left:3px solid var(--gold2);
+  border-radius:0 6px 6px 0;
+  font-size:14px;color:var(--ink2);line-height:1.8;
+  font-style:italic;
+  text-align:left;
+}
+
+/* Contenido */
+.chapter-section{
+  margin-bottom:32px;
+}
+.chapter-h2{
+  font-size:22px;font-weight:500;color:var(--ink);
+  margin:40px 0 16px;line-height:1.3;
+  letter-spacing:-.01em;
+}
+.chapter-h3{
+  font-size:17px;font-weight:600;color:var(--ink);
+  margin:28px 0 10px;line-height:1.3;
+}
+.chapter-h3 .num{
+  color:var(--gold);font-weight:400;font-style:italic;
+  margin-right:6px;
+}
+p{
+  font-size:15px;color:var(--ink2);line-height:1.85;
+  margin-bottom:14px;text-align:justify;
+  hyphens:auto;
+}
+p:last-child{margin-bottom:0}
+strong{font-weight:600;color:var(--ink)}
+em{color:var(--gold)}
+
+/* Diagrama */
+.diagram-wrap{
+  text-align:center;
+  margin:28px 0;
+  padding:24px 16px;
+  background:#fff;
+  border:1px solid var(--rule);
+  border-radius:8px;
+}
+.diagram-wrap img{max-width:100%;height:auto;}
+.diagram-caption{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:11px;color:var(--ink3);margin-top:10px;
+  font-style:italic;
+}
+
+/* Separador entre fases */
+.phase-sep{
+  display:flex;align-items:center;gap:12px;
+  margin:36px 0 20px;
+}
+.phase-sep span{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold);
+  white-space:nowrap;
+}
+.phase-sep::before,.phase-sep::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* Paginación */
+.page-num{
+  font-family:'Source Sans 3',sans-serif;
+  font-size:10px;color:var(--ink3);
+  text-align:center;margin:32px 0 8px;
+  letter-spacing:.1em;
+}
+
+/* Botón descarga */
+.download-bar{
+  position:sticky;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,var(--paper) 30%);
+  padding:20px 0 16px;
+  text-align:center;
+  z-index:10;
+}
+.btn-download{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Source Sans 3',sans-serif;
+  font-size:14px;font-weight:600;
+  background:var(--ink);color:var(--paper);
+  border:none;padding:12px 28px;border-radius:6px;
+  text-decoration:none;cursor:pointer;
+  transition:all .2s;letter-spacing:.02em;
+}
+.btn-download:hover{background:var(--ink2);transform:translateY(-1px)}
+.btn-download svg{width:16px;height:16px;fill:currentColor}
+
+/* Progreso de lectura */
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;
+  background:var(--gold2);z-index:100;
+  width:0;transition:width .1s;
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="prog"></div>
+
+<div class="book">
+
+<div class="book-header">
+  <div class="book-eyebrow">Extracto del libro</div>
+  <h1 class="book-title">El viaje del <em>paciente</em></h1>
+  <div class="book-author">Álex Vallés &mdash; La Fórmula del Éxito en Fisioterapia</div>
+  <div class="book-personal">
+    &laquo;Esto es algo muy personal. Cuando lo entendí bien, cambió por completo la manera que tengo de construir mis servicios de fisioterapia. Es tan personal que es una pequeña parte del libro que escribí en la baja de paternidad. Recordaré toda la vida esas horas con mi hijo durmiendo encima de mí, mientras escribía algunas de las líneas que hoy voy a compartir contigo.&raquo;
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="chapter-section">
+  <p>Para crear una propuesta de valor única, primero debemos comprender el &ldquo;viaje del paciente&rdquo;: esa travesía emocional que va desde el dolor inicial hasta la recuperación, permitiéndonos guiarle en cada etapa y asegurarnos de que confía en que está en el lugar adecuado.</p>
+  <p>Evaluaremos también el entorno competitivo, identificando oportunidades que otros pasan por alto y que harán que nuestra propuesta destaque. Además, definiremos el &ldquo;resultado soñado&rdquo; del cliente, buscando no sólo aliviar el dolor, sino transformar su calidad de vida.</p>
+</div>
+
+<!-- 4.3.1 -->
+<h2 class="chapter-h2">Conoce el camino que transita el cliente</h2>
+
+<div class="chapter-section">
+  <p>Si recuerdas, en páginas anteriores te contaba la importancia de entender que el protagonista de la película es el cliente, no tú. El cliente recorre su propio viaje de transformación y nuestra función es la de ser el sherpa que le guíe en el proceso. Nuestro papel no es robarle el protagonismo, sino acompañarle y ayudarle a alcanzar la cima, que para él representa la resolución de su problema y la consecución de su &ldquo;resultado soñado&rdquo;.</p>
+</div>
+
+<!-- QUÉ ES -->
+<h2 class="chapter-h2">&iquest;Qué es el &ldquo;viaje del paciente&rdquo;?</h2>
+
+<div class="chapter-section">
+  <p>El &ldquo;viaje del paciente&rdquo; es el proceso por el cual pasa un cliente potencial, desde el momento en que toma conciencia de un problema hasta que logra resolverlo y alcanzar su &ldquo;resultado soñado&rdquo;. En el caso de un paciente de fisioterapia, este viaje podría comenzar con una molestia inicial en la espalda y finalizar cuando el paciente es capaz de volver a hacer ejercicio sin dolor, reanudar su vida cotidiana o incluso alcanzar un estado físico mejor que antes de la lesión.</p>
+  <p>Imagina que este viaje es una montaña. Al principio, el paciente se encuentra en la base, consciente del problema pero sin saber cómo abordarlo. A medida que sube, se enfrenta a retos, dudas y altibajos. Tu trabajo es ser el guía experimentado que lo acompaña en cada paso del ascenso asegurándote de que sigue el camino correcto y que no abandona antes de llegar a la cima.</p>
+  <p>El &ldquo;viaje del paciente&rdquo; nos sirve para comprender en qué etapa se encuentra cada persona y visualizar todo el recorrido que realiza, desde el inicio del problema hasta su recuperación. Al mapear este camino, podemos identificar los procesos, acciones y sistemas que necesitamos implementar en cada fase.</p>
+</div>
+
+<!-- DIAGRAMA SVG -->
+<div class="diagram-wrap">
+  <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;">
+    <style>
+      .etapa{font-family:'Source Sans 3',sans-serif;font-size:9px;fill:#1e1c18;font-weight:600}
+      .num-e{font-family:'Lora',serif;font-size:10px;fill:#c8a84a;font-style:italic}
+      .line{stroke:#ddd8cc;stroke-width:1.5;fill:none;stroke-dasharray:6,4}
+      .dot{fill:#c8a84a}
+    </style>
+    <!-- Path curvo -->
+    <path class="line" d="M60,60 C120,50 140,80 200,70 C260,60 280,120 320,140 C360,160 380,200 340,220 C300,240 260,200 220,210 C180,220 160,260 200,280 C240,300 320,280 380,260 C440,240 480,200 520,180"/>
+    <!-- Puntos y etiquetas -->
+    <circle class="dot" cx="60" cy="60" r="5"/><text class="num-e" x="40" y="45">1</text><text class="etapa" x="40" y="35">Conciencia</text>
+    <circle class="dot" cx="140" cy="72" r="5"/><text class="num-e" x="120" y="57">2</text><text class="etapa" x="108" y="47">Búsqueda</text>
+    <circle class="dot" cx="210" cy="68" r="5"/><text class="num-e" x="195" y="55">3</text><text class="etapa" x="183" y="45">Decisión</text>
+    <circle class="dot" cx="300" cy="130" r="5"/><text class="num-e" x="305" y="120">4</text><text class="etapa" x="305" y="110">Solicitud cita</text>
+    <circle class="dot" cx="350" cy="170" r="5"/><text class="num-e" x="360" y="165">5</text><text class="etapa" x="360" y="155">Espera cita</text>
+    <circle class="dot" cx="330" cy="220" r="5"/><text class="num-e" x="340" y="215">6</text><text class="etapa" x="340" y="205">Llegada</text>
+    <circle class="dot" cx="270" cy="215" r="5"/><text class="num-e" x="250" y="205">7</text><text class="etapa" x="235" y="195">Espera sala</text>
+    <circle class="dot" cx="215" cy="225" r="5"/><text class="num-e" x="190" y="240">8</text><text class="etapa" x="165" y="250">1a sesión</text>
+    <circle class="dot" cx="205" cy="270" r="5"/><text class="num-e" x="175" y="285">9</text><text class="etapa" x="155" y="295">Cobro</text>
+    <circle class="dot" cx="260" cy="285" r="5"/><text class="num-e" x="250" y="305">10</text><text class="etapa" x="235" y="315">Espera</text>
+    <circle class="dot" cx="330" cy="275" r="5"/><text class="num-e" x="335" y="295">11</text><text class="etapa" x="320" y="305">Sesiones</text>
+    <circle class="dot" cx="400" cy="258" r="5"/><text class="num-e" x="405" y="278">12</text><text class="etapa" x="390" y="288">Readapt.</text>
+    <circle class="dot" cx="460" cy="230" r="5"/><text class="num-e" x="465" y="250">13</text><text class="etapa" x="445" y="260">Manten.</text>
+    <circle class="dot" cx="520" cy="180" r="5"/><text class="num-e" x="525" y="175">14</text><text class="etapa" x="510" y="165">Fideliz.</text>
+    <!-- Figura humana simple -->
+    <circle cx="30" cy="55" r="6" fill="none" stroke="#1e1c18" stroke-width="1.5"/>
+    <line x1="30" y1="61" x2="30" y2="80" stroke="#1e1c18" stroke-width="1.5"/>
+    <line x1="22" y1="70" x2="38" y2="70" stroke="#1e1c18" stroke-width="1.5"/>
+    <line x1="30" y1="80" x2="22" y2="95" stroke="#1e1c18" stroke-width="1.5"/>
+    <line x1="30" y1="80" x2="38" y2="95" stroke="#1e1c18" stroke-width="1.5"/>
+  </svg>
+  <div class="diagram-caption">Las 14 etapas del viaje del paciente &mdash; &copy; Álex Vallés</div>
+</div>
+
+<!-- LAS ETAPAS -->
+<h2 class="chapter-h2">Las etapas del &ldquo;viaje del paciente&rdquo;</h2>
+
+<div class="chapter-section">
+  <p>Para entender mejor el &ldquo;viaje del paciente&rdquo; lo podemos dividir en tres etapas: <strong>antes, durante y después</strong>. Cada una de estas fases representa un momento distinto en el que el paciente tiene necesidades, emociones y expectativas específicas. Si puedes identificar qué sucede en cada etapa y cómo puedes intervenir para añadir valor, serás capaz de convertirte en ese sherpa de confianza que el paciente necesita para ascender la montaña.</p>
+</div>
+
+<div class="phase-sep"><span>Antes de ser paciente</span></div>
+
+<h3 class="chapter-h3"><span class="num">1.</span> Conciencia del problema</h3>
+<div class="chapter-section">
+  <p>Aquí empieza todo antes, incluso, de ser tu paciente. En esta etapa, siente que algo no va bien. Quizá sea un dolor en la rodilla al correr o una rigidez en la espalda que antes no estaba ahí. No sabe qué lo causa ni si es grave, pero una alerta se activa: algo pasa y necesita respuestas.</p>
+  <p>Aunque este paciente aún no está buscando contratar tus servicios, si logras ser visible y ofrecerle contenido valioso, la próxima vez que piense en resolver su problema, tú serás la opción natural. &iquest;Recuerdas alguna vez en la que elegiste un experto sólo porque su contenido te proporcionó claridad? Esa es exactamente la huella que puedes dejar en tu paciente en esta fase.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">2.</span> Búsqueda de soluciones</h3>
+<div class="chapter-section">
+  <p>El paciente ya reconoció que tiene un problema y ha pasado a la acción: está en modo investigación total. Imagina que se convierte en un pequeño detective buscando respuestas, explorando opciones y considerando si la fisioterapia es la solución que necesita.</p>
+  <p>Haz que entienda claramente qué puede esperar de ti y que la probabilidad de éxito será real. Cuando el paciente siente que tiene respuestas concretas y tangibles, tú ya no eres sólo una opción; te conviertes en su elección más lógica.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">3.</span> Decisión de tratamiento</h3>
+<div class="chapter-section">
+  <p>En esta etapa, el paciente ha decidido que es hora de actuar. Después de soportar dolor o molestias que le impiden hacer su vida normal, finalmente acepta que necesita ayuda profesional. Ya no se trata de si hará algo al respecto, la cuestión ahora es con quién lo hará.</p>
+  <p>Dale toda la claridad y confianza que necesita, y verás cómo esa determinación inicial se convierte en una decisión firme de elegirte a ti.</p>
+</div>
+
+<div class="phase-sep"><span>Durante el tiempo que es paciente</span></div>
+
+<h3 class="chapter-h3"><span class="num">4.</span> Solicitud de cita</h3>
+<div class="chapter-section">
+  <p>Este es el momento de la verdad. El paciente ha decidido que es hora de buscar ayuda y está listo para programar una cita. Está en movimiento, ocupado, y la mayoría de las veces usará el móvil, preferiblemente WhatsApp, para contactarte. Si la llamada va al buzón o la cita disponible está muy lejana, puede decidir probar suerte en otro lugar.</p>
+  <p>La solicitud de cita es más que una transacción; es el primer contacto directo del paciente contigo. Haz que el proceso sea fácil, muestra que te importa desde el primer segundo y estarás construyendo una relación de confianza desde el inicio.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">5.</span> Espera hasta el día de la cita</h3>
+<div class="chapter-section">
+  <p>La cita ya está programada, pero para el paciente empieza ahora un periodo de espera que puede estar lleno de incomodidad y ansiedad. Aunque el primer paso está dado, él sigue lidiando con el dolor y cada día que pasa aumenta la incertidumbre.</p>
+  <p>La espera antes de la cita es una oportunidad para fortalecer la relación con el paciente y demostrar que tu compromiso empieza mucho antes del primer tratamiento.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">6.</span> Traslado y llegada a la clínica</h3>
+<div class="chapter-section">
+  <p>El paciente finalmente se desplaza hacia tu clínica para su primera cita y este es un momento de gran peso. Piensa en el esfuerzo real que implica: salir de casa o del trabajo, enfrentarse al tráfico, encontrar la dirección correcta y llegar a un lugar desconocido con un sinfín de expectativas. Esta es la primera impresión física que tendrá de tu clínica y cada detalle cuenta.</p>
+  <p>El traslado y la llegada son mucho más que un trámite: suponen una oportunidad para demostrar tu profesionalidad, atención al detalle y una bienvenida que haga al paciente sentirse seguro y valorado desde el primer minuto.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">7.</span> Espera en la sala</h3>
+<div class="chapter-section">
+  <p>El paciente ha llegado y ahora toca esperar. Por breve que sea, este tiempo tiene un peso especial en su percepción de la experiencia. Su agenda está llena de responsabilidades: trabajo, familia, ocio, y cualquier minuto que pase esperando suma presión a esa sensación de falta de tiempo. Lo más probable es que se sumerja en el móvil, navegando por redes sociales&hellip; Pero, &iquest;realmente eso le ayuda?</p>
+  <p>No es un momento para que siga en &ldquo;piloto automático&rdquo;; es una oportunidad para sorprenderle y darle un respiro de valor en su día.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">8.</span> Primera sesión</h3>
+<div class="chapter-section">
+  <p>La primera sesión es donde todo empieza a tomar forma. El paciente ha esperado días para este momento y ahora, finalmente está frente a su fisioterapeuta. Este es un instante clave: el paciente siente que por fin podrá contar todo lo que lo ha traído hasta aquí.</p>
+  <p>Esta primera sesión es mucho más que una simple evaluación inicial: es el punto donde se construye la relación de confianza y compromiso con el paciente. Explicando cada paso con claridad, utilizando datos que refuercen su comprensión y ajustando el plan de acuerdo a sus necesidades puedes crear una experiencia que le dé la seguridad de que está en el lugar correcto.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">9.</span> Cobro y reagendar cita</h3>
+<div class="chapter-section">
+  <p>El paciente acaba de terminar su primera sesión. Puede que esté algo dolorido, cansado o incluso desorientado si ha pasado un buen rato en la camilla. Este es un momento delicado donde pueden surgir emociones de alivio de haber iniciado, pero también de incertidumbre y preocupación por el costo y la gestión de su tiempo.</p>
+  <p>Con un proceso de pago claro, flexibilidad en la programación y una planificación a largo plazo, puedes convertir esta etapa en una experiencia positiva y motivadora.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">10.</span> Espera entre sesiones</h3>
+<div class="chapter-section">
+  <p>Entre sesiones, el paciente continúa con su vida cotidiana y se enfrenta el desafío de mantener la motivación en el proceso de recuperación. Las dudas pueden surgir de forma natural: &iquest;Está realmente avanzando?, &iquest;está haciendo los ejercicios correctamente? Es una etapa crucial donde la ansiedad y la incertidumbre pueden poner a prueba su compromiso.</p>
+  <p>Esta etapa es una oportunidad para mantener al paciente motivado y comprometido, y demostrarle que su recuperación es un proceso guiado y activo, aun cuando no está en la clínica.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">11.</span> Sesiones de recuperación</h3>
+<div class="chapter-section">
+  <p>Durante esta etapa, el paciente empieza a ver los frutos de su esfuerzo. Va a tus sesiones con regularidad y nota cómo su condición mejora gradualmente. Sin embargo, la recuperación rara vez es lineal: puede tener días en los que los avances sean claros y otros en los que se sienta estancado.</p>
+  <p>En cada sesión actúas como un guía y un motivador, más allá de aplicar las técnicas correspondientes. El enfoque no debe estar sólo en el resultado final sino en cada pequeño logro que construye su recuperación.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">12.</span> Comienzo de la readaptación</h3>
+<div class="chapter-section">
+  <p>El paciente ha avanzado notablemente y está listo para retomar aquellas actividades que había dejado de lado. Esta etapa es un punto de transición crítico: se aleja de la fase de rehabilitación y se acerca a recuperar plenamente su funcionalidad.</p>
+  <p>La readaptación es el paso final pero uno de los más importantes en el viaje de recuperación. Al ayudar al paciente a ver su valor y que tome consciencia de la necesidad, no sólo logras que llegue a la recuperación completa, sino que también fortaleces su relación contigo.</p>
+</div>
+
+<div class="phase-sep"><span>Después del tratamiento</span></div>
+
+<h3 class="chapter-h3"><span class="num">13.</span> Recuperación y mantenimiento</h3>
+<div class="chapter-section">
+  <p>El tratamiento principal ha concluido y el paciente ha alcanzado una buena recuperación. Pero aquí no acaba el proceso; en esta nueva etapa, la meta es mantener los logros y prevenir recaídas, ayudando al paciente a avanzar hacia una versión más fuerte y funcional de sí mismo.</p>
+  <p>Esta etapa de recuperación y mantenimiento es mucho más que una continuación del tratamiento: es la oportunidad de guiar al paciente hacia una transformación real y duradera. Al ofrecer un plan adaptado, fomentar su autonomía y acompañarle en su evolución personal, puedes convertirte en un aliado esencial para su salud a largo plazo.</p>
+</div>
+
+<h3 class="chapter-h3"><span class="num">14.</span> Fidelización y &ldquo;remarketing&rdquo;</h3>
+<div class="chapter-section">
+  <p>El tratamiento ha concluido y el paciente ha vuelto a su vida cotidiana, libre de dolor y con gratitud por la ayuda recibida. Pero con el tiempo, puede suceder una de estas tres cosas: el paciente sigue bien y se olvida de nosotros; el dolor reaparece y decide regresar; o, en el peor de los casos, vuelve a sufrir molestias y duda de la eficacia del tratamiento.</p>
+  <p>El objetivo no es sólo mantener a los pacientes cerca para futuras consultas, sino convertirles en embajadores de tu clínica. Al cuidar la relación con tus pacientes después del tratamiento aseguras su regreso y multiplicas las oportunidades de crecimiento a través de sus recomendaciones, construyendo una comunidad leal y activa en torno a la clínica.</p>
+</div>
+
+<!-- CIERRE -->
+<div style="border-top:2px solid var(--ink);margin-top:40px;padding-top:24px;">
+  <p style="font-style:italic;color:var(--gold);">El &ldquo;viaje del paciente&rdquo; no es lineal ni sencillo, pero cuando logras mapearlo y comprenderlo con detalle, te conviertes en algo más que un simple fisioterapeuta: eres su guía. Y cuando eres ese sherpa que acompaña al cliente a lo largo de cada ascensión, garantizando que alcance su &ldquo;resultado soñado&rdquo;, no sólo creas un servicio de fisioterapia; lo conviertes en una experiencia transformadora.</p>
+  <p style="font-style:italic;color:var(--gold);">Recuerda: la cima no es sólo el fin del dolor, sino la transformación completa del paciente, y tú estás ahí para guiarle en cada paso del camino.</p>
+</div>
+
+<div class="page-num">Extracto de &laquo;La Fórmula del Éxito en Fisioterapia&raquo; &mdash; pp. 110-119</div>
+
+</div><!-- .book -->
+
+<div class="download-bar">
+  <a href="viaje-paciente.pdf" download class="btn-download">
+    <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 4h14v-2H5v2z"/></svg>
+    Descargar capítulo en PDF
+  </a>
+</div>
+
+<script>
+window.addEventListener('scroll',function(){
+  var h=document.documentElement;
+  var pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('prog').style.width=pct+'%';
+});
+</script>
+</body>
+</html>
