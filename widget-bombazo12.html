@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tu Script de Presentación · Bombazo 10</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Epilogue:wght@300;400;500;600;700&family=Martian+Mono:wght@300;400&display=swap');
+
+:root{
+
+–bg:#0c0c0a;
+
+–s1:#131310;
+
+–s2:#191916;
+
+–border:#242420;
+
+–border2:#2e2e28;
+
+–text:#e8e2d4;
+
+–muted:#6a6860;
+
+–muted2:#4a4840;
+
+–amber:#c8902a;
+
+–amber2:#e8b050;
+
+–amber-dim:#c8902a18;
+
+–green:#5a9a6a;
+
+–green-dim:#5a9a6a12;
+
+–red:#9a5a4a;
+
+–acto1:#c87a2a;
+
+–acto2:#2a7a8a;
+
+–acto3:#6a5a9a;
+
+–acto4:#4a8a5a;
+
+}
+
+\*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+
+font-family:‘Epilogue’,sans-serif;
+
+background:var(–bg);
+
+color:var(–text);
+
+min-height:100vh;
+
+padding:0 0 80px;
+
+position:relative;
+
+overflow-x:hidden;
+
+}
+
+/\* Cortina de teatro \*/
+
+body::before{
+
+content:’’;
+
+position:fixed;
+
+top:0;left:0;right:0;height:3px;
+
+background:linear-gradient(90deg,var(–acto1),var(–acto2),var(–acto3),var(–acto4));
+
+z-index:10;
+
+}
+
+body::after{
+
+content:’’;
+
+position:fixed;inset:0;
+
+background:
+
+radial-gradient(ellipse 80% 60% at 0% 0%,rgba(200,144,42,.04),transparent),
+
+radial-gradient(ellipse 60% 40% at 100% 100%,rgba(42,122,138,.03),transparent);
+
+pointer-events:none;z-index:0;
+
+}
+
+.wrap{max-width:700px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+/\* ── HERO ── \*/
+
+.hero{padding:56px 0 40px;border-bottom:1px solid var(–border)}
+
+.hero-tag{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+
+color:var(–muted);margin-bottom:20px;
+
+display:flex;align-items:center;gap:10px;
+
+}
+
+.hero-tag::before{
+
+content:’’;width:24px;height:1px;background:var(–amber);flex-shrink:0;
+
+}
+
+.hero-h1{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:clamp(30px,5.5vw,48px);
+
+font-weight:400;line-height:1.05;
+
+letter-spacing:-.03em;color:var(–text);
+
+margin-bottom:16px;
+
+}
+
+.hero-h1 em{font-style:italic;color:var(–amber2)}
+
+.hero-sub{
+
+font-size:14px;color:var(–muted);
+
+line-height:1.8;max-width:520px;font-weight:300;
+
+margin-bottom:20px;
+
+}
+
+.hero-aviso{
+
+display:inline-flex;align-items:flex-start;gap:10px;
+
+background:var(–s2);border:1px solid var(–border2);
+
+border-radius:6px;padding:12px 16px;
+
+font-size:12px;color:var(–muted);line-height:1.7;
+
+max-width:520px;
+
+}
+
+.hero-aviso strong{color:var(–amber2);font-weight:500}
+
+/\* ── PROGRESO ── \*/
+
+.progreso{
+
+display:flex;gap:0;margin:24px 0 0;
+
+border:1px solid var(–border);border-radius:6px;
+
+overflow:hidden;
+
+}
+
+.prog-acto{
+
+flex:1;padding:8px 10px;text-align:center;
+
+border-right:1px solid var(–border);
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;letter-spacing:.06em;
+
+color:var(–muted2);transition:all .3s;
+
+}
+
+.prog-acto:last-child{border-right:none}
+
+.prog-acto.activo{background:var(–amber-dim);color:var(–amber2)}
+
+.prog-acto.hecho{background:var(–green-dim);color:var(–green)}
+
+.prog-label{margin-top:2px;font-size:8px;display:block;letter-spacing:.04em}
+
+/\* ── ACTO ── \*/
+
+.acto{
+
+margin-top:32px;
+
+background:var(–s1);
+
+border:1px solid var(–border);
+
+border-radius:12px;
+
+overflow:hidden;
+
+transition:border-color .3s;
+
+}
+
+.acto:focus-within{border-color:var(–border2)}
+
+.acto-header{
+
+padding:18px 22px 16px;
+
+border-bottom:1px solid var(–border);
+
+display:flex;align-items:flex-start;gap:14px;
+
+}
+
+.acto-n{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:11px;font-weight:400;
+
+letter-spacing:.08em;flex-shrink:0;
+
+margin-top:3px;padding:2px 8px;
+
+border-radius:3px;
+
+}
+
+.acto-meta{flex:1}
+
+.acto-titulo{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:19px;font-weight:400;
+
+color:var(–text);line-height:1.25;
+
+letter-spacing:-.01em;margin-bottom:4px;
+
+}
+
+.acto-titulo em{font-style:italic}
+
+.acto-desc{font-size:12px;color:var(–muted);line-height:1.65;font-weight:300}
+
+.acto-estado{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;color:var(–muted2);
+
+flex-shrink:0;margin-top:4px;letter-spacing:.06em;
+
+}
+
+.acto-body{padding:20px 22px}
+
+/\* EJEMPLO PODIUM \*/
+
+.ejemplo{
+
+background:var(–bg);
+
+border:1px solid var(–border2);
+
+border-radius:7px;
+
+padding:14px 16px;
+
+margin-bottom:18px;
+
+position:relative;
+
+}
+
+.ej-tag{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+
+color:var(–muted2);margin-bottom:8px;
+
+display:flex;align-items:center;gap:6px;
+
+}
+
+.ej-tag::before{content:‘▶’;font-size:7px}
+
+.ej-texto{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:12px;color:#8a8478;
+
+line-height:1.75;font-style:italic;
+
+}
+
+.ej-nota{
+
+font-size:11px;color:var(–muted2);
+
+line-height:1.6;margin-top:8px;
+
+padding-top:8px;border-top:1px solid var(–border);
+
+font-style:normal;
+
+}
+
+/\* GUÍA DE CONSTRUCCIÓN \*/
+
+.guia{
+
+display:flex;flex-direction:column;gap:6px;
+
+margin-bottom:16px;
+
+}
+
+.guia-item{
+
+display:flex;gap:8px;font-size:12px;
+
+color:var(–muted);line-height:1.55;
+
+}
+
+.guia-dot{
+
+width:5px;height:5px;border-radius:50%;
+
+flex-shrink:0;margin-top:5px;
+
+}
+
+/\* TEXTAREA del guion \*/
+
+.campo-guion{position:relative;margin-top:4px}
+
+.campo-label{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+
+color:var(–muted);margin-bottom:8px;display:block;
+
+}
+
+textarea{
+
+width:100%;
+
+font-family:‘Epilogue’,sans-serif;
+
+font-size:14px;color:var(–text);
+
+background:var(–s2);
+
+border:1px solid var(–border);
+
+border-radius:7px;
+
+padding:14px 16px;
+
+resize:vertical;min-height:90px;
+
+outline:none;line-height:1.7;
+
+transition:border-color .25s,background .25s;
+
+}
+
+textarea:focus{border-color:var(–border2);background:#1c1c18}
+
+textarea::placeholder{color:var(–muted2);font-style:italic;font-size:13px}
+
+/\* Contador de palabras \*/
+
+.contador{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;color:var(–muted2);
+
+text-align:right;margin-top:5px;
+
+transition:color .2s;
+
+}
+
+.contador.ok{color:var(–green)}
+
+/\* OBJECIONES \*/
+
+.objeciones-titulo{
+
+font-size:12px;font-weight:600;color:var(–muted);
+
+margin:18px 0 10px;letter-spacing:.04em;
+
+text-transform:uppercase;font-size:10px;
+
+font-family:‘Martian Mono’,monospace;
+
+}
+
+.obj-row{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+
+.obj-label{
+
+font-size:11px;color:var(–amber2);
+
+font-family:‘Martian Mono’,monospace;
+
+flex-shrink:0;margin-top:3px;
+
+letter-spacing:.04em;
+
+}
+
+textarea.obj{min-height:52px;font-size:13px}
+
+/\* BTN PRINCIPAL \*/
+
+.btn-wrap{text-align:center;margin-top:36px}
+
+.btn-gen{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:17px;font-style:italic;
+
+background:var(–amber);color:#0c0c0a;
+
+border:none;padding:15px 44px;
+
+border-radius:6px;cursor:pointer;
+
+letter-spacing:.02em;
+
+transition:all .2s;
+
+display:inline-flex;align-items:center;gap:12px;
+
+}
+
+.btn-gen:hover{background:var(–amber2);transform:translateY(-1px);box-shadow:0 8px 28px rgba(200,144,42,.25)}
+
+.btn-gen span{font-size:20px;transition:transform .2s;font-style:normal}
+
+.btn-gen:hover span{transform:translateX(4px)}
+
+/\* ── SCRIPT GENERADO ── \*/
+
+.script-gen{
+
+display:none;margin-top:52px;
+
+animation:ap .6s ease;
+
+}
+
+.script-gen.show{display:block}
+
+@keyframes ap{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/\* Portada del guion \*/
+
+.portada{
+
+background:var(–s1);
+
+border:1px solid var(–border2);
+
+border-radius:12px;
+
+padding:32px 30px;
+
+text-align:center;
+
+position:relative;overflow:hidden;
+
+margin-bottom:16px;
+
+}
+
+.portada::before{
+
+content:’’;position:absolute;top:0;left:0;right:0;height:2px;
+
+background:linear-gradient(90deg,var(–acto1),var(–acto2),var(–acto3),var(–acto4));
+
+}
+
+.port-pre{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+
+color:var(–muted);margin-bottom:14px;
+
+}
+
+.port-titulo{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:clamp(22px,4vw,32px);
+
+font-weight:400;color:var(–text);
+
+line-height:1.15;margin-bottom:8px;
+
+letter-spacing:-.02em;
+
+}
+
+.port-titulo em{font-style:italic;color:var(–amber2)}
+
+.port-sub{font-size:12px;color:var(–muted);line-height:1.7;font-weight:300}
+
+.port-fecha{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;color:var(–muted2);
+
+margin-top:16px;letter-spacing:.08em;
+
+}
+
+/\* ACTOS DEL GUION \*/
+
+.guion-acto{
+
+background:var(–s1);
+
+border:1px solid var(–border);
+
+border-radius:10px;
+
+overflow:hidden;
+
+margin-bottom:10px;
+
+}
+
+.ga-header{
+
+padding:12px 20px;
+
+border-bottom:1px solid var(–border);
+
+display:flex;align-items:center;gap:10px;
+
+}
+
+.ga-num{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;letter-spacing:.1em;
+
+padding:3px 8px;border-radius:3px;
+
+flex-shrink:0;
+
+}
+
+.ga-titulo{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:14px;color:var(–text);
+
+}
+
+.ga-body{padding:16px 20px}
+
+.ga-texto{
+
+font-size:14px;color:#b8b2a4;
+
+line-height:1.85;white-space:pre-wrap;
+
+font-family:‘Epilogue’,sans-serif;
+
+}
+
+.ga-texto.vacio{
+
+color:var(–muted2);font-style:italic;font-size:13px;
+
+}
+
+/\* OBJECIONES GENERADAS \*/
+
+.obj-gen{
+
+background:var(–s2);
+
+border:1px solid var(–border);
+
+border-radius:8px;
+
+padding:16px 18px;
+
+margin-top:10px;
+
+}
+
+.objg-titulo{
+
+font-family:‘Martian Mono’,monospace;
+
+font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+
+color:var(–muted);margin-bottom:12px;
+
+}
+
+.objg-item{
+
+padding:8px 0;
+
+border-bottom:1px solid var(–border);
+
+}
+
+.objg-item:last-child{border-bottom:none;padding-bottom:0}
+
+.objg-q{
+
+font-size:12px;font-weight:600;color:var(–amber2);
+
+margin-bottom:4px;
+
+}
+
+.objg-a{font-size:13px;color:#9a9488;line-height:1.65}
+
+.objg-a.vacio{color:var(–muted2);font-style:italic}
+
+/\* INSTRUCCIONES DE PRÁCTICA \*/
+
+.practica{
+
+background:linear-gradient(135deg,var(–amber-dim),transparent);
+
+border:1px solid rgba(200,144,42,.2);
+
+border-radius:10px;
+
+padding:20px 22px;
+
+margin-top:10px;
+
+}
+
+.prac-titulo{
+
+font-size:12px;font-weight:700;color:var(–amber2);
+
+letter-spacing:.08em;text-transform:uppercase;
+
+font-family:‘Martian Mono’,monospace;
+
+margin-bottom:12px;
+
+}
+
+.prac-items{display:flex;flex-direction:column;gap:8px}
+
+.prac-item{
+
+display:flex;gap:10px;font-size:13px;
+
+color:#9a9488;line-height:1.6;
+
+}
+
+.prac-n{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:16px;color:var(–amber2);
+
+flex-shrink:0;line-height:1.2;margin-top:1px;
+
+}
+
+.prac-txt strong{color:var(–text);font-weight:500}
+
+/\* CIERRE \*/
+
+.cierre{
+
+background:var(–s1);border:1px solid var(–border2);
+
+border-radius:10px;padding:22px 24px;
+
+margin-top:10px;text-align:center;
+
+}
+
+.cierre-titulo{
+
+font-family:‘Instrument Serif’,serif;
+
+font-size:clamp(16px,2.8vw,20px);
+
+font-weight:400;color:var(–text);
+
+line-height:1.3;margin-bottom:8px;
+
+letter-spacing:-.01em;
+
+}
+
+.cierre-titulo em{font-style:italic;color:var(–amber2)}
+
+.cierre-texto{font-size:13px;color:var(–muted);line-height:1.8;max-width:460px;margin:0 auto}
+
+.cierre-texto strong{color:#9a9488;font-weight:500}
+
+@media(max-width:480px){
+
+.progreso{display:none}
+
+.acto-header{flex-direction:column;gap:8px}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="hero-tag">Bombazo 10 · 27 abril · Alex Vallés</div>
+
+<h1 class="hero-h1">Cómo presentar<br>tu servicio sin que<br>parezca que <em>estás vendiendo</em></h1>
+
+<p class="hero-sub">La venta no es convencer — es mostrar el camino que el paciente no puede ver solo. Eso ya sabes hacerlo en clínica. Aquí lo conviertes en las palabras exactas para la primera visita.</p>
+
+<div class="hero-aviso">
+
+💡 <div><strong>Antes de empezar:</strong> piensa en tu paciente ideal — el que definiste en el Bombazo 05. Este script se escribe para esa persona concreta, no para todos los pacientes en general. Cuanto más específico sea, más natural sonará.</div>
+
+</div>
+
+<!-- Barra de progreso -->
+
+<div class="progreso">
+
+<div class="prog-acto" id="pg1">
+
+ACTO I<span class="prog-label">El diagnóstico</span>
+
+</div>
+
+<div class="prog-acto" id="pg2">
+
+ACTO II<span class="prog-label">La historia</span>
+
+</div>
+
+<div class="prog-acto" id="pg3">
+
+ACTO III<span class="prog-label">El camino</span>
+
+</div>
+
+<div class="prog-acto" id="pg4">
+
+ACTO IV<span class="prog-label">El primer paso</span>
+
+</div>
+
+<div class="prog-acto" id="pg5">
+
+OBJ.<span class="prog-label">Objeciones</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ════════ ACTO I ════════ -->
+
+<div class="acto" id="acto1">
+
+<div class="acto-header">
+
+<div class="acto-n" style="background:rgba(200,122,42,.12);color:var(--acto1);border:1px solid rgba(200,122,42,.2)">ACTO I</div>
+
+<div class="acto-meta">
+
+<div class="acto-titulo">El diagnóstico <em>en su lenguaje</em></div>
+
+<div class="acto-desc">No explicas la lesión en términos clínicos. Le dices al paciente lo que tú ves — en el impacto real que tiene en su vida.</div>
+
+</div>
+
+<div class="acto-estado" id="st1">SIN COMPLETAR</div>
+
+</div>
+
+<div class="acto-body">
+
+```
+
+<div class="ejemplo">
+
+<div class="ej-tag">Ejemplo real · Podium</div>
+
+<div class="ej-texto">"Lo que veo en tu caso es que llevas meses con un dolor que te ha obligado a dejar de correr, que interrumpe tu sueño y que ya ha afectado a cómo te mueves en el trabajo. No es solo un problema de rodilla — es que tu cuerpo lleva tiempo compensando y eso tiene consecuencias que van más allá del dolor."</div>
+
+<div class="ej-nota">Fíjate: no hay terminología clínica. El paciente oye su vida, no un diagnóstico.</div>
+
+</div>
+
+<div class="guia">
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto1)"></div><div>Empieza por lo que el paciente ya siente — no por lo que tú has encontrado.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto1)"></div><div>Nombra el impacto en su vida: qué no puede hacer, qué ha dejado de hacer, qué le preocupa.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto1)"></div><div>Evita: "tienes una tendinopatía rotuliana bilateral". Di: "el dolor que sientes al bajar escaleras tiene una causa concreta que podemos trabajar".</div></div>
+
+</div>
+
+<span class="campo-label">Tu versión — escríbela en tus propias palabras</span>
+
+<div class="campo-guion">
+
+<textarea id="a1" rows="4"
+
+placeholder="Lo que veo en tu caso es... Este problema está afectando a..."
+
+oninput="cuenta(1);actActo(1)"></textarea>
+
+<div class="contador" id="cnt1">0 palabras</div>
+
+</div>
+
+```
+
+</div>
+
+</div>
+
+<!-- ════════ ACTO II ════════ -->
+
+<div class="acto" id="acto2">
+
+<div class="acto-header">
+
+<div class="acto-n" style="background:rgba(42,122,138,.12);color:var(--acto2);border:1px solid rgba(42,122,138,.2)">ACTO II</div>
+
+<div class="acto-meta">
+
+<div class="acto-titulo">Lo que pasa si no se <em>resuelve bien</em></div>
+
+<div class="acto-desc">La historia natural de la lesión como argumento clínico. No es miedo — es información que el paciente necesita y que tú tienes.</div>
+
+</div>
+
+<div class="acto-estado" id="st2">SIN COMPLETAR</div>
+
+</div>
+
+<div class="acto-body">
+
+```
+
+<div class="ejemplo">
+
+<div class="ej-tag">Ejemplo real · Podium</div>
+
+<div class="ej-texto">"Lo que suele pasar cuando esto no se trabaja correctamente es que el cuerpo aprende a compensar. Y esas compensaciones generan nuevos problemas — en la cadera, en la espalda, en el otro lado. No es que el dolor vuelva solo: es que sin un trabajo completo, el cuerpo nunca recupera el patrón correcto. Y eso tarde o temprano aparece."</div>
+
+<div class="ej-nota">Esto no es venta — es lo que ya le dices en clínica. La única diferencia es que ahora lo conectas con la decisión de continuar.</div>
+
+</div>
+
+<div class="guia">
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto2)"></div><div>Usa la historia natural de la lesión — no inventes consecuencias, usa las que ya conoces.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto2)"></div><div>El tono es clínico-informativo, no alarmista. "Suele ocurrir que..." no "si no haces esto..."</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto2)"></div><div>Incluye el coste de la inacción — no el coste económico, el coste en calidad de vida.</div></div>
+
+</div>
+
+<span class="campo-label">Tu versión — en el lenguaje de tu especialidad</span>
+
+<div class="campo-guion">
+
+<textarea id="a2" rows="4"
+
+placeholder="Lo que suele pasar cuando esto no se trabaja correctamente es... El cuerpo tiende a..."
+
+oninput="cuenta(2);actActo(2)"></textarea>
+
+<div class="contador" id="cnt2">0 palabras</div>
+
+</div>
+
+```
+
+</div>
+
+</div>
+
+<!-- ════════ ACTO III ════════ -->
+
+<div class="acto" id="acto3">
+
+<div class="acto-header">
+
+<div class="acto-n" style="background:rgba(106,90,154,.12);color:var(--acto3);border:1px solid rgba(106,90,154,.2)">ACTO III</div>
+
+<div class="acto-meta">
+
+<div class="acto-titulo">El camino que <em>vais a hacer juntos</em></div>
+
+<div class="acto-desc">Las fases del proceso, qué puede esperar en cada una y cómo sabrá que está avanzando. El paciente necesita ver el mapa antes de decidir si sube al coche.</div>
+
+</div>
+
+<div class="acto-estado" id="st3">SIN COMPLETAR</div>
+
+</div>
+
+<div class="acto-body">
+
+```
+
+<div class="ejemplo">
+
+<div class="ej-tag">Ejemplo real · Podium</div>
+
+<div class="ej-texto">"Lo que vamos a hacer tiene tres fases. En la primera — unas 3-4 semanas — el objetivo es reducir el dolor y recuperar la movilidad base. Verás resultados pronto, pero no es el final. En la segunda fase trabajamos la causa: por qué el cuerpo llegó aquí y cómo evitar que vuelva. Y en la última fase, que es la más importante, te damos las herramientas para que no necesites volverte a sentar delante de mí."</div>
+
+<div class="ej-nota">La última frase es clave — transmite honestidad clínica y genera confianza inmediata.</div>
+
+</div>
+
+<div class="guia">
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto3)"></div><div>Define 2-3 fases con nombres simples y resultados concretos en cada una.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto3)"></div><div>Incluye cuándo esperará ver los primeros cambios — eso reduce la ansiedad y el abandono temprano.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto3)"></div><div>Termina con el resultado final — la vida que recupera, no el alta clínica.</div></div>
+
+</div>
+
+<span class="campo-label">Tu versión — las fases de tu metodología</span>
+
+<div class="campo-guion">
+
+<textarea id="a3" rows="5"
+
+placeholder="Lo que vamos a hacer tiene X fases. En la primera... En la segunda... Al final del proceso..."
+
+oninput="cuenta(3);actActo(3)"></textarea>
+
+<div class="contador" id="cnt3">0 palabras</div>
+
+</div>
+
+```
+
+</div>
+
+</div>
+
+<!-- ════════ ACTO IV ════════ -->
+
+<div class="acto" id="acto4">
+
+<div class="acto-header">
+
+<div class="acto-n" style="background:rgba(74,138,90,.12);color:var(--acto4);border:1px solid rgba(74,138,90,.2)">ACTO IV</div>
+
+<div class="acto-meta">
+
+<div class="acto-titulo">El primer paso <em>concreto</em></div>
+
+<div class="acto-desc">No "venga mañana". Qué ocurre exactamente en la próxima sesión y por qué. El paciente que sabe lo que viene tiene la mitad del camino hecho.</div>
+
+</div>
+
+<div class="acto-estado" id="st4">SIN COMPLETAR</div>
+
+</div>
+
+<div class="acto-body">
+
+```
+
+<div class="ejemplo">
+
+<div class="ej-tag">Ejemplo real · Podium</div>
+
+<div class="ej-texto">"Lo que hacemos en la próxima sesión es la valoración funcional completa. Vamos a ver exactamente qué está pasando en el movimiento — no solo dónde duele. Eso nos da el mapa real para diseñar el tratamiento. Son unos 50 minutos y al terminar ya tienes el plan concreto de las próximas semanas."</div>
+
+<div class="ej-nota">Sin "¿qué le parece si...?" — el primer paso se propone, no se negocia. El paciente agradece la dirección.</div>
+
+</div>
+
+<div class="guia">
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto4)"></div><div>Describe la próxima sesión con precisión: qué ocurre, cuánto dura, qué se consigue.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto4)"></div><div>El tono es de propuesta firme, no de pregunta. "Lo que hacemos es..." no "¿quieres que...?"</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--acto4)"></div><div>Termina con lo que el paciente tendrá al final de esa sesión — seguridad, plan, siguiente paso.</div></div>
+
+</div>
+
+<span class="campo-label">Tu versión — la propuesta del primer paso</span>
+
+<div class="campo-guion">
+
+<textarea id="a4" rows="4"
+
+placeholder="Lo que hacemos en la próxima sesión es... Eso nos permite... Al terminar ya tienes..."
+
+oninput="cuenta(4);actActo(4)"></textarea>
+
+<div class="contador" id="cnt4">0 palabras</div>
+
+</div>
+
+```
+
+</div>
+
+</div>
+
+<!-- ════════ OBJECIONES ════════ -->
+
+<div class="acto" id="acto5">
+
+<div class="acto-header">
+
+<div class="acto-n" style="background:rgba(200,144,42,.1);color:var(--amber2);border:1px solid rgba(200,144,42,.2)">OBJ.</div>
+
+<div class="acto-meta">
+
+<div class="acto-titulo">Las 3 objeciones <em>más frecuentes</em></div>
+
+<div class="acto-desc">Anticipa lo que tu paciente ideal dice cuando duda. Tener la respuesta preparada no es manipulación — es respeto por su tiempo y el tuyo.</div>
+
+</div>
+
+<div class="acto-estado" id="st5">SIN COMPLETAR</div>
+
+</div>
+
+<div class="acto-body">
+
+```
+
+<div class="ejemplo">
+
+<div class="ej-tag">Las más frecuentes en fisioterapia</div>
+
+<div class="ej-texto" style="color:var(--muted)">"Es que es caro..." · "Déjame pensarlo..." · "¿No puede ser solo una sesión para ver cómo va?"</div>
+
+</div>
+
+<div class="guia">
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--amber)"></div><div>No argumentes contra la objeción — hazle una pregunta. "¿Caro comparado con qué?" abre la conversación.</div></div>
+
+<div class="guia-item"><div class="guia-dot" style="background:var(--amber)"></div><div>La mejor respuesta a "déjame pensarlo" es: "¿hay algo que no haya quedado claro?" El problema casi nunca es el tiempo.</div></div>
+
+</div>
+
+<div class="objeciones-titulo">Escribe tus 3 objeciones más frecuentes y cómo las responderías</div>
+
+<div class="obj-row">
+
+<div class="obj-label">01 /</div>
+
+<div style="flex:1">
+
+<textarea class="obj" id="oq1" placeholder="Objeción más frecuente..."></textarea>
+
+<textarea class="obj" id="oa1" placeholder="Mi respuesta..." style="margin-top:6px" oninput="actActo(5)"></textarea>
+
+</div>
+
+</div>
+
+<div class="obj-row">
+
+<div class="obj-label">02 /</div>
+
+<div style="flex:1">
+
+<textarea class="obj" id="oq2" placeholder="Segunda objeción..."></textarea>
+
+<textarea class="obj" id="oa2" placeholder="Mi respuesta..." style="margin-top:6px" oninput="actActo(5)"></textarea>
+
+</div>
+
+</div>
+
+<div class="obj-row">
+
+<div class="obj-label">03 /</div>
+
+<div style="flex:1">
+
+<textarea class="obj" id="oq3" placeholder="Tercera objeción..."></textarea>
+
+<textarea class="obj" id="oa3" placeholder="Mi respuesta..." style="margin-top:6px" oninput="actActo(5)"></textarea>
+
+</div>
+
+</div>
+
+```
+
+</div>
+
+</div>
+
+<!-- BTN -->
+
+<div class="btn-wrap">
+
+<button class="btn-gen" onclick="generar()">
+
+Generar mi script completo
+
+<span>→</span>
+
+</button>
+
+</div>
+
+<!-- ════════════ SCRIPT GENERADO ════════════ -->
+
+<div class="script-gen" id="script-gen">
+
+<div class="portada">
+
+<div class="port-pre">Fisioreferentes · Bombazo 10 · Script de presentación</div>
+
+<div class="port-titulo">Tu guion de<br><em>primera visita</em></div>
+
+<div class="port-sub">Construido en tus propias palabras · Listo para practicar esta noche</div>
+
+<div class="port-fecha" id="port-fecha"></div>
+
+</div>
+
+<!-- Los 4 actos -->
+
+<div id="guion-actos"></div>
+
+<!-- Objeciones -->
+
+<div class="obj-gen" id="obj-gen"></div>
+
+<!-- Instrucciones de práctica -->
+
+<div class="practica">
+
+<div class="prac-titulo">Cómo practicar este script esta noche</div>
+
+<div class="prac-items">
+
+<div class="prac-item">
+
+<div class="prac-n">1.</div>
+
+<div class="prac-txt"><strong>Léelo completo en voz alta una vez.</strong> No en tu cabeza — en voz alta. Lo que suene raro al decirlo, cámbialo. Lo que fluya, quédatelo.</div>
+
+</div>
+
+<div class="prac-item">
+
+<div class="prac-n">2.</div>
+
+<div class="prac-txt"><strong>Grábate una vez.</strong> No para escucharlo — para perder el miedo a oírte. Los mejores vendedores no nacen seguros: practican hasta que suena natural.</div>
+
+</div>
+
+<div class="prac-item">
+
+<div class="prac-n">3.</div>
+
+<div class="prac-txt"><strong>Identifica el bloque que menos te convence.</strong> Ése es el que más necesitas trabajar. No el que suena mejor — el que suena menos tuyo.</div>
+
+</div>
+
+<div class="prac-item">
+
+<div class="prac-n">4.</div>
+
+<div class="prac-txt"><strong>Pruébalo con el próximo paciente nuevo.</strong> No tienes que usarlo todo — elige un solo bloque. El resultado te dirá qué funciona en tu contexto real.</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Cierre -->
+
+<div class="cierre">
+
+<div class="cierre-titulo">El script más poderoso<br>es el que <em>suena a ti.</em></div>
+
+<div class="cierre-texto">Lo que acabas de construir no es un guion de ventas — es un guion clínico. La diferencia entre el fisio que "vende" incómodo y el que presenta con convicción no es la técnica: es haber trabajado estas palabras antes de estar delante del paciente. <strong>En ACTIVA, el Paso 12 incluye práctica de roleplay con el KNAAS hasta que suena completamente natural.</strong></div>
+
+</div>
+
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+
+var actoColors = {
+
+1:'var(--acto1)',2:'var(--acto2)',
+
+3:'var(--acto3)',4:'var(--acto4)',5:'var(--amber2)'
+
+};
+
+var actoNames = {
+
+1:'ACTO I · El diagnóstico en su lenguaje',
+
+2:'ACTO II · Lo que pasa si no se resuelve bien',
+
+3:'ACTO III · El camino que vais a hacer juntos',
+
+4:'ACTO IV · El primer paso concreto',
+
+5:'OBJECIONES'
+
+};
+
+function v(id){ return (document.getElementById(id).value||'').trim() }
+
+function cuenta(n){
+
+var txt = v('a'+n);
+
+var words = txt ? txt.split(/\s+/).filter(Boolean).length : 0;
+
+var el = document.getElementById('cnt'+n);
+
+el.textContent = words + ' palabra' + (words!==1?'s':'');
+
+el.className = 'contador' + (words>=20?' ok':'');
+
+}
+
+function actActo(n){
+
+var pgId = 'pg'+n;
+
+var stId = 'st'+n;
+
+var filled = false;
+
+if(n<=4){ filled = v('a'+n).length > 20; }
+
+else { filled = v('oa1').length>5||v('oa2').length>5||v('oa3').length>5; }
+
+var pg = document.getElementById(pgId);
+
+var st = document.getElementById(stId);
+
+if(filled){
+
+pg && pg.classList.add('hecho');
+
+pg && pg.classList.remove('activo');
+
+if(st) st.textContent = '✓ COMPLETADO';
+
+} else {
+
+pg && pg.classList.add('activo');
+
+if(st) st.textContent = 'EN PROCESO';
+
+}
+
+}
+
+function generar(){
+
+var hoy = new Date();
+
+document.getElementById('port-fecha').textContent =
+
+'Generado el ' + hoy.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
+
+// Actos
+
+var actosHtml = '';
+
+for(var i=1;i<=4;i++){
+
+var txt = v('a'+i);
+
+var color = actoColors[i];
+
+actosHtml += '<div class="guion-acto">'
+
++'<div class="ga-header">'
+
++'<div class="ga-num" style="background:'+color+'18;color:'+color+';border:1px solid '+color+'33">'+actoNames[i].split('·')[0].trim()+'</div>'
+
++'<div class="ga-titulo">'+actoNames[i].split('·')[1].trim()+'</div>'
+
++'</div>'
+
++'<div class="ga-body">'
+
++'<div class="ga-texto'+(txt?'':' vacio')+'">'
+
++(txt || 'Sin completar — vuelve y escribe este bloque.')
+
++'</div></div></div>';
+
+}
+
+document.getElementById('guion-actos').innerHTML = actosHtml;
+
+// Objeciones
+
+var oqs = [v('oq1'),v('oq2'),v('oq3')];
+
+var oas = [v('oa1'),v('oa2'),v('oa3')];
+
+var tieneObj = oqs.some(function(q){ return q.length>3; });
+
+var objHtml = '<div class="objg-titulo">Tus respuestas a objeciones frecuentes</div>';
+
+for(var j=0;j<3;j++){
+
+if(!oqs[j]&&!oas[j]) continue;
+
+objHtml += '<div class="objg-item">'
+
++'<div class="objg-q">'+(oqs[j]||'Objeción '+(j+1))+'</div>'
+
++'<div class="objg-a'+(oas[j]?'':' vacio')+'">'+(oas[j]||'Sin respuesta completada todavía.')+'</div>'
+
++'</div>';
+
+}
+
+if(!tieneObj){
+
+objHtml += '<div class="objg-item"><div class="objg-a vacio">No has completado las objeciones. Dedícale 5 minutos — es el bloque que más impacto tiene en la conversación real.</div></div>';
+
+}
+
+document.getElementById('obj-gen').innerHTML = objHtml;
+
+// Mostrar
+
+document.getElementById('script-gen').classList.add('show');
+
+setTimeout(function(){
+
+document.getElementById('script-gen').scrollIntoView({behavior:'smooth',block:'start'});
+
+},150);
+
+}
+
+</script>
+
+</body>
+
+</html>
