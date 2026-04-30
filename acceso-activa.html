@@ -760,6 +760,102 @@
     .mentoring-banner { padding: 24px 16px; }
     .countdown-bar { font-size: 0.85rem; padding: 12px 16px; }
     .pain-grid { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .testimonial-featured { grid-template-columns: 1fr; }
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonial-section {
+    background: var(--white);
+  }
+
+  .testimonial-featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+  }
+
+  .testimonial-card.highlight {
+    border-color: var(--gold);
+    background: var(--beige);
+  }
+
+  .testimonial-stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .testimonial-quote {
+    font-size: 0.95rem;
+    color: var(--gray-700);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .testimonial-quote strong {
+    font-style: normal;
+    color: var(--navy);
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .testimonial-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--navy);
+  }
+
+  .testimonial-role {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .testimonial-metric {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
   }
 </style>
 </head>
@@ -820,6 +916,126 @@
         <p class="pain-quote">"Hice otra mentoría y no me sirvió de nada. Pero creo que vosotros sois diferentes."</p>
         <span class="pain-author">— Fisioterapeuta, clínica en crecimiento</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     TESTIMONIOS
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="testimonial-section">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="section-eyebrow">No nos creas a nosotros</div>
+      <h2 class="section-title">Escucha a fisios que ya pasaron por aquí</h2>
+      <p class="section-subtitle" style="margin:0 auto;">Propietarios de clínica que estaban exactamente donde tú estás ahora.</p>
+    </div>
+
+    <!-- 2 DESTACADOS -->
+    <div class="testimonial-featured">
+
+      <div class="testimonial-card highlight">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"<strong>No hagas este máster. De verdad.</strong> Porque vas a dejar de ver tu clínica como antes. Vas a recuperar la ilusión que tenías cuando decidiste montar tu centro. <strong>Pero esta vez sí con un plan.</strong>"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">CH</div>
+          <div>
+            <div class="testimonial-name">Chema</div>
+            <div class="testimonial-role">Fisioterapeuta · Propietario de clínica</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card highlight">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-metric">+20% facturación</div>
+        <p class="testimonial-quote">"He conseguido <strong>un +20% de facturación y una sensación de control</strong> que antes no tenía. Ahora tomo decisiones con criterio, no con la tripa."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">PM</div>
+          <div>
+            <div class="testimonial-name">Pedro Mateos</div>
+            <div class="testimonial-role">Fisioterapeuta · Propietario de clínica</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 6 GRID -->
+    <div class="testimonial-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Estaba <strong>secuestrada por mi negocio</strong>. Ahora siento calma y tomo decisiones con datos. Ha sido un cambio enorme en cómo gestiono mi clínica."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">C</div>
+          <div>
+            <div class="testimonial-name">Cristina</div>
+            <div class="testimonial-role">Fisioleon</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Llevo 16 años con mi clínica y esto <strong>me cambió completamente mi manera de entender el negocio</strong>. 100% recomendable."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">VC</div>
+          <div>
+            <div class="testimonial-name">Víctor Castro</div>
+            <div class="testimonial-role">Fisioterapeuta · Jaén · 16 años de experiencia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Es como sacarte el carnet de conducir de tu clínica. Antes iba sin saber por dónde. <strong>Ahora he aprendido a conducir mi clínica.</strong>"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RP</div>
+          <div>
+            <div class="testimonial-name">Rosa Palomares</div>
+            <div class="testimonial-role">Fisioterapeuta · Propietaria de clínica</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Pensé varias veces en <strong>cerrar mi centro</strong>. El máster fue un antes y un después. <strong>Recuperé la ilusión por mi profesión.</strong>"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">F</div>
+          <div>
+            <div class="testimonial-name">Fernando</div>
+            <div class="testimonial-role">Kinearte</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Lo que más valoro es que lo haya creado un fisioterapeuta que ha vivido todo esto. <strong>Completamente satisfecho.</strong>"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rafael Borruel</div>
+            <div class="testimonial-role">Fisioterapeuta · Propietario de clínica</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Empecé el máster justo antes de abrir mi clínica, convencido de que ser buen fisio era suficiente. <strong>Este máster marca la diferencia y pone el éxito en tus manos.</strong>"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">N</div>
+          <div>
+            <div class="testimonial-name">Nil</div>
+            <div class="testimonial-role">OsteoVNG</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
