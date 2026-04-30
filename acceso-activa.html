@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACTIVA — Reserva tu plaza | FisioReferentes</title>
+<link rel="icon" href="/logo-fisioreferentes.png" type="image/png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --navy: #1B3A5C;
+    --navy-dark: #0F2640;
+    --navy-light: #264D73;
+    --gold: #D4A843;
+    --gold-light: #E8C96A;
+    --gold-dark: #B8922E;
+    --beige: #FBF3DC;
+    --beige-dark: #F0E4C4;
+    --white: #FFFFFF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --green: #059669;
+    --green-light: #D1FAE5;
+    --red: #DC2626;
+    --red-light: #FEE2E2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--white);
+    color: var(--gray-800);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+    color: var(--white);
+    padding: 60px 20px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(212,168,67,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212,168,67,0.15);
+    border: 1px solid rgba(212,168,67,0.3);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255,255,255,0.8);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+
+  .hero-arrow {
+    animation: bounce 2s infinite;
+    opacity: 0.5;
+    font-size: 1.5rem;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-bar {
+    background: linear-gradient(90deg, #B91C1C, #DC2626, #B91C1C);
+    color: var(--white);
+    padding: 14px 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
+  .countdown-bar .countdown-label {
+    margin-right: 8px;
+  }
+
+  .countdown-timer {
+    display: inline-flex;
+    gap: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown-timer .unit {
+    background: rgba(0,0,0,0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    min-width: 32px;
+    text-align: center;
+  }
+
+  .countdown-timer .separator {
+    opacity: 0.6;
+  }
+
+  .countdown-expired {
+    color: var(--gold-light);
+    font-weight: 700;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 60px 20px; }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    max-width: 640px;
+    line-height: 1.7;
+  }
+
+  /* ── PAIN SECTION ── */
+  .pain-section {
+    background: var(--gray-50);
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .pain-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+  }
+
+  .pain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    border-radius: 12px 12px 0 0;
+    opacity: 0.6;
+  }
+
+  .pain-card .pain-quote {
+    font-style: italic;
+    color: var(--gray-700);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .pain-card .pain-author {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+
+  /* ── VALUE STACK ── */
+  .stack-section {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .stack-total-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .stack-total-header .strikethrough {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    text-decoration: line-through;
+    color: rgba(255,255,255,0.4);
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 3px;
+  }
+
+  .stack-total-header .actual-label {
+    display: block;
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  .stack-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stack-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px 24px;
+    transition: background 0.2s;
+  }
+
+  .stack-item:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .stack-item .item-icon {
+    font-size: 1.5rem;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+
+  .stack-item .item-text {
+    flex: 1;
+  }
+
+  .stack-item .item-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .stack-item .item-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .stack-item .item-value {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-left: 16px;
+    white-space: nowrap;
+  }
+
+  .stack-divider {
+    border: none;
+    border-top: 1px dashed rgba(255,255,255,0.15);
+    margin: 8px 0;
+  }
+
+  .stack-total {
+    max-width: 700px;
+    margin: 32px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(212,168,67,0.12);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .stack-total .total-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .stack-total .total-amount {
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: var(--gold);
+  }
+
+  .stack-bottom-text {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .stack-bottom-text strong {
+    color: var(--gold);
+    font-size: 1.3rem;
+  }
+
+  /* ── PRICING SECTION ── */
+  .pricing-section {
+    background: var(--gray-50);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .pricing-card.featured {
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(212,168,67,0.15);
+    transform: scale(1.02);
+  }
+
+  .pricing-card.featured:hover {
+    transform: scale(1.02) translateY(-4px);
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--navy-dark);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .pricing-badge.green {
+    background: var(--green);
+    color: var(--white);
+  }
+
+  .pricing-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .pricing-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .pricing-tagline {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+    min-height: 40px;
+  }
+
+  .pricing-price {
+    margin-bottom: 8px;
+  }
+
+  .pricing-price .amount {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .pricing-price .suffix {
+    font-size: 0.95rem;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+
+  .pricing-price .iva-note {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: 4px;
+  }
+
+  .pricing-saving {
+    display: inline-block;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 24px;
+    padding: 0;
+  }
+
+  .pricing-features li {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    padding: 6px 0;
+    padding-left: 24px;
+    position: relative;
+  }
+
+  .pricing-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .pricing-deadline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 16px;
+    padding: 8px 12px;
+    background: var(--red-light);
+    border-radius: 8px;
+  }
+
+  .pricing-cta {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cta-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy-dark);
+    box-shadow: 0 4px 16px rgba(212,168,67,0.3);
+  }
+
+  .cta-gold:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(212,168,67,0.4);
+  }
+
+  .cta-navy {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .cta-navy:hover {
+    background: var(--navy-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(27,58,92,0.3);
+  }
+
+  .cta-green {
+    background: var(--green);
+    color: var(--white);
+  }
+
+  .cta-green:hover {
+    background: #047857;
+    transform: translateY(-1px);
+  }
+
+  .pricing-guarantee {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-top: 12px;
+  }
+
+  /* ── MENTORING INFO ── */
+  .mentoring-banner {
+    background: var(--beige);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .mentoring-banner .mentoring-date {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .mentoring-banner .mentoring-detail {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+  }
+
+  /* ── GUARANTEE SECTION ── */
+  .guarantee-section {
+    background: var(--white);
+    text-align: center;
+  }
+
+  .guarantee-box {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--beige);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 40px 32px;
+  }
+
+  .guarantee-box .guarantee-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+  }
+
+  .guarantee-box h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .guarantee-box p {
+    font-size: 1rem;
+    color: var(--gray-700);
+    line-height: 1.7;
+  }
+
+  /* ── ALEX QUOTE ── */
+  .alex-section {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+  }
+
+  .alex-quote {
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 20px;
+  }
+
+  .alex-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .alex-role {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    background: var(--gray-50);
+  }
+
+  .faq-list {
+    max-width: 700px;
+    margin: 32px auto 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 20px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--gold);
+    transition: transform 0.2s;
+  }
+
+  .faq-question.open::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    display: none;
+    padding: 0 0 20px;
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+  }
+
+  .faq-answer.open {
+    display: block;
+  }
+
+  /* ── FINAL CTA ── */
+  .final-cta-section {
+    background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+    color: var(--white);
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .final-cta-section h2 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .final-cta-section h2 span {
+    color: var(--gold);
+  }
+
+  .final-cta-section p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .final-cta-buttons a {
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 0.8rem;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 16px 36px; }
+    section { padding: 40px 16px; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .pricing-card.featured { transform: none; }
+    .pricing-card.featured:hover { transform: translateY(-4px); }
+    .stack-item { flex-direction: column; text-align: center; gap: 8px; }
+    .stack-item .item-value { margin-left: 0; }
+    .stack-total { flex-direction: column; text-align: center; gap: 8px; }
+    .mentoring-banner { padding: 24px 16px; }
+    .countdown-bar { font-size: 0.85rem; padding: 12px 16px; }
+    .pain-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     COUNTDOWN BAR (sticky top)
+     ══════════════════════════════════════════════════════════════════ -->
+<div class="countdown-bar" id="countdownBar">
+  <span class="countdown-label">🔥 BECA DE CONFIANZA — Cierra en:</span>
+  <span class="countdown-timer" id="countdownTimer">
+    <span class="unit" id="cd-hours">00</span>
+    <span class="separator">:</span>
+    <span class="unit" id="cd-minutes">00</span>
+    <span class="separator">:</span>
+    <span class="unit" id="cd-seconds">00</span>
+  </span>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HERO
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Solo para asistentes a la masterclass</div>
+    <h1>Tu clínica puede funcionar<br><span>sin depender de ti.</span></h1>
+    <p class="hero-subtitle">
+      Acabas de ver cómo lo hemos hecho. Ahora te toca decidir:<br>
+      seguir igual, o empezar a construir un negocio que trabaje para ti.
+    </p>
+    <div class="hero-arrow">↓</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PAIN — Citas reales de fisios
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="pain-section">
+  <div class="container">
+    <div class="section-eyebrow">¿Te suena alguna de estas?</div>
+    <h2 class="section-title">Esto nos lo han dicho fisios como tú.</h2>
+    <p class="section-subtitle">Literalmente. Son respuestas reales de propietarios de clínica que se presentaron al programa.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <p class="pain-quote">"Trabajo 12 horas al día y no tengo tiempo de estar con mi hijo."</p>
+        <span class="pain-author">— Fisioterapeuta, dueño de clínica</span>
+      </div>
+      <div class="pain-card">
+        <p class="pain-quote">"Todo lo que pasa pasa por mí o lo soluciono yo. 24/7. Es una dependencia tóxica con la clínica."</p>
+        <span class="pain-author">— Propietaria, 2 clínicas</span>
+      </div>
+      <div class="pain-card">
+        <p class="pain-quote">"Tuve un equipazo y por una oveja negra se desmoronó. He cogido miedo absoluto a contratar."</p>
+        <span class="pain-author">— Fisioterapeuta, 8 años de experiencia</span>
+      </div>
+      <div class="pain-card">
+        <p class="pain-quote">"Hice otra mentoría y no me sirvió de nada. Pero creo que vosotros sois diferentes."</p>
+        <span class="pain-author">— Fisioterapeuta, clínica en crecimiento</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     VALUE STACK (Hormozi)
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="stack-section">
+  <div class="container">
+    <div class="stack-total-header">
+      <div class="section-eyebrow" style="color: var(--gold-light);">Esto es todo lo que incluye ACTIVA</div>
+      <h2 class="section-title" style="color: var(--white);">El valor real del programa</h2>
+    </div>
+
+    <div class="stack-list">
+      <div class="stack-item">
+        <span class="item-icon">🎯</span>
+        <div class="item-text">
+          <div class="item-name">4 meses de mentoría grupal en directo con Álex y Jano</div>
+          <div class="item-desc">Sesiones semanales donde resolvemos TUS problemas reales de clínica</div>
+        </div>
+        <div class="item-value">2.400€</div>
+      </div>
+
+      <div class="stack-item">
+        <span class="item-icon">📚</span>
+        <div class="item-text">
+          <div class="item-name">Metodología ACTIVA completa (SABER · DECIDIR · ACTIVAR)</div>
+          <div class="item-desc">Lecciones, cuadernos de trabajo y hojas de ruta de implementación</div>
+        </div>
+        <div class="item-value">1.200€</div>
+      </div>
+
+      <div class="stack-item">
+        <span class="item-icon">🛠️</span>
+        <div class="item-text">
+          <div class="item-name">Plataforma Academia con herramientas interactivas</div>
+          <div class="item-desc">Widgets de diagnóstico, tareas y seguimiento personalizado</div>
+        </div>
+        <div class="item-value">800€</div>
+      </div>
+
+      <div class="stack-item">
+        <span class="item-icon">👥</span>
+        <div class="item-text">
+          <div class="item-name">Comunidad privada de fisios propietarios</div>
+          <div class="item-desc">Red de contactos con dueños de clínica que entienden tu realidad</div>
+        </div>
+        <div class="item-value">600€</div>
+      </div>
+
+      <div class="stack-item">
+        <span class="item-icon">📞</span>
+        <div class="item-text">
+          <div class="item-name">Acceso directo a Álex y Jano entre sesiones</div>
+          <div class="item-desc">Canal de consultas rápidas para que no te quedes bloqueado</div>
+        </div>
+        <div class="item-value">500€</div>
+      </div>
+
+      <div class="stack-item">
+        <span class="item-icon">📋</span>
+        <div class="item-text">
+          <div class="item-name">Plantillas, scripts y protocolos listos para usar</div>
+          <div class="item-desc">Todo lo que usamos en nuestras clínicas, adaptado para ti</div>
+        </div>
+        <div class="item-value">500€</div>
+      </div>
+    </div>
+
+    <hr class="stack-divider">
+
+    <div class="stack-total">
+      <div class="total-label">VALOR TOTAL DEL PROGRAMA</div>
+      <div class="total-amount">
+        <span class="strikethrough" style="font-size:1.3rem; margin-right: 12px;">6.000€</span>
+      </div>
+    </div>
+
+    <p class="stack-bottom-text">
+      Pero hoy no vas a pagar 6.000€. Ni siquiera 4.000€.<br>
+      <strong>Desde 2.500€ + IVA</strong> — si decides rápido.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PRICING CARDS
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="pricing-section" id="precios">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="section-eyebrow">Elige tu plan</div>
+      <h2 class="section-title">3 formas de entrar en ACTIVA</h2>
+      <p class="section-subtitle" style="margin:0 auto 8px;">Todas incluyen exactamente lo mismo. Solo cambia cómo y cuándo pagas.</p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- ── BECA DE CONFIANZA ── -->
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Mejor precio</div>
+        <div class="pricing-icon">🏆</div>
+        <div class="pricing-name">BECA DE CONFIANZA</div>
+        <div class="pricing-tagline">Para los que no necesitan pensárselo dos veces.</div>
+
+        <div class="pricing-price">
+          <span class="amount">2.500€</span>
+          <span class="suffix"> + IVA</span>
+          <span class="iva-note">3.025€ IVA incluido · Pago único</span>
+        </div>
+
+        <div class="pricing-saving">Te ahorras 605€ vs. Plan Garantía</div>
+
+        <ul class="pricing-features">
+          <li>Acceso inmediato a la plataforma</li>
+          <li>Todo el contenido del programa</li>
+          <li>4 meses de mentorías en directo</li>
+          <li>Comunidad + soporte directo</li>
+          <li>Precio más bajo — no se repetirá</li>
+        </ul>
+
+        <div class="pricing-deadline" id="becaDeadline">
+          ⏰ <span>Cierra viernes 2 mayo a las 23:59</span>
+        </div>
+
+        <a href="https://academia.fisioreferentes.com/register?code=activa-beca-confianza" class="pricing-cta cta-gold">
+          Quiero mi plaza ahora
+        </a>
+        <p class="pricing-guarantee">Pago seguro con Stripe · Factura con IVA</p>
+      </div>
+
+      <!-- ── PAGO FRACCIONADO ── -->
+      <div class="pricing-card">
+        <div class="pricing-icon">💳</div>
+        <div class="pricing-name">PAGO FRACCIONADO</div>
+        <div class="pricing-tagline">Mismo programa, en 4 cómodos plazos mensuales.</div>
+
+        <div class="pricing-price">
+          <span class="amount">725€</span>
+          <span class="suffix"> + IVA/mes</span>
+          <span class="iva-note">877,25€/mes IVA incl. · 4 cuotas · Total: 3.509€</span>
+        </div>
+
+        <div class="pricing-saving" style="background: var(--beige); color: var(--gold-dark);">4 cuotas sin intereses</div>
+
+        <ul class="pricing-features">
+          <li>Acceso inmediato a la plataforma</li>
+          <li>Todo el contenido del programa</li>
+          <li>4 meses de mentorías en directo</li>
+          <li>Comunidad + soporte directo</li>
+          <li>Primera cuota se cobra hoy</li>
+        </ul>
+
+        <div class="pricing-deadline" style="background: #FEF3C7; color: #92400E;">
+          ⏰ <span>Disponible hasta domingo 4 mayo a las 23:59</span>
+        </div>
+
+        <a href="https://academia.fisioreferentes.com/register?code=activa-fraccionado" class="pricing-cta cta-navy">
+          Empezar por 877€
+        </a>
+        <p class="pricing-guarantee">Pago seguro con Stripe · Sin permanencia</p>
+      </div>
+
+      <!-- ── PLAN GARANTÍA ── -->
+      <div class="pricing-card">
+        <div class="pricing-badge green">Sin riesgo</div>
+        <div class="pricing-icon">🛡️</div>
+        <div class="pricing-name">PLAN GARANTÍA 15 DÍAS</div>
+        <div class="pricing-tagline">Prueba 15 días gratis. Si no te convence, no pagas nada.</div>
+
+        <div class="pricing-price">
+          <span class="amount">3.000€</span>
+          <span class="suffix"> + IVA</span>
+          <span class="iva-note">3.630€ IVA incluido · Cobro tras 15 días</span>
+        </div>
+
+        <div class="pricing-saving" style="background: var(--green-light); color: var(--green);">15 días gratis · Cancela cuando quieras</div>
+
+        <ul class="pricing-features">
+          <li>Acceso inmediato y completo</li>
+          <li>Todo el contenido del programa</li>
+          <li>4 meses de mentorías en directo</li>
+          <li>Comunidad + soporte directo</li>
+          <li>Si cancelas en 15 días: 0€</li>
+        </ul>
+
+        <div class="pricing-deadline" style="background: #FEF3C7; color: #92400E;">
+          ⏰ <span>Disponible hasta domingo 4 mayo a las 23:59</span>
+        </div>
+
+        <a href="https://academia.fisioreferentes.com/register?code=activa-garantia-15" class="pricing-cta cta-green">
+          Probar 15 días gratis
+        </a>
+        <p class="pricing-guarantee">No se cobra nada ahora · Solo necesitas tarjeta</p>
+      </div>
+
+    </div>
+
+    <!-- ── MENTORÍA BIENVENIDA ── -->
+    <div class="mentoring-banner">
+      <div style="font-size:2rem; margin-bottom:8px;">🗓️</div>
+      <div class="mentoring-date">Primera mentoría: Jueves 7 de mayo · 19:30h</div>
+      <div class="mentoring-detail">Sesión de Bienvenida con Álex y Jano — exclusiva para nuevos alumnos</div>
+      <div class="mentoring-detail" style="margin-top:8px; font-weight:600; color: var(--navy);">Si te inscribes hoy, el jueves ya estarás dentro.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     GUARANTEE
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="guarantee-section">
+  <div class="container">
+    <div class="guarantee-box">
+      <div class="guarantee-icon">🛡️</div>
+      <h3>La Garantía FisioReferentes</h3>
+      <p>
+        Con el Plan Garantía, entras <strong>gratis durante 15 días</strong> con acceso completo al programa, las mentorías y la comunidad.
+        Si en esos 15 días sientes que esto no es para ti, nos escribes y no se cobra ni un euro. Sin preguntas, sin letra pequeña, sin resentimiento.
+      </p>
+      <p style="margin-top:12px;">
+        Si ponemos esta garantía es porque sabemos lo que entregamos. Llevamos años ayudando a fisios a transformar sus clínicas.
+        Si no pudiéramos cumplir, no nos atreveríamos a ofrecer esto.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     ALEX QUOTE
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="alex-section">
+  <div class="container">
+    <p class="alex-quote">
+      "Yo también estuve donde tú estás ahora. Agenda llena, márgenes vacíos, sin poder irme de vacaciones sin que todo se parara.
+      La diferencia es que encontré la salida. Y ahora te la puedo enseñar."
+    </p>
+    <div class="alex-name">Álex Vallés</div>
+    <div class="alex-role">Fisioterapeuta · Fundador de FisioZaragoza y FisioReferentes</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FAQ
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="faq-section">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="section-eyebrow">Preguntas frecuentes</div>
+      <h2 class="section-title">Antes de decidir, léete esto</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Cuánto tiempo tengo que dedicar a la semana?</button>
+        <div class="faq-answer">Entre 2 y 3 horas semanales: la mentoría en directo más el trabajo con los materiales del programa. El 96% de nuestros alumnos lo consideran asumible. Muchos nos dicen que es la mejor inversión de tiempo que hacen toda la semana.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Y si ya he probado otras mentorías y no me han funcionado?</button>
+        <div class="faq-answer">Lo sabemos — es la objeción más frecuente. La diferencia de ACTIVA es que está diseñado por fisioterapeutas para fisioterapeutas. No te vamos a enseñar funnels de marketing ni trucos de Instagram. Te vamos a ayudar a poner orden en tu clínica con metodología probada en clínicas reales. Si has hecho otras formaciones genéricas de negocio y no te han servido, precisamente por eso necesitas una específica para tu sector.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Qué pasa si no puedo asistir a una mentoría en directo?</button>
+        <div class="faq-answer">Todas las sesiones se graban y quedan disponibles en la plataforma. Puedes verlas cuando quieras y dejar tus preguntas para la siguiente sesión. Lo ideal es venir en directo, pero no pasa nada si alguna semana no puedes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Sirve si acabo de abrir mi clínica?</button>
+        <div class="faq-answer">Sí. De hecho, el 20% de los alumnos que entran están montando o acaban de abrir. La ventaja de entrar ahora es que construyes con buenos cimientos desde el principio, en lugar de tener que desmontar y reconstruir después. Es más barato prevenir que curar — eso tú lo sabes bien.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Hay factura con IVA?</button>
+        <div class="faq-answer">Sí. Todos los precios incluyen el 21% de IVA. Recibirás factura completa y deducible como gasto de formación profesional.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Qué diferencia hay entre los 3 planes?</button>
+        <div class="faq-answer">El contenido es exactamente el mismo en los tres. La Beca de Confianza es el precio más bajo (para los que deciden rápido y se ahorran 605€). El fraccionado es para quien prefiere pagar en 4 cuotas mensuales. Y el Plan Garantía es para quien necesita probarlo antes: entras gratis 15 días y si no te convence, no pagas. Elige el que mejor se adapte a ti.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">¿Puedo hablar con alguien antes de decidir?</button>
+        <div class="faq-answer">Claro. Escríbenos por WhatsApp o email y te resolvemos cualquier duda. Pero ten en cuenta que la Beca de Confianza cierra el viernes a las 23:59 y las otras opciones cierran el domingo a las 23:59. No queremos que pierdas la opción que más te conviene por no preguntar a tiempo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FINAL CTA
+     ══════════════════════════════════════════════════════════════════ -->
+<section class="final-cta-section">
+  <div class="container">
+    <h2>Tu clínica no va a cambiar sola.<br><span>Pero tú sí puedes cambiarla.</span></h2>
+    <p>Elige el plan que mejor se adapte a ti y nos vemos el jueves 7 de mayo en la Sesión de Bienvenida.</p>
+
+    <div class="final-cta-buttons">
+      <a href="https://academia.fisioreferentes.com/register?code=activa-beca-confianza" class="cta-gold">
+        🏆 Beca de Confianza — 2.500€+IVA
+      </a>
+      <a href="https://academia.fisioreferentes.com/register?code=activa-fraccionado" class="cta-navy" style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.3);">
+        💳 Fraccionado — 725€+IVA/mes
+      </a>
+      <a href="https://academia.fisioreferentes.com/register?code=activa-garantia-15" class="cta-green">
+        🛡️ 15 días gratis — 3.000€+IVA después
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════════════ -->
+<footer>
+  <p>
+    <a href="https://fisioreferentes.com" target="_blank">FisioReferentes</a> · De Fisio a Empresario &copy; 2026
+  </p>
+  <p style="margin-top:6px;">Pago seguro procesado por Stripe · Factura con IVA deducible</p>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SCRIPTS
+     ══════════════════════════════════════════════════════════════════ -->
+<script>
+  // ── Countdown to Friday May 2, 2026 at 23:59 CEST (UTC+2) ──
+  const BECA_DEADLINE = new Date('2026-05-02T23:59:00+02:00').getTime();
+
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = BECA_DEADLINE - now;
+
+    if (diff <= 0) {
+      document.getElementById('countdownBar').innerHTML =
+        '<span class="countdown-expired">🔒 La Beca de Confianza ha cerrado. Aún puedes elegir Fraccionado o Garantía.</span>';
+      const becaCard = document.querySelector('.pricing-card.featured');
+      if (becaCard) {
+        becaCard.style.opacity = '0.5';
+        becaCard.style.pointerEvents = 'none';
+        const cta = becaCard.querySelector('.pricing-cta');
+        if (cta) { cta.textContent = 'Plazo cerrado'; cta.style.background = '#9CA3AF'; }
+      }
+      return;
+    }
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── FAQ toggles ──
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('open'));
+
+    if (!isOpen) {
+      answer.classList.add('open');
+      btn.classList.add('open');
+    }
+  }
+
+  // ── Smooth scroll for anchor links ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
