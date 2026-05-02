@@ -987,7 +987,7 @@
      ══════════════════════════════════════════════════════════════════ -->
 <div class="countdown-bar" id="countdownBar">
   <div class="countdown-left">
-    <span class="countdown-label">🔥 BECA DE CONFIANZA — Cierra en:</span>
+    <span class="countdown-label">⏰ ACTIVA cierra en:</span>
     <span class="countdown-timer" id="countdownTimer">
       <span class="unit" id="cd-hours">00</span>
       <span class="separator">:</span>
@@ -996,7 +996,7 @@
       <span class="unit" id="cd-seconds">00</span>
     </span>
   </div>
-  <a href="#precios" class="countdown-cta">Acceder a la Beca →</a>
+  <a href="#precios" class="countdown-cta">Probar 15 días gratis →</a>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════════
@@ -1049,7 +1049,7 @@
 
     <div class="replay-cta-wrap">
       <a href="#precios">Ya lo he visto. Quiero entrar en ACTIVA →</a>
-      <p class="replay-cta-sub">La Beca de Confianza (el precio más bajo) cierra hoy a las 23:59h</p>
+      <p class="replay-cta-sub">Acceso abierto hasta domingo 3 mayo a las 23:59h · Plan Garantía: 15 días gratis</p>
     </div>
   </div>
 </section>
@@ -1302,28 +1302,28 @@
   <div class="container">
     <div style="text-align:center;">
       <div class="section-eyebrow">Elige tu plan</div>
-      <h2 class="section-title">3 formas de entrar en ACTIVA</h2>
-      <p class="section-subtitle" style="margin:0 auto 8px;">Todas incluyen exactamente lo mismo. Solo cambia cómo y cuándo pagas.</p>
+      <h2 class="section-title">2 formas de entrar en ACTIVA</h2>
+      <p class="section-subtitle" style="margin:0 auto 8px;">Ambas incluyen exactamente lo mismo. Solo cambia cómo pagas. Cierre: domingo 3 mayo a las 23:59h.</p>
     </div>
 
     <div class="pricing-grid">
 
-      <!-- ── BECA DE CONFIANZA ── -->
-      <div class="pricing-card featured">
-        <div class="pricing-badge">Mejor precio</div>
+      <!-- ── BECA DE CONFIANZA — CERRADA ── -->
+      <div class="pricing-card" style="opacity:0.45; pointer-events:none; order:3;">
+        <div class="pricing-badge" style="background:#9CA3AF;color:#fff;">Plazo cerrado</div>
         <div class="pricing-icon">🏆</div>
         <div class="pricing-name">BECA DE CONFIANZA</div>
-        <div class="pricing-tagline">Para los que no necesitan pensárselo dos veces.</div>
+        <div class="pricing-tagline" style="text-decoration:line-through;">Para los que no necesitan pensárselo dos veces.</div>
 
         <div class="pricing-price">
-          <span class="amount">2.500€</span>
+          <span class="amount" style="text-decoration:line-through;">2.500€</span>
           <span class="suffix"> + IVA</span>
-          <span class="iva-note">3.025€ IVA incluido · Pago único</span>
+          <span class="iva-note">Esta opción cerró el viernes 1 de mayo</span>
         </div>
 
-        <div class="pricing-saving">Te ahorras 605€ vs. Plan Garantía</div>
+        <div class="pricing-saving" style="background:#F3F4F6;color:#9CA3AF;">Ya no disponible</div>
 
-        <ul class="pricing-features">
+        <ul class="pricing-features" style="color:#9CA3AF;">
           <li>Acceso inmediato a la plataforma</li>
           <li>Todo el contenido del programa</li>
           <li>4 meses de mentorías en directo</li>
@@ -1331,18 +1331,17 @@
           <li>Precio más bajo — no se repetirá</li>
         </ul>
 
-        <div class="pricing-deadline" id="becaDeadline">
-          ⏰ <span>Cierra viernes 1 mayo a las 23:59</span>
+        <div class="pricing-deadline" style="background:#F3F4F6; color:#9CA3AF;">
+          🔒 <span>Cerrada el viernes 1 mayo a las 23:59</span>
         </div>
 
-        <a href="https://academia.fisioreferentes.com/register?code=activa-beca-confianza" class="pricing-cta cta-gold">
-          Quiero mi plaza ahora
-        </a>
-        <p class="pricing-guarantee">Pago seguro con Stripe · Factura con IVA</p>
+        <span class="pricing-cta" style="display:block;text-align:center;background:#9CA3AF;color:#fff;padding:16px;border-radius:8px;font-weight:700;cursor:default;">
+          Plazo cerrado
+        </span>
       </div>
 
       <!-- ── PAGO FRACCIONADO ── -->
-      <div class="pricing-card">
+      <div class="pricing-card" style="order:2;">
         <div class="pricing-icon">💳</div>
         <div class="pricing-name">PAGO FRACCIONADO</div>
         <div class="pricing-tagline">Mismo programa, en 4 cómodos plazos mensuales.</div>
@@ -1373,9 +1372,9 @@
         <p class="pricing-guarantee">Pago seguro con Stripe · Sin permanencia</p>
       </div>
 
-      <!-- ── PLAN GARANTÍA ── -->
-      <div class="pricing-card">
-        <div class="pricing-badge green">Sin riesgo</div>
+      <!-- ── PLAN GARANTÍA — AHORA DESTACADO ── -->
+      <div class="pricing-card featured" style="order:1;">
+        <div class="pricing-badge green">Recomendado · Sin riesgo</div>
         <div class="pricing-icon">🛡️</div>
         <div class="pricing-name">PLAN GARANTÍA 15 DÍAS</div>
         <div class="pricing-tagline">Prueba 15 días gratis. Si no te convence, no pagas nada.</div>
@@ -1485,11 +1484,11 @@
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">¿Qué diferencia hay entre los 3 planes?</button>
-        <div class="faq-answer">El contenido es exactamente el mismo en los tres. La Beca de Confianza es el precio más bajo (para los que deciden rápido y se ahorran 605€). El fraccionado es para quien prefiere pagar en 4 cuotas mensuales. Y el Plan Garantía es para quien necesita probarlo antes: entras gratis 15 días y si no te convence, no pagas. Elige el que mejor se adapte a ti.</div>
+        <div class="faq-answer">El contenido es exactamente el mismo en los dos. El Plan Garantía es para quien quiere probarlo antes de pagar: entras gratis 15 días con acceso completo y si no te convence, no se cobra nada. El fraccionado es para quien ya lo tiene claro y prefiere pagar en 4 cuotas mensuales sin intereses. La Beca de Confianza (pago único con descuento) ya ha cerrado.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">¿Puedo hablar con alguien antes de decidir?</button>
-        <div class="faq-answer">Claro. Escríbenos por WhatsApp o email y te resolvemos cualquier duda. Pero ten en cuenta que la Beca de Confianza cierra el viernes 1 de mayo a las 23:59 y las otras opciones cierran el domingo 3 de mayo a las 23:59. No queremos que pierdas la opción que más te conviene por no preguntar a tiempo.</div>
+        <div class="faq-answer">Claro. Escríbenos por WhatsApp o email y te resolvemos cualquier duda. Pero ten en cuenta que el acceso a ACTIVA cierra el domingo 3 de mayo a las 23:59. No queremos que pierdas la oportunidad por no preguntar a tiempo.</div>
       </div>
     </div>
   </div>
@@ -1504,14 +1503,11 @@
     <p>Elige el plan que mejor se adapte a ti y nos vemos el jueves 7 de mayo en la Sesión de Bienvenida.</p>
 
     <div class="final-cta-buttons">
-      <a href="https://academia.fisioreferentes.com/register?code=activa-beca-confianza" class="cta-gold">
-        🏆 Beca de Confianza — 2.500€+IVA
+      <a href="https://academia.fisioreferentes.com/register?code=activa-garantia-15" class="cta-green">
+        🛡️ Probar 15 días gratis — sin pagar nada
       </a>
       <a href="https://academia.fisioreferentes.com/register?code=activa-fraccionado" class="cta-navy" style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.3);">
-        💳 Fraccionado — 725€+IVA/mes
-      </a>
-      <a href="https://academia.fisioreferentes.com/register?code=activa-garantia-15" class="cta-green">
-        🛡️ 15 días gratis — 3.000€+IVA después
+        💳 Fraccionado — 725€+IVA/mes × 4
       </a>
     </div>
   </div>
@@ -1531,8 +1527,8 @@
      SCRIPTS
      ══════════════════════════════════════════════════════════════════ -->
 <script>
-  // ── Countdown to Friday May 1, 2026 at 23:59 CEST (UTC+2) ──
-  const BECA_DEADLINE = new Date('2026-05-01T23:59:00+02:00').getTime();
+  // ── Countdown to Sunday May 3, 2026 at 23:59 CEST (UTC+2) ──
+  const BECA_DEADLINE = new Date('2026-05-03T23:59:00+02:00').getTime();
 
   function updateCountdown() {
     const now = Date.now();
@@ -1540,15 +1536,7 @@
 
     if (diff <= 0) {
       document.getElementById('countdownBar').innerHTML =
-        '<span class="countdown-expired">🔒 La Beca de Confianza ha cerrado. Aún puedes elegir Fraccionado o Garantía.</span>' +
-        '<a href="#precios" class="countdown-cta" style="background:#059669;color:#fff;">Ver opciones disponibles →</a>';
-      const becaCard = document.querySelector('.pricing-card.featured');
-      if (becaCard) {
-        becaCard.style.opacity = '0.5';
-        becaCard.style.pointerEvents = 'none';
-        const cta = becaCard.querySelector('.pricing-cta');
-        if (cta) { cta.textContent = 'Plazo cerrado'; cta.style.background = '#9CA3AF'; }
-      }
+        '<span class="countdown-expired">🔒 El acceso a ACTIVA ha cerrado.</span>';
       return;
     }
 
