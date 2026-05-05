@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FisioReferentes — Nueva Era</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Helvetica Neue', sans-serif;
+  background: #000000;
+  color: #f5f5f7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 22px 60px;
+  position: relative;
+}
+
+/* Logo */
+.logo-wrap {
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: softIn 1s ease 0.2s forwards;
+}
+
+.logo-wrap svg {
+  height: 48px;
+  width: auto;
+}
+
+@keyframes softIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero headline */
+.hero-headline {
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: softIn 1s ease 0.5s forwards;
+}
+
+.hero-headline .gradient {
+  background: linear-gradient(90deg, #6e6eff, #b07aff, #e06eff, #ff6eb0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 28px;
+  font-weight: 400;
+  color: #86868b;
+  line-height: 1.35;
+  max-width: 680px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: softIn 1s ease 0.8s forwards;
+}
+
+/* ── EVOLUTION ── */
+.evo-section {
+  padding: 120px 22px;
+  text-align: center;
+}
+
+.evo-section .section-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #86868b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: softIn 0.8s ease 1.4s forwards;
+}
+
+.evo-grid {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.evo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: softIn 0.8s ease forwards;
+}
+
+.evo-item:nth-child(1) { animation-delay: 1.7s; }
+.evo-item:nth-child(2) { animation-delay: 2.1s; }
+.evo-item:nth-child(3) { animation-delay: 2.5s; }
+
+.evo-old-text {
+  font-size: 20px;
+  font-weight: 400;
+  color: #424245;
+  position: relative;
+}
+
+.evo-old-text::after {
+  content: '';
+  position: absolute;
+  left: -4px; right: -4px;
+  top: 50%;
+  height: 1.5px;
+  background: #424245;
+}
+
+.evo-arrow-icon {
+  width: 20px;
+  height: 20px;
+  color: #86868b;
+}
+
+.evo-new-text {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #6e6eff, #b07aff, #e06eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── MESSAGE ── */
+.msg-section {
+  padding: 80px 22px 100px;
+  text-align: center;
+}
+
+.msg-text {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  max-width: 640px;
+  margin: 0 auto;
+  color: #f5f5f7;
+  opacity: 0;
+  animation: softIn 0.8s ease 3.2s forwards;
+}
+
+.msg-text .dim {
+  color: #86868b;
+}
+
+/* ── EVENT ── */
+.event-section {
+  padding: 60px 22px 40px;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  animation: softIn 0.8s ease 3.8s forwards;
+}
+
+.event-card {
+  width: 100%;
+  max-width: 520px;
+  background: #1d1d1f;
+  border-radius: 24px;
+  padding: 52px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(110,110,255,0.4), rgba(176,122,255,0.4), transparent);
+}
+
+.event-top-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b07aff;
+  margin-bottom: 28px;
+}
+
+.event-date-text {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+  margin-bottom: 4px;
+}
+
+.event-time-text {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+  margin-bottom: 28px;
+}
+
+.event-hosts-text {
+  font-size: 17px;
+  font-weight: 400;
+  color: #86868b;
+  line-height: 1.5;
+}
+
+.event-hosts-text strong {
+  color: #f5f5f7;
+  font-weight: 500;
+}
+
+/* ── CTA ── */
+.cta-section {
+  padding: 40px 22px 20px;
+  text-align: center;
+  opacity: 0;
+  animation: softIn 0.7s ease 4.4s forwards;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f5f7;
+  color: #000000;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 16px 36px;
+  border-radius: 980px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.cta-btn:hover {
+  background: #ffffff;
+  transform: scale(1.04);
+}
+
+.cta-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cta-note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+/* ── PROPOSAL TEASER ── */
+.teaser-section {
+  padding: 80px 22px 60px;
+  text-align: center;
+  opacity: 0;
+  animation: softIn 0.7s ease 4.8s forwards;
+}
+
+.teaser-text {
+  font-size: 24px;
+  font-weight: 500;
+  color: #86868b;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+.teaser-text em {
+  font-style: normal;
+  color: #f5f5f7;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  padding: 40px 22px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  opacity: 0;
+  animation: softIn 0.5s ease 5.2s forwards;
+}
+
+.site-footer p {
+  font-size: 12px;
+  color: #424245;
+  letter-spacing: 0.02em;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 734px) {
+  .hero { padding: 60px 22px 40px; min-height: auto; }
+  .hero-headline { font-size: 44px; }
+  .hero-sub { font-size: 19px; }
+  .evo-grid { gap: 48px; flex-direction: column; }
+  .evo-new-text { font-size: 36px; }
+  .evo-section { padding: 80px 22px; }
+  .msg-text { font-size: 24px; }
+  .event-card { padding: 40px 28px; }
+  .event-date-text, .event-time-text { font-size: 32px; }
+  .teaser-text { font-size: 19px; }
+}
+
+@media (max-width: 480px) {
+  .hero-headline { font-size: 36px; }
+  .hero-sub { font-size: 17px; }
+  .evo-new-text { font-size: 28px; }
+  .event-date-text, .event-time-text { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="logo-wrap">
+    <img src="/logo-fr-white.png" alt="FisioReferentes" style="height:48px;width:auto;">
+  </div>
+
+  <h1 class="hero-headline">
+    Una nueva era<br><span class="gradient">comienza.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Todo lo que conoc&iacute;ais de FisioReferentes<br>acaba de cambiar.
+  </p>
+</section>
+
+<!-- EVOLUTION -->
+<section class="evo-section">
+  <p class="section-label">La evoluci&oacute;n</p>
+  <div class="evo-grid">
+    <div class="evo-item">
+      <span class="evo-old-text">Formaci&oacute;n</span>
+      <svg class="evo-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      <span class="evo-new-text">Sistema</span>
+    </div>
+    <div class="evo-item">
+      <span class="evo-old-text">V&iacute;deos</span>
+      <svg class="evo-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      <span class="evo-new-text">Inteligencia</span>
+    </div>
+    <div class="evo-item">
+      <span class="evo-old-text">Consumir</span>
+      <svg class="evo-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      <span class="evo-new-text">Decidir</span>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGE -->
+<section class="msg-section">
+  <p class="msg-text">
+    Hemos construido algo que no exist&iacute;a en el sector. <span class="dim">Algo que convierte lo que ya sab&eacute;is en decisiones reales dentro de vuestra cl&iacute;nica.</span>
+  </p>
+</section>
+
+<!-- EVENT -->
+<section class="event-section">
+  <div class="event-card">
+    <p class="event-top-label">Sesi&oacute;n en directo</p>
+    <p class="event-date-text">S&aacute;bado 9 de mayo</p>
+    <p class="event-time-text">9:00 h</p>
+    <p class="event-hosts-text">Con <strong>&Aacute;lex Vall&eacute;s</strong> y <strong>Jano Cabello</strong></p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=FisioReferentes+%E2%80%94+Nueva+Era&dates=20260509T070000Z/20260509T083000Z&details=Sesi%C3%B3n+en+directo+con+%C3%81lex+Vall%C3%A9s+y+Jano+Cabello.%0A%0AZoom%3A+https%3A%2F%2Fus06web.zoom.us%2Fj%2F85075907640%3Fpwd%3DQ9QTjEw69AgcqjfK71wvKjELgZYJZ7.1&location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F85075907640%3Fpwd%3DQ9QTjEw69AgcqjfK71wvKjELgZYJZ7.1" target="_blank" class="cta-btn">
+    A&ntilde;adir a mi calendario
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+  <p class="cta-note">Google Calendar &middot; Zoom incluido</p>
+</section>
+
+<!-- TEASER -->
+<section class="teaser-section">
+  <p class="teaser-text">
+    Traemos una propuesta<br>que <em>os va a encantar.</em>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>FisioReferentes &copy; 2026</p>
+</footer>
+
+</body>
+</html>
