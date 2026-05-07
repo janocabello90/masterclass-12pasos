@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FR PRO — Tu acceso a todo el ecosistema FisioReferentes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Helvetica Neue', sans-serif;
+  background: #000000;
+  color: #f5f5f7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes softIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 22px 60px;
+  position: relative;
+}
+
+.logo-wrap {
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: softIn 1s ease 0.2s forwards;
+}
+
+.hero-headline {
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: softIn 1s ease 0.5s forwards;
+}
+
+.hero-headline .gradient {
+  background: linear-gradient(90deg, #6e6eff, #b07aff, #e06eff, #ff6eb0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 28px;
+  font-weight: 400;
+  color: #86868b;
+  line-height: 1.35;
+  max-width: 680px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: softIn 1s ease 0.8s forwards;
+}
+
+/* ── NEURAL + EVOLUTION ── */
+.neural-section {
+  width: 100%;
+  height: 560px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: softIn 1.5s ease 1.0s forwards;
+}
+
+#neuralCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.evo-overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0 22px;
+}
+
+.evo-overlay .section-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #a1a1a6;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: softIn 0.8s ease 1.4s forwards;
+}
+
+.evo-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+.evo-item {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: softIn 0.8s ease forwards;
+}
+
+.evo-item:nth-child(1) { animation-delay: 1.7s; }
+.evo-item:nth-child(2) { animation-delay: 1.9s; }
+.evo-item:nth-child(3) { animation-delay: 2.1s; }
+.evo-item:nth-child(4) { animation-delay: 2.3s; }
+.evo-item:nth-child(5) { animation-delay: 2.5s; }
+
+.evo-connector { padding: 0 20px; }
+
+.evo-line-icon {
+  width: 80px;
+  height: 4px;
+  display: block;
+}
+
+.evo-new-text {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #6e6eff, #b07aff, #e06eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── MESSAGE SECTIONS ── */
+.msg-section {
+  padding: 80px 22px 100px;
+  text-align: center;
+}
+
+.msg-text {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  max-width: 640px;
+  margin: 0 auto;
+  color: #f5f5f7;
+}
+
+.msg-text .dim { color: #86868b; }
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  text-align: center;
+  padding: 100px 22px 60px;
+}
+
+.section-header .label {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6e6eff;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.section-header h2 .gradient {
+  background: linear-gradient(90deg, #6e6eff, #b07aff, #e06eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── FEATURES GRID ── */
+.features-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 22px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.feature-card {
+  background: #1d1d1f;
+  border-radius: 20px;
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(110,110,255,0.3), transparent);
+}
+
+.feature-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  color: #f5f5f7;
+}
+
+.feature-card p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #86868b;
+}
+
+.feature-card.featured {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(110,110,255,0.08), rgba(176,122,255,0.08));
+  border: 1px solid rgba(110,110,255,0.15);
+}
+
+/* ── TOOLS SECTION ── */
+.tools-list {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 22px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tool-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 28px;
+  background: #1d1d1f;
+  border-radius: 16px;
+  position: relative;
+}
+
+.tool-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tool-info h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #f5f5f7;
+  margin-bottom: 4px;
+}
+
+.tool-info p {
+  font-size: 14px;
+  color: #86868b;
+  line-height: 1.45;
+}
+
+.tool-badge {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: 980px;
+  text-transform: uppercase;
+}
+
+.tool-badge.active {
+  background: rgba(52, 199, 89, 0.15);
+  color: #34c759;
+}
+
+.tool-badge.soon {
+  background: rgba(176, 122, 255, 0.15);
+  color: #b07aff;
+}
+
+/* ── HOW IT WORKS ── */
+.how-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 22px 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.how-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.how-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e6eff, #b07aff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.how-step p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #a1a1a6;
+  line-height: 1.4;
+}
+
+/* ── PRICING CARD ── */
+.pricing-section {
+  padding: 40px 22px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pricing-card {
+  width: 100%;
+  max-width: 520px;
+  background: #1d1d1f;
+  border-radius: 24px;
+  padding: 52px 48px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6e6eff, #b07aff, #e06eff, #ff6eb0);
+}
+
+.pricing-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(180deg, #6e6eff, #b07aff);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 8px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-radius: 0 24px 0 12px;
+  white-space: nowrap;
+}
+
+.pricing-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b07aff;
+  margin-bottom: 24px;
+}
+
+.pricing-name {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+  margin-bottom: 8px;
+}
+
+.pricing-amount {
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.pricing-amount .currency {
+  font-size: 32px;
+  font-weight: 600;
+  vertical-align: top;
+  margin-right: 4px;
+  color: #b07aff;
+}
+
+.pricing-amount .number {
+  background: linear-gradient(90deg, #6e6eff, #b07aff, #e06eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pricing-iva {
+  font-size: 15px;
+  color: #86868b;
+  margin-bottom: 8px;
+}
+
+.pricing-total {
+  font-size: 17px;
+  font-weight: 500;
+  color: #a1a1a6;
+  margin-bottom: 32px;
+}
+
+.pricing-features {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 36px;
+  padding: 0;
+}
+
+.pricing-features li {
+  font-size: 15px;
+  color: #a1a1a6;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pricing-features li:last-child { border-bottom: none; }
+
+.pricing-features .check {
+  color: #34c759;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.pricing-note {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #6e6e73;
+  line-height: 1.5;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ── CTA ── */
+.cta-section {
+  padding: 40px 22px 20px;
+  text-align: center;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #6e6eff, #b07aff);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 18px 40px;
+  border-radius: 980px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 30px rgba(110,110,255,0.3);
+}
+
+.cta-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cta-note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6e6e73;
+}
+
+/* ── TEASER ── */
+.teaser-section {
+  padding: 80px 22px 60px;
+  text-align: center;
+}
+
+.teaser-text {
+  font-size: 24px;
+  font-weight: 500;
+  color: #86868b;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+.teaser-text em {
+  font-style: normal;
+  color: #f5f5f7;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  padding: 40px 22px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.site-footer p {
+  font-size: 12px;
+  color: #424245;
+  letter-spacing: 0.02em;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 734px) {
+  .hero { padding: 60px 22px 40px; min-height: auto; }
+  .hero-headline { font-size: 44px; }
+  .hero-sub { font-size: 19px; }
+  .neural-section { height: 480px; }
+  .evo-grid { flex-direction: column; gap: 12px; }
+  .evo-connector { display: none; }
+  .evo-new-text { font-size: 36px; }
+  .msg-text { font-size: 24px; }
+  .section-header h2 { font-size: 32px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card.featured { grid-column: auto; }
+  .how-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .pricing-card { padding: 40px 28px 32px; }
+  .pricing-amount { font-size: 44px; }
+  .pricing-name { font-size: 28px; }
+  .teaser-text { font-size: 19px; }
+}
+
+@media (max-width: 480px) {
+  .hero-headline { font-size: 36px; }
+  .hero-sub { font-size: 17px; }
+  .evo-new-text { font-size: 28px; }
+  .pricing-amount { font-size: 38px; }
+  .how-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="logo-wrap">
+    <img src="/logo-fr-white.png" alt="FisioReferentes" style="height:48px;width:auto;">
+  </div>
+
+  <h1 class="hero-headline">
+    Una nueva era<br><span class="gradient">comienza.</span>
+  </h1>
+
+  <p class="hero-sub">
+    La fisioterapia se divide<br>en antes y despu&eacute;s de esto.
+  </p>
+</section>
+
+<!-- NEURAL + EVOLUTION (merged) -->
+<section class="neural-section">
+  <canvas id="neuralCanvas"></canvas>
+  <div class="evo-overlay">
+    <p class="section-label">Todo el conocimiento est&aacute; conectado</p>
+    <div class="evo-grid">
+      <div class="evo-item">
+        <span class="evo-new-text">Sistema</span>
+      </div>
+      <div class="evo-item evo-connector">
+        <svg class="evo-line-icon" viewBox="0 0 80 4" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="2" x2="80" y2="2" stroke="url(#lineGrad)" stroke-width="1.5"/>
+          <circle cx="0" cy="2" r="3" fill="#6e6eff" opacity="0.6"/>
+          <circle cx="80" cy="2" r="3" fill="#b07aff" opacity="0.6"/>
+          <defs><linearGradient id="lineGrad"><stop offset="0%" stop-color="#6e6eff" stop-opacity="0.4"/><stop offset="100%" stop-color="#b07aff" stop-opacity="0.4"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="evo-item">
+        <span class="evo-new-text">Inteligencia</span>
+      </div>
+      <div class="evo-item evo-connector">
+        <svg class="evo-line-icon" viewBox="0 0 80 4" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="2" x2="80" y2="2" stroke="url(#lineGrad2)" stroke-width="1.5"/>
+          <circle cx="0" cy="2" r="3" fill="#b07aff" opacity="0.6"/>
+          <circle cx="80" cy="2" r="3" fill="#e06eff" opacity="0.6"/>
+          <defs><linearGradient id="lineGrad2"><stop offset="0%" stop-color="#b07aff" stop-opacity="0.4"/><stop offset="100%" stop-color="#e06eff" stop-opacity="0.4"/></linearGradient></defs>
+        </svg>
+      </div>
+      <div class="evo-item">
+        <span class="evo-new-text">Decisiones</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="msg-section" style="padding-bottom:40px;">
+  <p class="msg-text" style="color:#86868b;">
+    2 a&ntilde;os construyendo esto. <span style="color:#f5f5f7;">+200 fisios que ya pasasteis por aqu&iacute;.</span><br>Y ahora, lo que ninguno de vosotros tuvo.
+  </p>
+</section>
+
+<!-- MESSAGE -->
+<section class="msg-section" style="padding-top:40px;">
+  <p class="msg-text">
+    Hemos construido algo que no exist&iacute;a en el sector. <span class="dim">Algo que convierte lo que ya sab&eacute;is en decisiones reales dentro de vuestra cl&iacute;nica. M&aacute;s control. M&aacute;s tiempo. Mejores decisiones.</span>
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- QU&Eacute; INCLUYE FR PRO -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header">
+  <p class="label">Todo en un solo acceso</p>
+  <h2>Qu&eacute; incluye <span class="gradient">FR PRO</span></h2>
+</div>
+
+<div class="features-grid">
+  <div class="feature-card">
+    <span class="feature-icon">&#128293;</span>
+    <h3>Mentor&iacute;as semanales</h3>
+    <p>Cada martes por la ma&ntilde;ana. Sesi&oacute;n grupal en vivo con &Aacute;lex y el equipo para resolver dudas, revisar casos y recibir feedback directo.</p>
+  </div>
+
+  <div class="feature-card">
+    <span class="feature-icon">&#127919;</span>
+    <h3>Mentor&iacute;a especial mensual</h3>
+    <p>Una sesi&oacute;n al mes m&aacute;s profunda, enfocada en un tema estrat&eacute;gico concreto. Formato reducido, m&aacute;s profundidad.</p>
+  </div>
+
+  <div class="feature-card">
+    <span class="feature-icon">&#129504;</span>
+    <h3>Espacio Neurona</h3>
+    <p>Acceso abierto cuando lo necesites. Para momentos cr&iacute;ticos: decisiones urgentes, problemas con equipo, negociaciones.</p>
+  </div>
+
+  <div class="feature-card">
+    <span class="feature-icon">&#127891;</span>
+    <h3>M&aacute;ster &ldquo;De Fisio a Empresario&rdquo;</h3>
+    <p>El programa formativo completo de FisioReferentes. Todas las lecciones, materiales y recursos. Acceso permanente.</p>
+  </div>
+
+  <div class="feature-card featured">
+    <span class="feature-icon">&#9889;</span>
+    <h3>Programa ACTIVA completo</h3>
+    <p>13 pasos con metodolog&iacute;a SABER&middot;DECIDIR&middot;ACTIVAR. Lecciones te&oacute;ricas, ejercicios guiados, hojas de ruta de implementaci&oacute;n, herramientas interactivas, comunidad de alumnos y videoteca completa.</p>
+  </div>
+
+  <div class="feature-card" style="grid-column: 1 / -1;">
+    <span class="feature-icon">&#128736;</span>
+    <h3>Hub de herramientas FR PRO</h3>
+    <p>Acceso a todas las herramientas que vayamos lanzando. Las actuales y las futuras. Sin coste adicional. Tu suscripci&oacute;n crece contigo.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- HERRAMIENTAS DEL HUB -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header">
+  <p class="label">Herramientas incluidas</p>
+  <h2>El Hub <span class="gradient">FR PRO</span></h2>
+</div>
+
+<div class="tools-list">
+  <div class="tool-item">
+    <span class="tool-icon">&#128202;</span>
+    <div class="tool-info">
+      <h4>NPS FisioReferentes</h4>
+      <p>Sistema de medici&oacute;n de satisfacci&oacute;n de pacientes adaptado a cl&iacute;nicas de fisioterapia.</p>
+    </div>
+    <span class="tool-badge active">Disponible</span>
+  </div>
+
+  <div class="tool-item">
+    <span class="tool-icon">&#129302;</span>
+    <div class="tool-info">
+      <h4>Cerebro FR</h4>
+      <p>Asistente de inteligencia artificial entrenado con todo el contenido de FisioReferentes. Como hablar con &Aacute;lex sobre gesti&oacute;n de cl&iacute;nicas.</p>
+    </div>
+    <span class="tool-badge active">Disponible</span>
+  </div>
+
+  <div class="tool-item">
+    <span class="tool-icon">&#128203;</span>
+    <div class="tool-info">
+      <h4>App de Valoraciones</h4>
+      <p>Aplicaci&oacute;n para gestionar y sistematizar las valoraciones cl&iacute;nicas de tu equipo.</p>
+    </div>
+    <span class="tool-badge soon">Pr&oacute;ximamente</span>
+  </div>
+
+  <div class="tool-item">
+    <span class="tool-icon">&#128101;</span>
+    <div class="tool-info">
+      <h4>App de Contrataciones</h4>
+      <p>Gestiona procesos de selecci&oacute;n y contrataci&oacute;n de fisioterapeutas para tu cl&iacute;nica.</p>
+    </div>
+    <span class="tool-badge soon">Junio 2026</span>
+  </div>
+
+  <div class="tool-item" style="border: 1px dashed rgba(110,110,255,0.2);">
+    <span class="tool-icon">&#10024;</span>
+    <div class="tool-info">
+      <h4>Futuras herramientas</h4>
+      <p>Todo lo que lancemos en el Hub de FR PRO estar&aacute; incluido en tu suscripci&oacute;n. Sin coste adicional.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- C&Oacute;MO FUNCIONA -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-header">
+  <p class="label">Sin complicaciones</p>
+  <h2>C&oacute;mo funciona</h2>
+</div>
+
+<div class="how-grid">
+  <div class="how-step">
+    <div class="how-number">1</div>
+    <p>Pagas una vez al a&ntilde;o</p>
+  </div>
+  <div class="how-step">
+    <div class="how-number">2</div>
+    <p>Acceso inmediato a la academia</p>
+  </div>
+  <div class="how-step">
+    <div class="how-number">3</div>
+    <p>Cancelas cuando quieras</p>
+  </div>
+  <div class="how-step">
+    <div class="how-number">4</div>
+    <p>Mantienes acceso hasta fin del periodo</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PRICING -->
+<!-- ═══════════════════════════════════════ -->
+<section class="pricing-section">
+  <div class="pricing-card">
+    <div class="pricing-ribbon">Suscripci&oacute;n anual</div>
+    <p class="pricing-label">Acceso completo</p>
+    <p class="pricing-name">FR PRO</p>
+    <p class="pricing-amount">
+      <span class="number">1.000&euro;</span>
+    </p>
+    <p class="pricing-iva">+ IVA</p>
+    <p class="pricing-total">1.210&euro;/a&ntilde;o &middot; Renovaci&oacute;n autom&aacute;tica</p>
+
+    <ul class="pricing-features">
+      <li><span class="check">&#10003;</span> Mentor&iacute;as semanales + mensuales</li>
+      <li><span class="check">&#10003;</span> Espacio Neurona</li>
+      <li><span class="check">&#10003;</span> M&aacute;ster &ldquo;De Fisio a Empresario&rdquo;</li>
+      <li><span class="check">&#10003;</span> Programa ACTIVA completo</li>
+      <li><span class="check">&#10003;</span> Hub de herramientas (actuales + futuras)</li>
+      <li><span class="check">&#10003;</span> Cerebro FR (IA)</li>
+    </ul>
+
+    <p class="pricing-note">* Si pagaste hace poco FR Pro, tenemos un c&oacute;digo de descuento para ti. Contacta con <strong style="color:#b07aff;">Elsa</strong>.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <a href="https://academia.fisioreferentes.com/register?code=fr-pro-anual" target="_blank" class="cta-btn">
+    Acceder a FR PRO
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+  <p class="cta-note">Acceso inmediato &middot; Cancela cuando quieras &middot; Pago seguro con Stripe</p>
+</section>
+
+<!-- TEASER -->
+<section class="teaser-section">
+  <p class="teaser-text">
+    Todo lo que ten&iacute;as sigue aqu&iacute;.<br><em>Pero ahora, tienes mucho m&aacute;s.</em>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>FisioReferentes &copy; 2026</p>
+</footer>
+
+<script>
+(function() {
+  const canvas = document.getElementById('neuralCanvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, nodes = [], mouse = { x: -1000, y: -1000 };
+  const NODE_COUNT = 60;
+  const CONNECTION_DIST = 140;
+  const MOUSE_DIST = 200;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    w = rect.width;
+    h = rect.height;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.scale(dpr, dpr);
+  }
+
+  function init() {
+    resize();
+    nodes = [];
+    for (let i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 1.5,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.01 + Math.random() * 0.02
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECTION_DIST) {
+          const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = 'rgba(110, 110, 255, ' + alpha + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      const dx = nodes[i].x - mouse.x;
+      const dy = nodes[i].y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < MOUSE_DIST) {
+        const alpha = (1 - dist / MOUSE_DIST) * 0.3;
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = 'rgba(176, 122, 255, ' + alpha + ')';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      const n = nodes[i];
+      n.pulse += n.pulseSpeed;
+      const glow = 0.4 + Math.sin(n.pulse) * 0.3;
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+      grad.addColorStop(0, 'rgba(110, 110, 255, ' + (glow * 0.3) + ')');
+      grad.addColorStop(1, 'rgba(110, 110, 255, 0)');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(176, 122, 255, ' + glow + ')';
+      ctx.fill();
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    }
+    requestAnimationFrame(draw);
+  }
+
+  canvas.addEventListener('mousemove', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  canvas.addEventListener('mouseleave', function() {
+    mouse.x = -1000;
+    mouse.y = -1000;
+  });
+  window.addEventListener('resize', function() { resize(); });
+
+  init();
+  draw();
+})();
+</script>
+</body>
+</html>
